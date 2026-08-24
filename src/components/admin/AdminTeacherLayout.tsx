@@ -270,10 +270,6 @@ export const AdminTeacherLayout: React.FC<Props> = ({
             <div className="text-[10px] text-amber-300 font-extrabold">{isAdmin ? 'Super Admin' : 'Guru Pengajar'}</div>
           </div>
         </div>
-            <span className="text-xs font-bold text-gray-900">The English Al-Karim</span>
-            <div className="text-[10px] text-emerald-700 font-bold">{isAdmin ? 'Admin' : 'Guru'}</div>
-          </div>
-        </div>
 
         <div className="flex items-center gap-2">
           <button
