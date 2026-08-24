@@ -461,62 +461,61 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 sm:p-6 lg:p-8">
       <div className="w-full max-w-md relative z-10">
-        {/* Decorative Top Typography Header inspired by Logo Colors */}
+        {/* Decorative Top Typography Header */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-rose-100 via-amber-100 via-teal-100 to-indigo-100 text-slate-900 text-xs font-extrabold tracking-wide border border-amber-300/80 mb-3 shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-rose-500 animate-pulse" />
-            <span className="bg-gradient-to-r from-rose-600 via-amber-600 via-teal-600 to-indigo-700 bg-clip-text text-transparent font-black">
-              The English Sekolah Alam Al-Karim
-            </span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#7A93D1] text-white text-xs font-extrabold tracking-wide border border-[#6B85C4] mb-3 shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-white animate-pulse" />
+            <span>The English Sekolah Alam Al-Karim</span>
           </div>
           <h1 className="text-2xl sm:text-3.5xl font-black text-slate-900 tracking-tight drop-shadow-xs leading-tight">
             Selamat Datang di <br />
-            <span className="text-[#0F214A] font-black">The </span>
-            <span className="bg-gradient-to-r from-rose-500 via-amber-500 via-teal-500 to-indigo-600 bg-clip-text text-transparent uppercase font-black tracking-wide">
+            <span className="text-[#7A93D1] font-black">The </span>
+            <span className="text-[#8CB5D3] uppercase font-black tracking-wide">
               English
             </span>
             <br />
-            <span className="text-emerald-700 font-black text-xl sm:text-2xl">
+            <span className="text-[#9ED7C6] font-black text-xl sm:text-2xl">
               Sekolah Alam Al-Karim
             </span>
           </h1>
           <p className="mt-2 text-sm sm:text-base text-slate-800 font-bold italic tracking-wide">
-            &ldquo;semua akan <span className="text-rose-500 font-extrabold not-italic underline decoration-amber-400 decoration-2">inggris</span> pada waktunya&rdquo;
+            &ldquo;semua akan <span className="text-[#E5B5C8] font-black not-italic underline decoration-[#7A93D1] decoration-2">inggris</span> pada waktunya&rdquo;
           </p>
           <p className="mt-1 text-xs text-slate-600 font-medium">
             Media Pembelajaran &amp; Evaluasi Bahasa Inggris Interaktif
           </p>
         </div>
 
-        {/* Student Form Card with Logo Colors */}
-        <div className="bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 border-2 border-emerald-200/90 shadow-2xl shadow-slate-900/10 relative overflow-visible">
-          {/* Top 5-color logo rainbow bar */}
-          <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-rose-500 via-amber-400 via-emerald-400 via-sky-400 to-purple-500 rounded-t-3xl" />
+        {/* Student Form Card styled like the 5 Pastel Reference Cards */}
+        <div className="bg-white rounded-3xl border-2 border-slate-200 shadow-xl relative overflow-hidden">
+          {/* Card Top Block with Pastel Periwinkle (#7A93D1) & White Line Divider */}
+          <div className="bg-[#7A93D1] text-white p-5 relative border-b-2 border-white/80">
+            <div className="flex items-center justify-between gap-3.5">
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-white/20 text-white flex items-center justify-center font-bold">
+                  <UserCheck className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-base sm:text-lg font-black text-white leading-tight">Mulai Belajar</h2>
+                  <p className="text-xs text-white/90 font-medium">
+                    {dbStudents.length > 0
+                      ? `Cari nama dari ${dbStudents.length} siswa terdaftar`
+                      : 'Masukkan Nama & pilih Kelas'}
+                  </p>
+                </div>
+              </div>
 
-          <div className="flex items-center justify-between gap-3.5 pb-4 mb-5 border-b border-gray-100 mt-1">
-            <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#0F214A] via-teal-700 to-emerald-600 text-white flex items-center justify-center font-bold shadow-md shadow-slate-900/20">
-                <UserCheck className="w-5 h-5 text-amber-300" />
-              </div>
-              <div>
-                <h2 className="text-base sm:text-lg font-black text-slate-900">Mulai Belajar</h2>
-                <p className="text-xs text-slate-600 font-medium">
-                  {dbStudents.length > 0
-                    ? `Cari nama dari ${dbStudents.length} siswa terdaftar`
-                    : 'Cukup masukkan Nama & pilih Kelas'}
-                </p>
-              </div>
+              {dbStudents.length > 0 && (
+                <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black bg-white/20 text-white border border-white/40 shadow-2xs">
+                  <Database className="w-3 h-3 text-white" />
+                  <span>{dbStudents.length} Siswa</span>
+                </span>
+              )}
             </div>
-
-            {dbStudents.length > 0 && (
-              <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black bg-emerald-50 text-emerald-800 border border-emerald-200 shadow-2xs">
-                <Database className="w-3 h-3 text-emerald-600" />
-                <span>{dbStudents.length} Siswa</span>
-              </span>
-            )}
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="p-6 sm:p-8">
+            <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium">
                 {error}
@@ -903,7 +902,7 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
               id="start-learning-btn"
               type="submit"
               disabled={loading}
-              className="w-full mt-3 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 via-rose-500 to-indigo-700 hover:from-emerald-700 hover:to-indigo-800 text-white font-black text-sm sm:text-base tracking-wide shadow-lg shadow-emerald-700/20 flex items-center justify-center gap-2 cursor-pointer transition transform active:scale-[0.99] disabled:opacity-70"
+              className="w-full mt-3 py-3.5 px-6 rounded-2xl bg-[#7A93D1] hover:bg-[#6B85C4] text-white font-black text-sm sm:text-base tracking-wide shadow-md flex items-center justify-center gap-2 cursor-pointer transition transform active:scale-[0.99] disabled:opacity-70 border border-white/80"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />

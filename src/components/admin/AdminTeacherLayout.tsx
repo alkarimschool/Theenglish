@@ -144,31 +144,22 @@ export const AdminTeacherLayout: React.FC<Props> = ({
   };
 
   return (
-    <div className="min-h-screen bg-mesh-admin flex flex-col md:flex-row selection:bg-rose-200 selection:text-slate-900 relative overflow-x-hidden">
-      {/* Floating Colorful Ambient Orbs for Teacher Dashboard Background */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
-        <div className="absolute -top-24 -left-20 w-96 h-96 rounded-full bg-gradient-to-br from-indigo-500/20 via-blue-400/15 to-transparent blur-3xl animate-float-slow" />
-        <div className="absolute top-1/3 -right-24 w-[28rem] h-[28rem] rounded-full bg-gradient-to-bl from-rose-500/20 via-pink-400/15 to-transparent blur-3xl animate-float-reverse" />
-        <div className="absolute bottom-20 left-1/3 w-96 h-96 rounded-full bg-gradient-to-tr from-amber-400/20 via-orange-300/15 to-transparent blur-3xl animate-float-slow" />
-        <div className="absolute -bottom-20 right-10 w-96 h-96 rounded-full bg-gradient-to-tl from-teal-400/20 via-emerald-300/15 to-transparent blur-3xl animate-float-reverse" />
-      </div>
-
+    <div className="min-h-screen bg-white flex flex-col md:flex-row selection:bg-slate-200 selection:text-slate-900">
       {/* Sidebar for Desktop */}
-      <aside className="hidden md:flex md:w-64 flex-col bg-white/95 backdrop-blur-md border-r border-gray-200/80 sticky top-0 h-screen z-30 shadow-md">
-        {/* Brand Header with Navy Gradient & Logo Accent Bar */}
-        <div className="p-5 bg-gradient-to-br from-[#0F214A] via-indigo-950 to-slate-900 text-white relative overflow-hidden shrink-0">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 via-amber-400 via-teal-400 to-purple-500" />
+      <aside className="hidden md:flex md:w-64 flex-col bg-slate-50/80 border-r border-slate-200 sticky top-0 h-screen z-30 shadow-xs">
+        {/* Brand Header with Pastel Periwinkle Blue (#7A93D1) & White Line Divider */}
+        <div className="p-5 bg-[#7A93D1] text-white relative overflow-hidden shrink-0 border-b-2 border-white/80">
           <div className="flex items-center gap-3">
             <img
               src={logoImg}
               alt="The English Logo"
-              className="w-10 h-10 object-contain rounded-full bg-white p-0.5 border-2 border-amber-300 shadow-md shrink-0"
+              className="w-10 h-10 object-contain rounded-full bg-white p-0.5 border-2 border-white/90 shadow-md shrink-0"
             />
             <div>
               <h1 className="text-sm font-black tracking-tight leading-tight text-white">
-                The English <span className="text-amber-300 font-black">Al-Karim</span>
+                The English <span className="text-white/90 font-black">Al-Karim</span>
               </h1>
-              <p className="text-[10px] text-teal-300 font-extrabold uppercase tracking-wider mt-0.5">
+              <p className="text-[10px] text-white/90 font-extrabold uppercase tracking-wider mt-0.5">
                 {isAdmin ? 'Super Admin Panel' : 'Panel Guru Pengajar'}
               </p>
             </div>
@@ -176,35 +167,35 @@ export const AdminTeacherLayout: React.FC<Props> = ({
         </div>
 
         {/* User Scope Card */}
-        <div className="p-3.5 mx-3.5 my-3 rounded-2xl bg-gradient-to-r from-rose-50/70 via-amber-50/70 via-teal-50/70 to-indigo-50/70 border-2 border-amber-200/80 shadow-2xs">
+        <div className="p-3.5 mx-3.5 my-3 rounded-2xl bg-white border-2 border-slate-200 shadow-2xs">
           <div className="flex items-center gap-2 mb-1">
             {isAdmin ? (
-              <Shield className="w-4 h-4 text-rose-600 shrink-0" />
+              <Shield className="w-4 h-4 text-[#7A93D1] shrink-0" />
             ) : (
-              <GraduationCap className="w-4 h-4 text-indigo-700 shrink-0" />
+              <GraduationCap className="w-4 h-4 text-[#8CB5D3] shrink-0" />
             )}
             <span className="text-xs font-black text-slate-900 truncate">{currentUser.name}</span>
           </div>
-          <div className="text-[10px] text-slate-700 font-bold">
+          <div className="text-[10px] text-slate-600 font-bold">
             {isAdmin
               ? 'Akses Semua Jenjang (TK s/d SMA)'
               : `Jenjang: ${allowedLevels.map((l) => l.name).join(', ')}`}
           </div>
         </div>
 
-        {/* Nav Links */}
+        {/* Nav Links with 5 Soft Pastel Palette Cards from Image */}
         <nav className="flex-1 px-3.5 space-y-1.5 overflow-y-auto">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
 
-            // Multi-colored active tab background based on feature area
-            let activeClass = 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20';
-            if (item.id === 'topics') activeClass = 'bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 text-white shadow-md shadow-rose-500/20';
-            if (item.id === 'questions') activeClass = 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md shadow-amber-500/20';
-            if (item.id === 'progress') activeClass = 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-md shadow-cyan-600/20';
-            if (item.id === 'teachers') activeClass = 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-600/20';
-            if (item.id === 'reports') activeClass = 'bg-gradient-to-r from-rose-600 to-indigo-700 text-white shadow-md shadow-indigo-600/20';
+            // 5 Soft Pastel card active colors from reference image
+            let activeClass = 'bg-[#7A93D1] text-white shadow-sm font-black'; // Card 1: Periwinkle Blue
+            if (item.id === 'topics') activeClass = 'bg-[#E5B5C8] text-[#4A1E2F] shadow-sm font-black'; // Card 5: Pastel Rose
+            if (item.id === 'questions') activeClass = 'bg-[#9ED7C6] text-[#0E3D34] shadow-sm font-black'; // Card 3: Mint Green
+            if (item.id === 'progress') activeClass = 'bg-[#8CB5D3] text-white shadow-sm font-black'; // Card 2: Sky Blue
+            if (item.id === 'teachers') activeClass = 'bg-[#CBEAD9] text-[#123E2A] shadow-sm font-black'; // Card 4: Sage Green
+            if (item.id === 'reports') activeClass = 'bg-[#E5B5C8] text-[#4A1E2F] shadow-sm font-black'; // Card 5: Pastel Rose
 
             return (
               <button
@@ -212,13 +203,13 @@ export const AdminTeacherLayout: React.FC<Props> = ({
                 id={`sidebar-nav-${item.id}`}
                 type="button"
                 onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-black transition cursor-pointer ${
+                className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs transition cursor-pointer ${
                   isActive
                     ? activeClass
-                    : 'text-slate-700 hover:bg-slate-100/80 hover:text-slate-900 font-bold'
+                    : 'text-slate-700 hover:bg-white hover:text-slate-900 font-bold border border-transparent hover:border-slate-200'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? '' : 'text-slate-400'}`} />
                 <span>{item.label}</span>
               </button>
             );
@@ -230,9 +221,9 @@ export const AdminTeacherLayout: React.FC<Props> = ({
               id="sidebar-import-students-btn"
               type="button"
               onClick={() => setIsImportStudentsOpen(true)}
-              className="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-black bg-gradient-to-r from-rose-50 via-amber-50 to-teal-50 hover:from-rose-100 hover:to-teal-100 text-slate-900 border-2 border-amber-300/80 transition cursor-pointer shadow-2xs group active:scale-98"
+              className="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-black bg-[#CBEAD9] text-[#123E2A] border border-[#B9E1CB] hover:brightness-95 transition cursor-pointer shadow-2xs group active:scale-98"
             >
-              <div className="w-5 h-5 rounded-md bg-gradient-to-br from-amber-500 to-rose-500 text-white flex items-center justify-center shrink-0 transition shadow-2xs">
+              <div className="w-5 h-5 rounded-md bg-[#123E2A] text-white flex items-center justify-center shrink-0 transition shadow-2xs">
                 <FileSpreadsheet className="w-3.5 h-3.5" />
               </div>
               <span className="truncate">Import Siswa Excel</span>
@@ -241,14 +232,14 @@ export const AdminTeacherLayout: React.FC<Props> = ({
         </nav>
 
         {/* Quick Student Switch & Logout */}
-        <div className="p-3.5 border-t border-gray-100 space-y-2 shrink-0">
+        <div className="p-3.5 border-t border-slate-200 space-y-2 shrink-0 bg-white">
           <button
             id="switch-student-preview-btn"
             type="button"
             onClick={onSwitchToStudentView}
-            className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-teal-50 to-indigo-50 hover:from-teal-100 hover:to-indigo-100 text-slate-900 border border-teal-200 text-xs font-black flex items-center justify-center gap-2 cursor-pointer transition shadow-2xs"
+            className="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 border border-slate-300 text-xs font-black flex items-center justify-center gap-2 cursor-pointer transition shadow-2xs"
           >
-            <ExternalLink className="w-3.5 h-3.5 text-teal-700" />
+            <ExternalLink className="w-3.5 h-3.5 text-slate-700" />
             <span>Mode Siswa (Preview)</span>
           </button>
 
@@ -264,18 +255,17 @@ export const AdminTeacherLayout: React.FC<Props> = ({
         </div>
       </aside>
 
-      {/* Mobile Header Bar */}
-      <div className="md:hidden bg-gradient-to-r from-[#0F214A] via-indigo-950 to-slate-900 text-white p-4 flex items-center justify-between sticky top-0 z-30 shadow-md relative">
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 via-amber-400 via-teal-400 to-purple-500" />
+      {/* Mobile Header Bar with Pastel Header Line */}
+      <div className="md:hidden bg-[#7A93D1] text-white p-4 flex items-center justify-between sticky top-0 z-30 shadow-md border-b-2 border-white/80">
         <div className="flex items-center gap-2.5">
           <img
             src={logoImg}
             alt="The English Logo"
-            className="w-8 h-8 object-contain rounded-full bg-white p-0.5 border border-amber-300 shrink-0"
+            className="w-8 h-8 object-contain rounded-full bg-white p-0.5 border border-white shrink-0"
           />
           <div>
             <span className="text-xs font-black text-white">The English Al-Karim</span>
-            <div className="text-[10px] text-amber-300 font-extrabold">{isAdmin ? 'Super Admin' : 'Guru Pengajar'}</div>
+            <div className="text-[10px] text-white/90 font-extrabold">{isAdmin ? 'Super Admin' : 'Guru Pengajar'}</div>
           </div>
         </div>
 

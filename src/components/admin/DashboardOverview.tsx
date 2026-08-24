@@ -36,19 +36,19 @@ export const DashboardOverview: React.FC<Props> = ({
 
   return (
     <div className="space-y-6">
-      {/* Welcome Banner */}
-      <div className="bg-gradient-to-r from-[#0F214A] via-indigo-950 via-teal-950 to-[#0F214A] text-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-indigo-950/20 relative overflow-hidden border-2 border-indigo-800/40">
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-rose-500 via-amber-400 via-teal-400 to-purple-500" />
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+      {/* Welcome Banner with Pastel Periwinkle Blue (#7A93D1) & White Line Divider */}
+      <div className="bg-[#7A93D1] text-white rounded-3xl p-6 sm:p-8 shadow-md relative overflow-hidden border-2 border-white/80">
+        <div className="absolute top-3 left-6 right-6 h-[2px] bg-white/80" />
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 mt-2">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-emerald-200 text-xs font-bold mb-2.5 backdrop-blur-xs">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-bold mb-2.5 backdrop-blur-xs">
+              <Sparkles className="w-3.5 h-3.5 text-white" />
               <span>{isTeacher ? 'Teacher Control Center' : 'Super Admin Management Center'}</span>
             </div>
-            <h1 className="text-xl sm:text-3xl font-extrabold tracking-tight">
+            <h1 className="text-xl sm:text-3xl font-black tracking-tight text-white">
               Assalamu’alaikum, {currentUser.name}
             </h1>
-            <p className="text-xs sm:text-sm text-emerald-100/90 mt-1 max-w-xl">
+            <p className="text-xs sm:text-sm text-white/90 mt-1 max-w-xl font-medium">
               {isTeacher
                 ? `Anda memiliki akses pengajaran untuk jenjang: ${
                     levels.map((l) => l.name).join(', ') || 'Jenjang Ditugaskan'
@@ -63,9 +63,9 @@ export const DashboardOverview: React.FC<Props> = ({
                 id="dash-quick-import-students-btn"
                 type="button"
                 onClick={onOpenImportStudents}
-                className="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-amber-950 font-black text-xs sm:text-sm flex items-center gap-2 shadow-md transition cursor-pointer active:scale-95"
+                className="px-4 py-2.5 rounded-xl bg-[#CBEAD9] hover:brightness-95 text-[#123E2A] font-black text-xs sm:text-sm flex items-center gap-2 shadow-sm transition cursor-pointer active:scale-95 border border-white/80"
               >
-                <FileSpreadsheet className="w-4 h-4 text-amber-900" />
+                <FileSpreadsheet className="w-4 h-4 text-[#123E2A]" />
                 <span>Import Siswa (Excel)</span>
               </button>
             )}
@@ -74,7 +74,7 @@ export const DashboardOverview: React.FC<Props> = ({
               id="dash-quick-topic-btn"
               type="button"
               onClick={() => onNavigate('topics')}
-              className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-md transition cursor-pointer"
+              className="px-4 py-2.5 rounded-xl bg-[#9ED7C6] hover:brightness-95 text-[#0E3D34] font-black text-xs sm:text-sm flex items-center gap-2 shadow-sm transition cursor-pointer border border-white/80"
             >
               <BookOpen className="w-4 h-4" />
               <span>Kelola Materi</span>
@@ -84,7 +84,7 @@ export const DashboardOverview: React.FC<Props> = ({
               id="dash-quick-questions-btn"
               type="button"
               onClick={() => onNavigate('questions')}
-              className="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs sm:text-sm flex items-center gap-2 border border-white/20 transition cursor-pointer"
+              className="px-4 py-2.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs sm:text-sm flex items-center gap-2 border border-white/40 transition cursor-pointer"
             >
               <HelpCircle className="w-4 h-4" />
               <span>Lihat Bank Soal</span>
@@ -93,85 +93,97 @@ export const DashboardOverview: React.FC<Props> = ({
         </div>
       </div>
 
-      {/* 6 Primary Key Metric Cards */}
+      {/* 6 Primary Key Metric Cards styled like the 5 pastel reference cards */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
         {!isTeacher && (
-          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-xs flex flex-col justify-between">
-            <div className="flex items-center justify-between text-gray-400 mb-2">
-              <span className="text-[11px] font-bold uppercase text-gray-500">Guru</span>
-              <div className="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-700 flex items-center justify-center font-bold">
+          /* Card 1: Soft Periwinkle Blue (#7A93D1) */
+          <div className="bg-[#7A93D1] text-white p-4 sm:p-5 rounded-2xl border-2 border-white/80 shadow-xs flex flex-col justify-between relative">
+            <div className="w-full h-[2px] bg-white/80 mb-3" />
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[11px] font-black uppercase text-white/90">Guru</span>
+              <div className="w-7 h-7 rounded-lg bg-white/20 text-white flex items-center justify-center font-bold">
                 <GraduationCap className="w-4 h-4" />
               </div>
             </div>
             <div>
-              <div className="text-2xl font-black text-gray-900">{stats.totalTeachers}</div>
-              <div className="text-[10px] text-gray-500 font-medium">Akun Pengajar</div>
+              <div className="text-2xl font-black text-white leading-tight">{stats.totalTeachers}</div>
+              <div className="text-[10px] text-white/80 font-bold">Akun Pengajar</div>
             </div>
           </div>
         )}
 
-        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-gray-400 mb-2">
-            <span className="text-[11px] font-bold uppercase text-gray-500">Siswa Aktif</span>
-            <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-bold">
+        {/* Card 2: Soft Sky Blue (#8CB5D3) */}
+        <div className="bg-[#8CB5D3] text-white p-4 sm:p-5 rounded-2xl border-2 border-white/80 shadow-xs flex flex-col justify-between relative">
+          <div className="w-full h-[2px] bg-white/80 mb-3" />
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[11px] font-black uppercase text-white/90">Siswa Aktif</span>
+            <div className="w-7 h-7 rounded-lg bg-white/20 text-white flex items-center justify-center font-bold">
               <Users className="w-4 h-4" />
             </div>
           </div>
           <div>
-            <div className="text-2xl font-black text-gray-900">{stats.totalStudents}</div>
-            <div className="text-[10px] text-gray-500 font-medium">Siswa Terdata</div>
+            <div className="text-2xl font-black text-white leading-tight">{stats.totalStudents}</div>
+            <div className="text-[10px] text-white/80 font-bold">Siswa Terdata</div>
           </div>
         </div>
 
-        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-gray-400 mb-2">
-            <span className="text-[11px] font-bold uppercase text-gray-500">Materi Topic</span>
-            <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold">
+        {/* Card 3: Soft Mint Green (#9ED7C6) */}
+        <div className="bg-[#9ED7C6] text-[#0E3D34] p-4 sm:p-5 rounded-2xl border-2 border-white/80 shadow-xs flex flex-col justify-between relative">
+          <div className="w-full h-[2px] bg-white/80 mb-3" />
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[11px] font-black uppercase text-[#0E3D34]">Materi Topic</span>
+            <div className="w-7 h-7 rounded-lg bg-[#0E3D34]/15 text-[#0E3D34] flex items-center justify-center font-bold">
               <BookOpen className="w-4 h-4" />
             </div>
           </div>
           <div>
-            <div className="text-2xl font-black text-gray-900">{stats.totalTopics}</div>
-            <div className="text-[10px] text-gray-500 font-medium">Topic Pembelajaran</div>
+            <div className="text-2xl font-black text-[#0E3D34] leading-tight">{stats.totalTopics}</div>
+            <div className="text-[10px] text-[#0E3D34]/80 font-bold">Topic Pembelajaran</div>
           </div>
         </div>
 
-        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-gray-400 mb-2">
-            <span className="text-[11px] font-bold uppercase text-gray-500">Bank Soal</span>
-            <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-bold">
+        {/* Card 4: Soft Pale Sage (#CBEAD9) */}
+        <div className="bg-[#CBEAD9] text-[#123E2A] p-4 sm:p-5 rounded-2xl border-2 border-white/80 shadow-xs flex flex-col justify-between relative">
+          <div className="w-full h-[2px] bg-white/80 mb-3" />
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[11px] font-black uppercase text-[#123E2A]">Bank Soal</span>
+            <div className="w-7 h-7 rounded-lg bg-[#123E2A]/15 text-[#123E2A] flex items-center justify-center font-bold">
               <HelpCircle className="w-4 h-4" />
             </div>
           </div>
           <div>
-            <div className="text-2xl font-black text-gray-900">{stats.totalQuestions}</div>
-            <div className="text-[10px] text-gray-500 font-medium">Total Soal Aktif</div>
+            <div className="text-2xl font-black text-[#123E2A] leading-tight">{stats.totalQuestions}</div>
+            <div className="text-[10px] text-[#123E2A]/80 font-bold">Total Soal Aktif</div>
           </div>
         </div>
 
-        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-gray-400 mb-2">
-            <span className="text-[11px] font-bold uppercase text-gray-500">Pengerjaan</span>
-            <div className="w-8 h-8 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center font-bold">
+        {/* Card 5: Soft Pastel Rose (#E5B5C8) */}
+        <div className="bg-[#E5B5C8] text-[#4A1E2F] p-4 sm:p-5 rounded-2xl border-2 border-white/80 shadow-xs flex flex-col justify-between relative">
+          <div className="w-full h-[2px] bg-white/80 mb-3" />
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[11px] font-black uppercase text-[#4A1E2F]">Latihan Selesai</span>
+            <div className="w-7 h-7 rounded-lg bg-[#4A1E2F]/15 text-[#4A1E2F] flex items-center justify-center font-bold">
+              <CheckCircle2 className="w-4 h-4" />
+            </div>
+          </div>
+          <div>
+            <div className="text-2xl font-black text-[#4A1E2F] leading-tight">{stats.totalAttempts}</div>
+            <div className="text-[10px] text-[#4A1E2F]/80 font-bold">Sesi Pengerjaan</div>
+          </div>
+        </div>
+
+        {/* Card 6: Soft Periwinkle Blue (#7A93D1) */}
+        <div className="bg-[#7A93D1] text-white p-4 sm:p-5 rounded-2xl border-2 border-white/80 shadow-xs flex flex-col justify-between relative">
+          <div className="w-full h-[2px] bg-white/80 mb-3" />
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[11px] font-black uppercase text-white/90">Lulus Latihan</span>
+            <div className="w-7 h-7 rounded-lg bg-white/20 text-white flex items-center justify-center font-bold">
               <TrendingUp className="w-4 h-4" />
             </div>
           </div>
           <div>
-            <div className="text-2xl font-black text-gray-900">{stats.totalAttempts}</div>
-            <div className="text-[10px] text-gray-500 font-medium">Kali Latihan Selesai</div>
-          </div>
-        </div>
-
-        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-gray-400 mb-2">
-            <span className="text-[11px] font-bold uppercase text-gray-500">Rata-Rata</span>
-            <div className="w-8 h-8 rounded-xl bg-rose-50 text-rose-700 flex items-center justify-center font-bold">
-              <Award className="w-4 h-4" />
-            </div>
-          </div>
-          <div>
-            <div className="text-2xl font-black text-emerald-700">{stats.averageScore}</div>
-            <div className="text-[10px] text-gray-500 font-medium">{stats.completionRate}% Kelulusan</div>
+            <div className="text-2xl font-black text-white leading-tight">{stats.passPercentage}%</div>
+            <div className="text-[10px] text-white/80 font-bold">Tingkat Kelulusan</div>
           </div>
         </div>
       </div>

@@ -1,71 +1,69 @@
 @import "tailwindcss";
 
 @layer utilities {
+  /* Clean White Page Backgrounds */
   .bg-mesh-colorful {
-    background-color: #faf7fd;
-    background-image: 
-      radial-gradient(at 5% 5%, rgba(244, 63, 94, 0.28) 0px, transparent 50%),
-      radial-gradient(at 95% 5%, rgba(245, 158, 11, 0.30) 0px, transparent 50%),
-      radial-gradient(at 95% 95%, rgba(20, 184, 166, 0.28) 0px, transparent 50%),
-      radial-gradient(at 5% 95%, rgba(139, 92, 246, 0.26) 0px, transparent 50%),
-      radial-gradient(at 50% 50%, rgba(59, 130, 246, 0.22) 0px, transparent 55%);
+    background-color: #ffffff;
+    background-image: none;
   }
 
   .bg-mesh-admin {
-    background-color: #f3f6fc;
-    background-image: 
-      radial-gradient(at 0% 0%, rgba(15, 33, 74, 0.22) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(244, 63, 94, 0.25) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(245, 158, 11, 0.25) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, rgba(20, 184, 166, 0.24) 0px, transparent 50%),
-      radial-gradient(at 50% 50%, rgba(139, 92, 246, 0.20) 0px, transparent 55%);
+    background-color: #ffffff;
+    background-image: none;
   }
 
-  .bg-mesh-card {
-    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(240, 253, 250, 0.90) 100%);
+  /* 5 Pastel Palette Card Styles from User Reference Image */
+  /* Card 1: Soft Periwinkle Blue */
+  .bg-pastel-card-1 {
+    background-color: #7A93D1;
+    color: #ffffff;
+  }
+  .border-pastel-card-1 {
+    border-color: #6B85C4;
   }
 
-  .bg-mesh-warm {
-    background-image: linear-gradient(135deg, rgba(255, 251, 235, 0.95) 0%, rgba(254, 243, 199, 0.8) 100%);
+  /* Card 2: Soft Sky Blue */
+  .bg-pastel-card-2 {
+    background-color: #8CB5D3;
+    color: #ffffff;
+  }
+  .border-pastel-card-2 {
+    border-color: #7FA4C4;
+  }
+
+  /* Card 3: Soft Mint Green */
+  .bg-pastel-card-3 {
+    background-color: #9ED7C6;
+    color: #0E3D34;
+  }
+  .border-pastel-card-3 {
+    border-color: #88CBB8;
+  }
+
+  /* Card 4: Soft Pale Sage */
+  .bg-pastel-card-4 {
+    background-color: #CBEAD9;
+    color: #123E2A;
+  }
+  .border-pastel-card-4 {
+    border-color: #B9E1CB;
+  }
+
+  /* Card 5: Soft Pastel Rose Pink */
+  .bg-pastel-card-5 {
+    background-color: #E5B5C8;
+    color: #4A1E2F;
+  }
+  .border-pastel-card-5 {
+    border-color: #D79FB6;
+  }
+
+  /* White Line Divider Header Accent inside Pastel Cards */
+  .pastel-card-header-line {
+    border-top: 2.5px solid rgba(255, 255, 255, 0.85);
   }
 
   .bg-logo-gradient {
-    background: linear-gradient(135deg, #0F214A 0%, #F43F5E 35%, #F59E0B 65%, #2DD4BF 100%);
+    background: linear-gradient(135deg, #7A93D1 0%, #8CB5D3 30%, #9ED7C6 60%, #E5B5C8 100%);
   }
-
-  .text-gradient-logo {
-    background: linear-gradient(135deg, #F43F5E 0%, #F59E0B 40%, #10B981 70%, #8B5CF6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .border-logo-gradient {
-    border-image: linear-gradient(to right, #F43F5E, #F59E0B, #10B981, #8B5CF6) 1;
-  }
-}
-
-@keyframes float-slow {
-  0%, 100% {
-    transform: translateY(0px) scale(1);
-  }
-  50% {
-    transform: translateY(-12px) scale(1.04);
-  }
-}
-
-@keyframes float-reverse {
-  0%, 100% {
-    transform: translateY(0px) scale(1);
-  }
-  50% {
-    transform: translateY(12px) scale(0.96);
-  }
-}
-
-.animate-float-slow {
-  animation: float-slow 8s ease-in-out infinite;
-}
-
-.animate-float-reverse {
-  animation: float-reverse 10s ease-in-out infinite;
 }

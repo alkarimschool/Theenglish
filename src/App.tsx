@@ -219,16 +219,9 @@ export default function App() {
     );
   }
 
-  // STUDENT VIEW (Colorful, cheerful, modern, mobile-first)
+  // STUDENT VIEW (Clean White Background, Soft Pastel Card Accents)
   return (
-    <div className="min-h-screen bg-mesh-colorful flex flex-col selection:bg-emerald-300 selection:text-emerald-950 relative overflow-x-hidden">
-      {/* Vibrant Multi-Color Ambient Lighting Background Orbs */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
-        <div className="absolute -top-28 -left-24 w-96 h-96 rounded-full bg-gradient-to-br from-rose-400/40 via-pink-300/30 to-transparent blur-3xl animate-float-slow" />
-        <div className="absolute top-1/4 -right-28 w-[30rem] h-[30rem] rounded-full bg-gradient-to-bl from-amber-400/40 via-orange-300/30 to-transparent blur-3xl animate-float-reverse" />
-        <div className="absolute bottom-16 left-1/4 w-96 h-96 rounded-full bg-gradient-to-tr from-teal-400/40 via-emerald-300/30 to-transparent blur-3xl animate-float-slow" />
-        <div className="absolute -bottom-24 right-10 w-96 h-96 rounded-full bg-gradient-to-tl from-indigo-500/35 via-purple-300/30 to-transparent blur-3xl animate-float-reverse" />
-      </div>
+    <div className="min-h-screen bg-white flex flex-col selection:bg-slate-200 selection:text-slate-950 relative overflow-x-hidden">
 
       {/* Student Top Header */}
       <div className="relative z-30">
