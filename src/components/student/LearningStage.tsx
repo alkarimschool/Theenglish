@@ -12,6 +12,8 @@ import {
   ArrowLeft,
   Sparkles,
   Layers,
+  Star,
+  Zap,
 } from 'lucide-react';
 
 interface Props {
@@ -23,6 +25,189 @@ interface Props {
   onStartExercise: () => void;
   onBackToTopics: () => void;
 }
+
+// Component helper for rendering markdown content cleanly with rich cards & audio support
+const RenderRichMarkdown: React.FC<{ content: string; theme: any }> = ({ content, theme }) => {
+  if (!content) return null;
+
+  const lines = content.split('\n');
+  const blocks: Array<{
+    type: 'header3' | 'header4' | 'hr' | 'paragraph' | 'bulletList';
+    text?: string;
+    items?: string[];
+  }> = [];
+
+  let currentBulletList: string[] = [];
+
+  const flushBullets = () => {
+    if (currentBulletList.length > 0) {
+      blocks.push({ type: 'bulletList', items: [...currentBulletList] });
+      currentBulletList = [];
+    }
+  };
+
+  lines.forEach((line) => {
+    const trimmed = line.trim();
+    if (!trimmed) {
+      flushBullets();
+      return;
+    }
+
+    if (trimmed.startsWith('### ')) {
+      flushBullets();
+      blocks.push({ type: 'header3', text: trimmed.replace(/^###\s+/, '') });
+    } else if (trimmed.startsWith('#### ')) {
+      flushBullets();
+      blocks.push({ type: 'header4', text: trimmed.replace(/^####\s+/, '') });
+    } else if (trimmed.startsWith('---')) {
+      flushBullets();
+      blocks.push({ type: 'hr' });
+    } else if (/^[\*\-]\s+/.test(trimmed) || /^\d+\.\s+/.test(trimmed)) {
+      currentBulletList.push(trimmed.replace(/^[\*\-]\s+/, '').replace(/^\d+\.\s+/, ''));
+    } else {
+      flushBullets();
+      blocks.push({ type: 'paragraph', text: trimmed });
+    }
+  });
+
+  flushBullets();
+
+  const parseInlineBold = (str: string) => {
+    const parts = str.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, idx) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        const text = part.slice(2, -2);
+        return (
+          <strong key={idx} className="font-extrabold text-emerald-950 bg-amber-100/90 px-1.5 py-0.5 rounded-md border border-amber-200/80 shadow-2xs">
+            {text}
+          </strong>
+        );
+      }
+      return part;
+    });
+  };
+
+  return (
+    <div className="space-y-6">
+      {blocks.map((block, bIdx) => {
+        if (block.type === 'header3') {
+          return (
+            <div
+              key={bIdx}
+              className="mt-6 mb-4 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-700 via-teal-700 to-emerald-800 text-white shadow-md flex items-center justify-between gap-3 border border-emerald-600/50"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center font-bold text-white shrink-0 shadow-inner">
+                  <Sparkles className="w-5 h-5 text-amber-300 animate-pulse" />
+                </div>
+                <h3 className="text-base sm:text-lg font-black tracking-tight text-white">
+                  {block.text}
+                </h3>
+              </div>
+              <span className="hidden sm:inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-bold bg-white/20 text-white backdrop-blur-xs">
+                <Zap className="w-3 h-3 text-amber-300" /> Materi Utama
+              </span>
+            </div>
+          );
+        }
+
+        if (block.type === 'header4') {
+          return (
+            <h4 key={bIdx} className="text-sm sm:text-base font-extrabold text-gray-900 mt-4 mb-2 flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
+              <span>{block.text}</span>
+            </h4>
+          );
+        }
+
+        if (block.type === 'hr') {
+          return (
+            <div key={bIdx} className="my-6 relative flex items-center justify-center">
+              <div className="w-full border-t border-emerald-100" />
+              <span className="absolute bg-white px-3 text-xs font-bold text-emerald-600/60 uppercase tracking-widest flex items-center gap-1">
+                <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                <span>ENGLISH LESSON</span>
+                <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+              </span>
+            </div>
+          );
+        }
+
+        if (block.type === 'paragraph') {
+          return (
+            <div key={bIdx} className="text-sm sm:text-base text-gray-800 leading-relaxed font-medium bg-emerald-50/40 p-4 rounded-2xl border border-emerald-100/70">
+              {parseInlineBold(block.text || '')}
+            </div>
+          );
+        }
+
+        if (block.type === 'bulletList' && block.items) {
+          return (
+            <div key={bIdx} className="grid grid-cols-1 md:grid-cols-2 gap-3.5 my-4">
+              {block.items.map((item, itemIdx) => {
+                // Match regex pattern: **Word** (Translation) : Description
+                const match = item.match(/^\*\*(.*?)\*\*\s*(?:\((.*?)\))?\s*:\s*(.*)$/);
+
+                if (match) {
+                  const term = match[1].trim();
+                  const translation = match[2]?.trim();
+                  const desc = match[3].trim();
+
+                  return (
+                    <div
+                      key={itemIdx}
+                      className="p-4 rounded-2xl border-2 border-emerald-100/90 bg-gradient-to-br from-white via-emerald-50/30 to-teal-50/20 shadow-xs hover:shadow-md hover:border-emerald-300 transition-all duration-200 flex flex-col justify-between group"
+                    >
+                      <div>
+                        {/* Card Header: Term Badge + Translation + Audio Pronunciation */}
+                        <div className="flex items-center justify-between gap-2 mb-2 pb-2.5 border-b border-emerald-100/80">
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            <span className="px-3 py-1 rounded-xl bg-gradient-to-r from-emerald-700 to-teal-700 text-white font-black text-xs sm:text-sm tracking-wide shadow-xs group-hover:from-emerald-800 group-hover:to-teal-800 transition">
+                              {term}
+                            </span>
+                            {translation && (
+                              <span className="px-2.5 py-0.5 rounded-lg bg-emerald-100/90 text-emerald-950 font-extrabold text-xs border border-emerald-200">
+                                ({translation})
+                              </span>
+                            )}
+                          </div>
+
+                          <TextToSpeechButton text={term} label="Listen" size="sm" />
+                        </div>
+
+                        {/* Card Body: Description */}
+                        <p className="text-xs sm:text-sm text-gray-700 leading-relaxed font-medium mt-1">
+                          {parseInlineBold(desc)}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                }
+
+                // Standard bullet list item
+                return (
+                  <div
+                    key={itemIdx}
+                    className="md:col-span-2 p-3.5 rounded-2xl border border-gray-200/80 bg-gray-50/70 flex items-start gap-3 hover:bg-emerald-50/50 hover:border-emerald-200 transition"
+                  >
+                    <div className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
+                      ✓
+                    </div>
+                    <div className="text-xs sm:text-sm text-gray-800 font-medium leading-relaxed">
+                      {parseInlineBold(item)}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        }
+
+        return null;
+      })}
+    </div>
+  );
+};
 
 export const LearningStage: React.FC<Props> = ({
   topic,
@@ -158,7 +343,7 @@ export const LearningStage: React.FC<Props> = ({
         {activeTab === 'explanation' && (
           <div className="space-y-6">
             {material.imageUrl && (
-              <div className="rounded-2xl overflow-hidden mb-6 border border-gray-100 max-h-72">
+              <div className="rounded-2xl overflow-hidden mb-6 border border-gray-100 max-h-72 shadow-xs">
                 <img
                   src={material.imageUrl}
                   alt={topic.title}
@@ -168,51 +353,21 @@ export const LearningStage: React.FC<Props> = ({
               </div>
             )}
 
-            <div className="prose max-w-none text-gray-800 leading-relaxed text-sm sm:text-base space-y-4">
-              {material.contentMarkdown.split('\n\n').map((paragraph, pIdx) => {
-                if (paragraph.startsWith('### ')) {
-                  return (
-                    <h3 key={pIdx} className={`text-lg font-bold ${theme.textDark} mt-4 mb-2 pb-1 border-b ${theme.borderColor}`}>
-                      {paragraph.replace('### ', '')}
-                    </h3>
-                  );
-                }
-                if (paragraph.startsWith('#### ')) {
-                  return (
-                    <h4 key={pIdx} className="text-base font-bold text-gray-900 mt-3 mb-1">
-                      {paragraph.replace('#### ', '')}
-                    </h4>
-                  );
-                }
-                if (paragraph.startsWith('* ') || paragraph.startsWith('- ')) {
-                  return (
-                    <ul key={pIdx} className="list-disc pl-5 space-y-1.5 text-sm text-gray-700">
-                      {paragraph.split('\n').map((li, liIdx) => (
-                        <li key={liIdx}>{li.replace(/^[\*\-]\s*/, '')}</li>
-                      ))}
-                    </ul>
-                  );
-                }
-                if (paragraph.startsWith('---')) {
-                  return <hr key={pIdx} className="border-gray-200 my-4" />;
-                }
-                return (
-                  <p key={pIdx} className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                    {paragraph}
-                  </p>
-                );
-              })}
-            </div>
+            {/* Rich Rendered Content */}
+            <RenderRichMarkdown content={material.contentMarkdown} theme={theme} />
 
             {/* Pronunciation speech block */}
-            <div className={`mt-6 p-4 rounded-2xl ${theme.bgLight} border ${theme.borderColor} flex items-center justify-between gap-4`}>
+            <div className={`mt-6 p-4 rounded-2xl ${theme.bgLight} border ${theme.borderColor} flex items-center justify-between gap-4 shadow-2xs`}>
               <div>
-                <div className={`text-xs font-bold ${theme.textDark}`}>Audio Pronunciation Support</div>
-                <div className="text-[11px] text-gray-600">
+                <div className={`text-xs font-bold ${theme.textDark} flex items-center gap-1.5`}>
+                  <Volume2 className="w-4 h-4 text-emerald-600" />
+                  <span>Audio Pronunciation Support</span>
+                </div>
+                <div className="text-[11px] text-gray-600 mt-0.5">
                   Dengarkan aksen penutur asli untuk melatih pendengaran (listening) dan pengucapan (speaking).
                 </div>
               </div>
-              <TextToSpeechButton text={topic.title} label="Listen Topic" size="md" />
+              <TextToSpeechButton text={topic.title} label="Dengarkan Topik" size="md" />
             </div>
           </div>
         )}
@@ -232,12 +387,12 @@ export const LearningStage: React.FC<Props> = ({
                 {material.vocabularyList.map((v) => (
                   <div
                     key={v.id}
-                    className={`p-4 rounded-2xl border border-gray-200 bg-gray-50/50 ${theme.cardBgHover} ${theme.borderHover} transition-all flex flex-col justify-between`}
+                    className={`p-4 rounded-2xl border border-gray-200 bg-gray-50/50 ${theme.cardBgHover} ${theme.borderHover} transition-all flex flex-col justify-between shadow-2xs`}
                   >
                     <div>
                       <div className="flex items-start justify-between gap-2 mb-1.5">
                         <div>
-                          <span className={`text-base font-bold ${theme.textDark}`}>{v.word}</span>
+                          <span className={`text-base font-extrabold ${theme.textDark}`}>{v.word}</span>
                           {v.phonetic && (
                             <span className="text-xs text-gray-500 ml-2 font-mono">{v.phonetic}</span>
                           )}
@@ -246,23 +401,23 @@ export const LearningStage: React.FC<Props> = ({
                       </div>
 
                       {v.partOfSpeech && (
-                        <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 mb-2">
+                        <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-100 text-amber-900 mb-2 border border-amber-200">
                           {v.partOfSpeech}
                         </span>
                       )}
 
-                      <div className="text-xs font-semibold text-gray-800 mb-2">
-                        Arti: <span className="font-normal text-gray-700">{v.meaning}</span>
+                      <div className="text-xs font-bold text-gray-900 mb-2">
+                        Arti: <span className="font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/60">{v.meaning}</span>
                       </div>
                     </div>
 
-                    <div className="pt-2 border-t border-gray-200/60 mt-2">
+                    <div className="pt-2.5 border-t border-gray-200/80 mt-2">
                       <div className="text-xs text-gray-700 italic flex items-center justify-between gap-2">
                         <span>"{v.example}"</span>
                         <TextToSpeechButton text={v.example} size="sm" />
                       </div>
                       {v.exampleTranslation && (
-                        <div className="text-[11px] text-gray-500 mt-1">({v.exampleTranslation})</div>
+                        <div className="text-[11px] text-gray-500 mt-1 font-medium">({v.exampleTranslation})</div>
                       )}
                     </div>
                   </div>
@@ -277,7 +432,7 @@ export const LearningStage: React.FC<Props> = ({
           <div>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-base font-bold text-gray-900">Contoh Percakapan (Dialogue Simulation)</h3>
-              <span className="text-xs text-gray-500">Percakapan situasi nyata</span>
+              <span className="text-xs text-gray-500 font-medium">Simulasi percakapan situasi nyata</span>
             </div>
 
             {(!material.dialogueSamples || material.dialogueSamples.length === 0) ? (
@@ -291,23 +446,25 @@ export const LearningStage: React.FC<Props> = ({
                       key={turn.id}
                       className={`p-4 rounded-2xl border transition-all ${
                         isFirstSpeaker
-                          ? `${theme.bgLight} ${theme.borderColor} ml-0 mr-4 sm:mr-12`
-                          : 'bg-blue-50/70 border-blue-200 mr-0 ml-4 sm:ml-12'
+                          ? `${theme.bgLight} ${theme.borderColor} ml-0 mr-4 sm:mr-12 shadow-2xs`
+                          : 'bg-blue-50/70 border-blue-200 mr-0 ml-4 sm:ml-12 shadow-2xs'
                       }`}
                     >
                       <div className="flex items-center justify-between gap-2 mb-1.5">
-                        <span className="text-xs font-extrabold text-gray-900 flex items-center gap-1.5">
+                        <span className="text-xs font-extrabold text-gray-900 flex items-center gap-2">
                           <span
-                            className={`w-2 h-2 rounded-full ${
-                              isFirstSpeaker ? theme.bgActive : 'bg-blue-600'
+                            className={`w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-black ${
+                              isFirstSpeaker ? 'bg-emerald-600' : 'bg-blue-600'
                             }`}
-                          />
-                          {turn.speaker}
+                          >
+                            {turn.speaker.charAt(0)}
+                          </span>
+                          <span>{turn.speaker}</span>
                         </span>
                         <TextToSpeechButton text={turn.text} size="sm" />
                       </div>
-                      <p className="text-sm font-semibold text-gray-900 leading-snug">{turn.text}</p>
-                      <p className="text-xs text-gray-600 mt-1 italic leading-snug">
+                      <p className="text-sm font-bold text-gray-900 leading-snug pl-8">{turn.text}</p>
+                      <p className="text-xs text-gray-600 mt-1 italic leading-snug pl-8">
                         Terjemahan: {turn.translation}
                       </p>
                     </div>
@@ -323,20 +480,20 @@ export const LearningStage: React.FC<Props> = ({
           <div className="space-y-6">
             {material.keyPoints && material.keyPoints.length > 0 && (
               <div>
-                <h3 className={`text-sm font-bold ${theme.textDark} uppercase tracking-wider mb-3 flex items-center gap-2`}>
+                <h3 className={`text-sm font-extrabold ${theme.textDark} uppercase tracking-wider mb-3 flex items-center gap-2`}>
                   <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   <span>Poin Kunci yang Wajib Diingat</span>
                 </h3>
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   {material.keyPoints.map((kp, kIdx) => (
                     <div
                       key={kIdx}
-                      className={`p-3.5 rounded-xl ${theme.bgLight} border ${theme.borderColor} text-xs sm:text-sm ${theme.textDark} font-medium flex items-start gap-2.5`}
+                      className={`p-4 rounded-2xl ${theme.bgLight} border ${theme.borderColor} text-xs sm:text-sm ${theme.textDark} font-semibold flex items-start gap-3 shadow-2xs`}
                     >
-                      <span className={`w-5 h-5 rounded-full ${theme.bgActive} text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5`}>
+                      <span className={`w-6 h-6 rounded-full ${theme.bgActive} text-white flex items-center justify-center text-xs font-black shrink-0 shadow-xs`}>
                         {kIdx + 1}
                       </span>
-                      <span>{kp}</span>
+                      <span className="mt-0.5">{kp}</span>
                     </div>
                   ))}
                 </div>
@@ -345,18 +502,20 @@ export const LearningStage: React.FC<Props> = ({
 
             {material.tips && material.tips.length > 0 && (
               <div>
-                <h3 className="text-sm font-bold text-amber-950 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <h3 className="text-sm font-extrabold text-amber-950 uppercase tracking-wider mb-3 flex items-center gap-2">
                   <Lightbulb className="w-4 h-4 text-amber-600" />
                   <span>Tips Belajar & Strategi Menjawab Soal</span>
                 </h3>
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   {material.tips.map((tip, tIdx) => (
                     <div
                       key={tIdx}
-                      className="p-3.5 rounded-xl bg-amber-50 border border-amber-200/80 text-xs sm:text-sm text-amber-950 font-medium flex items-start gap-2.5"
+                      className="p-4 rounded-2xl bg-amber-50/90 border border-amber-200/90 text-xs sm:text-sm text-amber-950 font-semibold flex items-start gap-3 shadow-2xs"
                     >
-                      <span className="text-amber-600 font-bold shrink-0 mt-0.5">💡</span>
-                      <span>{tip}</span>
+                      <span className="w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center text-xs font-black shrink-0 shadow-xs">
+                        💡
+                      </span>
+                      <span className="mt-0.5">{tip}</span>
                     </div>
                   ))}
                 </div>
@@ -367,11 +526,11 @@ export const LearningStage: React.FC<Props> = ({
       </div>
 
       {/* Bottom CTA to Start Exercise */}
-      <div className={`p-6 bg-gradient-to-r ${theme.bannerGradient} rounded-3xl text-white shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4`}>
+      <div className={`p-6 sm:p-8 bg-gradient-to-r ${theme.bannerGradient} rounded-3xl text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4`}>
         <div>
-          <h3 className="text-lg font-bold">Sudah Paham Materinya?</h3>
-          <p className="text-xs text-white/90 mt-0.5">
-            Uji pemahamanmu sekarang dengan mengerjakan {questionCount} soal pilihan ganda.
+          <h3 className="text-lg sm:text-xl font-black">Sudah Paham Materinya?</h3>
+          <p className="text-xs sm:text-sm text-white/90 mt-1 leading-relaxed">
+            Uji pemahamanmu sekarang dengan mengerjakan {questionCount} soal latihan interaktif.
           </p>
         </div>
 
