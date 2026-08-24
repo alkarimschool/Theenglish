@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { api } from '../../services/api';
 import { Level, StudentProfile } from '../../types';
+import logoImg from '../../assets/logo.png';
 import {
   Sparkles,
   ArrowRight,
@@ -465,7 +466,7 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
           <div className="relative inline-block mb-3 group">
             <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-teal-400 to-pink-500 rounded-full blur-md opacity-40 group-hover:opacity-75 transition duration-500 animate-pulse" />
             <img
-              src="/logo.png"
+              src={logoImg}
               alt="The English - Semua akan inggris pada waktunya"
               className="relative w-44 h-44 sm:w-52 sm:h-52 mx-auto object-contain drop-shadow-xl hover:scale-105 transition-transform duration-300"
             />

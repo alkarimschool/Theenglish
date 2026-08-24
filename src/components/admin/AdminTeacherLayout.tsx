@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { User, Level, Category, Topic, DashboardStats, StudentProgress, StudentAttempt } from '../../types';
+import logoImg from '../../assets/logo.png';
 import { DashboardOverview } from './DashboardOverview';
 import { TeacherManagement } from './TeacherManagement';
 import { StudentProgressTable } from './StudentProgressTable';
@@ -149,7 +150,7 @@ export const AdminTeacherLayout: React.FC<Props> = ({
         {/* Brand */}
         <div className="p-6 border-b border-gray-100 flex items-center gap-3">
           <img
-            src="/logo.png"
+            src={logoImg}
             alt="The English Logo"
             className="w-10 h-10 object-contain rounded-full bg-white p-0.5 border border-emerald-100 shadow-xs shrink-0"
           />
@@ -247,7 +248,7 @@ export const AdminTeacherLayout: React.FC<Props> = ({
       <div className="md:hidden bg-white border-b border-gray-200 p-4 flex items-center justify-between sticky top-0 z-30">
         <div className="flex items-center gap-2.5">
           <img
-            src="/logo.png"
+            src={logoImg}
             alt="The English Logo"
             className="w-8 h-8 object-contain rounded-full bg-white p-0.5 border border-emerald-100 shrink-0"
           />

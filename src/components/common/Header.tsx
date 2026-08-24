@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { BookOpen, User as UserIcon, Shield, LogOut, GraduationCap, Sparkles, ArrowLeft } from 'lucide-react';
+import logoImg from '../../assets/logo.png';
 
 interface Props {
   onOpenLogin: () => void;
@@ -35,7 +36,7 @@ export const Header: React.FC<Props> = ({
 
           <div className="flex items-center gap-3">
             <img
-              src="/logo.png"
+              src={logoImg}
               alt="The English Logo"
               className="w-11 h-11 object-contain rounded-full shadow-xs bg-white p-0.5 border border-emerald-100/80 shrink-0"
             />
