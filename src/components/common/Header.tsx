@@ -34,9 +34,11 @@ export const Header: React.FC<Props> = ({
           )}
 
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 flex items-center justify-center text-white shadow-sm shadow-emerald-700/20">
-              <BookOpen className="w-5 h-5" />
-            </div>
+            <img
+              src="/logo.png"
+              alt="The English Logo"
+              className="w-11 h-11 object-contain rounded-full shadow-xs bg-white p-0.5 border border-emerald-100/80 shrink-0"
+            />
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-base sm:text-lg font-black tracking-tight text-emerald-950">

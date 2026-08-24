@@ -148,9 +148,11 @@ export const AdminTeacherLayout: React.FC<Props> = ({
       <aside className="hidden md:flex md:w-64 flex-col bg-white border-r border-gray-200 sticky top-0 h-screen z-30">
         {/* Brand */}
         <div className="p-6 border-b border-gray-100 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-700 to-teal-800 flex items-center justify-center text-white font-bold shadow-sm shadow-emerald-800/20">
-            <BookOpen className="w-5 h-5" />
-          </div>
+          <img
+            src="/logo.png"
+            alt="The English Logo"
+            className="w-10 h-10 object-contain rounded-full bg-white p-0.5 border border-emerald-100 shadow-xs shrink-0"
+          />
           <div>
             <h1 className="text-sm font-black text-gray-900 tracking-tight leading-tight">
               The English <span className="text-emerald-700 font-black">Al-Karim</span>
@@ -244,9 +246,11 @@ export const AdminTeacherLayout: React.FC<Props> = ({
       {/* Mobile Header Bar */}
       <div className="md:hidden bg-white border-b border-gray-200 p-4 flex items-center justify-between sticky top-0 z-30">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold">
-            <BookOpen className="w-4 h-4" />
-          </div>
+          <img
+            src="/logo.png"
+            alt="The English Logo"
+            className="w-8 h-8 object-contain rounded-full bg-white p-0.5 border border-emerald-100 shrink-0"
+          />
           <div>
             <span className="text-xs font-bold text-gray-900">The English Al-Karim</span>
             <div className="text-[10px] text-emerald-700 font-bold">{isAdmin ? 'Admin' : 'Guru'}</div>

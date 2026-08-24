@@ -27,9 +27,9 @@ function shouldIgnore(relativePath) {
   return parts.some(part => IGNORED_PATHS.includes(part));
 }
 
-function runCommand(cmd) {
+function runCommand(cmd, timeoutMs = 15000) {
   return new Promise((resolve, reject) => {
-    exec(cmd, { cwd: rootDir }, (error, stdout, stderr) => {
+    exec(cmd, { cwd: rootDir, timeout: timeoutMs }, (error, stdout, stderr) => {
       if (error) {
         reject({ error, stdout, stderr });
       } else {
@@ -51,7 +51,7 @@ async function performSync() {
   pendingFiles.clear();
 
   try {
-    const { stdout: status } = await runCommand('git status --porcelain');
+    const { stdout: status } = await runCommand('git status --porcelain', 5000);
     if (!status.trim()) {
       console.log('[Auto-Sync] No changes detected in Git working tree.');
       isSyncing = false;
@@ -62,16 +62,19 @@ async function performSync() {
     console.log(`\n[Auto-Sync] [${timestamp}] Detected changes in ${filesToSync.length} file(s). Syncing to GitHub...`);
 
     console.log('[Auto-Sync] Running git add .');
-    await runCommand('git add .');
+    await runCommand('git add .', 10000);
 
-    const commitMsg = `auto-sync: update from local edit [${timestamp}]`;
+    const commitMsg = `auto-sync: update logo and UI [${timestamp}]`;
     console.log(`[Auto-Sync] Committing: "${commitMsg}"`);
-    await runCommand(`git commit -m "${commitMsg.replace(/"/g, '\\"')}"`);
+    await runCommand(`git commit -m "${commitMsg.replace(/"/g, '\\"')}"`, 10000);
 
     console.log('[Auto-Sync] Pushing to origin main...');
-    await runCommand('git push origin main');
-
-    console.log(`[Auto-Sync] ✅ Successfully pushed to GitHub & AI Studio at ${timestamp}!\n`);
+    try {
+      await runCommand('git push origin main', 15000);
+      console.log(`[Auto-Sync] ✅ Successfully pushed to GitHub & AI Studio at ${timestamp}!\n`);
+    } catch (pushErr) {
+      console.warn('[Auto-Sync] ⚠️ Push paused or timed out (will retry on next change or manual push).');
+    }
   } catch (err) {
     console.error('[Auto-Sync] ❌ Sync error:', err.stderr || err.error || err);
   } finally {
