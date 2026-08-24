@@ -461,22 +461,22 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 sm:p-6 lg:p-8">
       <div className="w-full max-w-md relative z-10">
-        {/* Decorative Top Logo & Header */}
+        {/* Decorative Top Typography Header */}
         <div className="text-center mb-6">
-          <div className="relative inline-block mb-3 group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-teal-400 to-pink-500 rounded-full blur-md opacity-40 group-hover:opacity-75 transition duration-500 animate-pulse" />
-            <img
-              src={logoImg}
-              alt="The English - Semua akan inggris pada waktunya"
-              className="relative w-44 h-44 sm:w-52 sm:h-52 mx-auto object-contain drop-shadow-xl hover:scale-105 transition-transform duration-300"
-            />
-          </div>
-
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-100 via-teal-100 to-amber-100 text-emerald-900 text-xs font-extrabold tracking-wide border border-emerald-300/80 mb-2 shadow-xs">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-100 via-teal-100 to-amber-100 text-emerald-900 text-xs font-extrabold tracking-wide border border-emerald-300/80 mb-3 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-emerald-700 animate-pulse" />
-            <span>Sekolah Alam Al-Karim</span>
+            <span>The English Sekolah Alam Al-Karim</span>
           </div>
-          <p className="text-xs text-gray-600 font-medium">
+          <h1 className="text-2xl sm:text-3xl font-black text-emerald-950 tracking-tight drop-shadow-xs">
+            Selamat Datang di <br />
+            <span className="bg-gradient-to-r from-emerald-700 via-teal-600 to-amber-600 bg-clip-text text-transparent uppercase">
+              The English Sekolah Alam Al-Karim
+            </span>
+          </h1>
+          <p className="mt-2 text-sm sm:text-base text-emerald-900 font-bold italic tracking-wide">
+            &ldquo;semua akan inggris pada waktunya&rdquo;
+          </p>
+          <p className="mt-1 text-xs text-gray-600 font-medium">
             Media pembelajaran &amp; evaluasi interaktif untuk jenjang TK, SD, SMP, dan SMA
           </p>
         </div>
