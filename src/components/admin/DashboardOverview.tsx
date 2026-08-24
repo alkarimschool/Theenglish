@@ -14,6 +14,7 @@ import {
   Upload,
   PlusCircle,
   FileSpreadsheet,
+  CheckCircle2,
 } from 'lucide-react';
 
 interface Props {
