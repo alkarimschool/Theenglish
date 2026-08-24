@@ -20,8 +20,8 @@ export const Header: React.FC<Props> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-xs relative">
-      {/* Top Pastel Periwinkle Accent Line inspired by reference card */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-[#7A93D1]" />
+      {/* Top Pink & Magenta Accent Line */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Left: Brand or Back */}
         <div className="flex items-center gap-3">
@@ -29,9 +29,9 @@ export const Header: React.FC<Props> = ({
             <button
               id="header-back-btn"
               onClick={onBackToStudentHome}
-              className="mr-1 p-2 rounded-xl text-slate-800 hover:bg-slate-100 border border-slate-200 transition-colors flex items-center gap-1.5 text-sm font-bold cursor-pointer"
+              className="mr-1 p-2 rounded-xl text-slate-800 hover:bg-pink-50 border border-slate-200 transition-colors flex items-center gap-1.5 text-sm font-bold cursor-pointer"
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="w-4 h-4 text-pink-600" />
               <span className="hidden sm:inline">{backTitle}</span>
             </button>
           )}
@@ -40,14 +40,14 @@ export const Header: React.FC<Props> = ({
             <img
               src={logoImg}
               alt="The English Logo"
-              className="w-11 h-11 object-contain rounded-full shadow-xs bg-white p-0.5 border border-slate-200 shrink-0"
+              className="w-11 h-11 object-contain rounded-full shadow-xs bg-white p-0.5 border border-pink-200 shrink-0"
             />
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-base sm:text-lg font-black tracking-tight text-slate-900">
-                  The English <span className="text-[#7A93D1] font-black">Sekolah Alam Al-Karim</span>
+                  The English <span className="text-pink-600 font-black">Sekolah Alam Al-Karim</span>
                 </span>
-                <span className="hidden lg:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-800 border border-slate-200">
+                <span className="hidden lg:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-pink-50 text-pink-800 border border-pink-200">
                   TK • SD • SMP • SMA
                 </span>
               </div>
@@ -65,9 +65,9 @@ export const Header: React.FC<Props> = ({
               <div className="text-right hidden sm:block">
                 <div className="text-xs font-bold text-slate-900 flex items-center gap-1 justify-end">
                   {currentUser.role === 'admin' ? (
-                    <Shield className="w-3.5 h-3.5 text-[#7A93D1]" />
+                    <Shield className="w-3.5 h-3.5 text-pink-600" />
                   ) : (
-                    <GraduationCap className="w-3.5 h-3.5 text-[#8CB5D3]" />
+                    <GraduationCap className="w-3.5 h-3.5 text-pink-600" />
                   )}
                   {currentUser.name}
                 </div>
@@ -89,27 +89,27 @@ export const Header: React.FC<Props> = ({
           ) : (
             <div className="flex items-center gap-2">
               {studentSession && (
-                <div className="hidden md:flex bg-slate-100 border border-slate-200 rounded-xl px-3 py-1.5 items-center gap-2">
-                  <div className="w-6 h-6 rounded-full bg-[#7A93D1] text-white flex items-center justify-center text-xs font-bold">
+                <div className="hidden md:flex bg-pink-50 border border-pink-200 rounded-xl px-3 py-1.5 items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-pink-600 text-white flex items-center justify-center text-xs font-bold">
                     {studentSession.name ? studentSession.name.charAt(0).toUpperCase() : 'S'}
                   </div>
                   <div className="text-left">
                     <div className="text-xs font-bold text-slate-900 leading-tight">
                       {studentSession.name || 'Siswa'}
                     </div>
-                    <div className="text-[10px] text-slate-600 font-medium leading-tight">
+                    <div className="text-[10px] text-pink-700 font-medium leading-tight">
                       Kelas {studentSession.className || '-'}
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* Tombol Login Admin / Guru dengan Pastel Card Periwinkle #7A93D1 */}
+              {/* Tombol Login Admin / Guru dengan Pink & Magenta Theme */}
               <button
                 id="header-admin-login-btn"
                 type="button"
                 onClick={onOpenLogin}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-black text-white bg-[#7A93D1] hover:bg-[#6B85C4] border border-white/80 shadow-xs transition-all duration-150 cursor-pointer group"
+                className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-black text-white bg-gradient-to-r from-pink-600 via-rose-500 to-pink-700 hover:from-pink-700 hover:to-rose-600 border border-pink-300/80 shadow-xs transition-all duration-150 cursor-pointer group"
                 title="Masuk ke Panel Guru / Admin"
               >
                 <div className="w-5 h-5 rounded-lg bg-white/20 flex items-center justify-center group-hover:scale-105 transition-transform">

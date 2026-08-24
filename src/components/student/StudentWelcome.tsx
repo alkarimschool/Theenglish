@@ -461,35 +461,35 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 sm:p-6 lg:p-8">
       <div className="w-full max-w-md relative z-10">
-        {/* Decorative Top Typography Header */}
+        {/* Decorative Top Typography Header - Pink & Magenta Theme */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#7A93D1] text-white text-xs font-extrabold tracking-wide border border-[#6B85C4] mb-3 shadow-xs">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 text-white text-xs font-extrabold tracking-wide border border-pink-300 mb-3 shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-white animate-pulse" />
             <span>The English Sekolah Alam Al-Karim</span>
           </div>
           <h1 className="text-2xl sm:text-3.5xl font-black text-slate-900 tracking-tight drop-shadow-xs leading-tight">
             Selamat Datang di <br />
-            <span className="text-[#7A93D1] font-black">The </span>
-            <span className="text-[#8CB5D3] uppercase font-black tracking-wide">
+            <span className="text-pink-900 font-black">The </span>
+            <span className="bg-gradient-to-r from-pink-600 via-rose-500 to-pink-600 bg-clip-text text-transparent uppercase font-black tracking-wide">
               English
             </span>
             <br />
-            <span className="text-[#9ED7C6] font-black text-xl sm:text-2xl">
+            <span className="text-rose-600 font-black text-xl sm:text-2xl">
               Sekolah Alam Al-Karim
             </span>
           </h1>
           <p className="mt-2 text-sm sm:text-base text-slate-800 font-bold italic tracking-wide">
-            &ldquo;semua akan <span className="text-[#E5B5C8] font-black not-italic underline decoration-[#7A93D1] decoration-2">inggris</span> pada waktunya&rdquo;
+            &ldquo;semua akan <span className="text-pink-600 font-black not-italic underline decoration-pink-400 decoration-2">inggris</span> pada waktunya&rdquo;
           </p>
           <p className="mt-1 text-xs text-slate-600 font-medium">
             Media Pembelajaran &amp; Evaluasi Bahasa Inggris Interaktif
           </p>
         </div>
 
-        {/* Student Form Card styled like the 5 Pastel Reference Cards */}
-        <div className="bg-white rounded-3xl border-2 border-slate-200 shadow-xl relative overflow-hidden">
-          {/* Card Top Block with Pastel Periwinkle (#7A93D1) & White Line Divider */}
-          <div className="bg-[#7A93D1] text-white p-5 relative border-b-2 border-white/80">
+        {/* Student Form Card with Pink & Magenta Theme */}
+        <div className="bg-white rounded-3xl border-2 border-pink-200 shadow-xl shadow-pink-900/5 relative overflow-hidden">
+          {/* Card Top Block with Pink & Magenta Gradient + White Line Divider */}
+          <div className="bg-gradient-to-r from-pink-600 via-rose-500 to-pink-700 text-white p-5 relative border-b-2 border-white/80">
             <div className="flex items-center justify-between gap-3.5">
               <div className="flex items-center gap-3.5">
                 <div className="w-10 h-10 rounded-xl bg-white/20 text-white flex items-center justify-center font-bold">
@@ -497,7 +497,7 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
                 </div>
                 <div>
                   <h2 className="text-base sm:text-lg font-black text-white leading-tight">Mulai Belajar</h2>
-                  <p className="text-xs text-white/90 font-medium">
+                  <p className="text-xs text-pink-100 font-medium">
                     {dbStudents.length > 0
                       ? `Cari nama dari ${dbStudents.length} siswa terdaftar`
                       : 'Masukkan Nama & pilih Kelas'}
@@ -897,12 +897,12 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
 
             </div>
 
-            {/* Submit Button */}
+            {/* Submit Button - Pink & Magenta Theme */}
             <button
               id="start-learning-btn"
               type="submit"
               disabled={loading}
-              className="w-full mt-3 py-3.5 px-6 rounded-2xl bg-[#7A93D1] hover:bg-[#6B85C4] text-white font-black text-sm sm:text-base tracking-wide shadow-md flex items-center justify-center gap-2 cursor-pointer transition transform active:scale-[0.99] disabled:opacity-70 border border-white/80"
+              className="w-full mt-3 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-pink-600 via-rose-500 to-pink-700 hover:from-pink-700 hover:to-rose-600 text-white font-black text-sm sm:text-base tracking-wide shadow-lg shadow-pink-600/20 flex items-center justify-center gap-2 cursor-pointer transition transform active:scale-[0.99] disabled:opacity-70 border border-white/80"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
