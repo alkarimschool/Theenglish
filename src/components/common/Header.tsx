@@ -19,7 +19,9 @@ export const Header: React.FC<Props> = ({
   const { currentUser, studentSession, logout, clearStudent, activeRole } = useAuth();
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-emerald-100 shadow-xs">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-xs relative">
+      {/* Top Multi-Color Accent Line inspired by logo */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 via-amber-400 via-emerald-400 via-sky-400 to-purple-500" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Left: Brand or Back */}
         <div className="flex items-center gap-3">

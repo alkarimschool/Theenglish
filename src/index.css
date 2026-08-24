@@ -2,21 +2,44 @@
 
 @layer utilities {
   .bg-mesh-colorful {
-    background-color: #f0fdf4;
+    background-color: #fcfbfe;
     background-image: 
-      radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.15) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.14) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, rgba(236, 72, 153, 0.12) 0px, transparent 50%),
-      radial-gradient(at 50% 50%, rgba(20, 184, 166, 0.12) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(244, 63, 94, 0.16) 0px, transparent 45%),
+      radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.18) 0px, transparent 45%),
+      radial-gradient(at 100% 100%, rgba(20, 184, 166, 0.16) 0px, transparent 45%),
+      radial-gradient(at 0% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 45%),
+      radial-gradient(at 50% 50%, rgba(59, 130, 246, 0.12) 0px, transparent 50%);
+  }
+
+  .bg-mesh-admin {
+    background-color: #f8fafc;
+    background-image: 
+      radial-gradient(at 10% 10%, rgba(15, 33, 74, 0.08) 0px, transparent 50%),
+      radial-gradient(at 90% 10%, rgba(244, 63, 94, 0.10) 0px, transparent 50%),
+      radial-gradient(at 90% 90%, rgba(245, 158, 11, 0.10) 0px, transparent 50%),
+      radial-gradient(at 10% 90%, rgba(20, 184, 166, 0.10) 0px, transparent 50%);
   }
 
   .bg-mesh-card {
-    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 253, 250, 0.85) 100%);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(240, 253, 250, 0.90) 100%);
   }
 
   .bg-mesh-warm {
     background-image: linear-gradient(135deg, rgba(255, 251, 235, 0.95) 0%, rgba(254, 243, 199, 0.8) 100%);
+  }
+
+  .bg-logo-gradient {
+    background: linear-gradient(135deg, #0F214A 0%, #F43F5E 35%, #F59E0B 65%, #2DD4BF 100%);
+  }
+
+  .text-gradient-logo {
+    background: linear-gradient(135deg, #F43F5E 0%, #F59E0B 40%, #10B981 70%, #8B5CF6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .border-logo-gradient {
+    border-image: linear-gradient(to right, #F43F5E, #F59E0B, #10B981, #8B5CF6) 1;
   }
 }
 

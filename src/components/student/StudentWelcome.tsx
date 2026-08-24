@@ -461,22 +461,29 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 sm:p-6 lg:p-8">
       <div className="w-full max-w-md relative z-10">
-        {/* Decorative Top Typography Header */}
+        {/* Decorative Top Typography Header inspired by Logo Colors */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-100 via-teal-100 to-amber-100 text-emerald-900 text-xs font-extrabold tracking-wide border border-emerald-300/80 mb-3 shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-700 animate-pulse" />
-            <span>The English Sekolah Alam Al-Karim</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-emerald-950 tracking-tight drop-shadow-xs">
-            Selamat Datang di <br />
-            <span className="bg-gradient-to-r from-emerald-700 via-teal-600 to-amber-600 bg-clip-text text-transparent uppercase">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-rose-100 via-amber-100 via-teal-100 to-indigo-100 text-slate-900 text-xs font-extrabold tracking-wide border border-amber-300/80 mb-3 shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-rose-500 animate-pulse" />
+            <span className="bg-gradient-to-r from-rose-600 via-amber-600 via-teal-600 to-indigo-700 bg-clip-text text-transparent font-black">
               The English Sekolah Alam Al-Karim
             </span>
+          </div>
+          <h1 className="text-2xl sm:text-3.5xl font-black text-slate-900 tracking-tight drop-shadow-xs leading-tight">
+            Selamat Datang di <br />
+            <span className="text-[#0F214A] font-black">The </span>
+            <span className="bg-gradient-to-r from-rose-500 via-amber-500 via-teal-500 to-indigo-600 bg-clip-text text-transparent uppercase font-black tracking-wide">
+              English
+            </span>
+            <br />
+            <span className="text-emerald-700 font-black text-xl sm:text-2xl">
+              Sekolah Alam Al-Karim
+            </span>
           </h1>
-          <p className="mt-2 text-sm sm:text-base text-emerald-900 font-bold italic tracking-wide">
-            &ldquo;semua akan inggris pada waktunya&rdquo;
+          <p className="mt-2 text-sm sm:text-base text-slate-800 font-bold italic tracking-wide">
+            &ldquo;semua akan <span className="text-rose-500 font-extrabold not-italic underline decoration-amber-400 decoration-2">inggris</span> pada waktunya&rdquo;
           </p>
-          <p className="mt-1 text-xs text-gray-600 font-medium">
+          <p className="mt-1 text-xs text-slate-600 font-medium">
             Media Pembelajaran &amp; Evaluasi Bahasa Inggris Interaktif
           </p>
         </div>
@@ -896,7 +903,7 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
               id="start-learning-btn"
               type="submit"
               disabled={loading}
-              className="w-full mt-3 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-700 hover:to-teal-800 text-white font-black text-sm tracking-wide shadow-lg shadow-emerald-700/25 flex items-center justify-center gap-2 cursor-pointer transition transform active:scale-[0.99] disabled:opacity-70"
+              className="w-full mt-3 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 via-rose-500 to-indigo-700 hover:from-emerald-700 hover:to-indigo-800 text-white font-black text-sm sm:text-base tracking-wide shadow-lg shadow-emerald-700/20 flex items-center justify-center gap-2 cursor-pointer transition transform active:scale-[0.99] disabled:opacity-70"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
