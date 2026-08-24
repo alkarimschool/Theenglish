@@ -144,7 +144,15 @@ export const AdminTeacherLayout: React.FC<Props> = ({
   };
 
   return (
-    <div className="min-h-screen bg-mesh-admin flex flex-col md:flex-row selection:bg-rose-200 selection:text-slate-900">
+    <div className="min-h-screen bg-mesh-admin flex flex-col md:flex-row selection:bg-rose-200 selection:text-slate-900 relative overflow-x-hidden">
+      {/* Floating Colorful Ambient Orbs for Teacher Dashboard Background */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+        <div className="absolute -top-24 -left-20 w-96 h-96 rounded-full bg-gradient-to-br from-indigo-500/20 via-blue-400/15 to-transparent blur-3xl animate-float-slow" />
+        <div className="absolute top-1/3 -right-24 w-[28rem] h-[28rem] rounded-full bg-gradient-to-bl from-rose-500/20 via-pink-400/15 to-transparent blur-3xl animate-float-reverse" />
+        <div className="absolute bottom-20 left-1/3 w-96 h-96 rounded-full bg-gradient-to-tr from-amber-400/20 via-orange-300/15 to-transparent blur-3xl animate-float-slow" />
+        <div className="absolute -bottom-20 right-10 w-96 h-96 rounded-full bg-gradient-to-tl from-teal-400/20 via-emerald-300/15 to-transparent blur-3xl animate-float-reverse" />
+      </div>
+
       {/* Sidebar for Desktop */}
       <aside className="hidden md:flex md:w-64 flex-col bg-white/95 backdrop-blur-md border-r border-gray-200/80 sticky top-0 h-screen z-30 shadow-md">
         {/* Brand Header with Navy Gradient & Logo Accent Bar */}

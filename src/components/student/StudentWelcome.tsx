@@ -488,19 +488,19 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
           </p>
         </div>
 
-        {/* Student Form Card */}
-        <div className="bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 border-2 border-emerald-200/90 shadow-xl shadow-emerald-900/10 relative overflow-visible">
-          {/* Top color bar */}
-          <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-emerald-500 via-teal-500 via-amber-400 to-pink-500 rounded-t-3xl" />
+        {/* Student Form Card with Logo Colors */}
+        <div className="bg-white/95 backdrop-blur-md rounded-3xl p-6 sm:p-8 border-2 border-emerald-200/90 shadow-2xl shadow-slate-900/10 relative overflow-visible">
+          {/* Top 5-color logo rainbow bar */}
+          <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-rose-500 via-amber-400 via-emerald-400 via-sky-400 to-purple-500 rounded-t-3xl" />
 
-          <div className="flex items-center justify-between gap-3.5 pb-4 mb-5 border-b border-emerald-100/80 mt-1">
+          <div className="flex items-center justify-between gap-3.5 pb-4 mb-5 border-b border-gray-100 mt-1">
             <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center font-bold shadow-md shadow-emerald-600/30">
-                <UserCheck className="w-5 h-5" />
+              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#0F214A] via-teal-700 to-emerald-600 text-white flex items-center justify-center font-bold shadow-md shadow-slate-900/20">
+                <UserCheck className="w-5 h-5 text-amber-300" />
               </div>
               <div>
-                <h2 className="text-base font-black text-gray-900">Mulai Belajar</h2>
-                <p className="text-xs text-gray-600 font-medium">
+                <h2 className="text-base sm:text-lg font-black text-slate-900">Mulai Belajar</h2>
+                <p className="text-xs text-slate-600 font-medium">
                   {dbStudents.length > 0
                     ? `Cari nama dari ${dbStudents.length} siswa terdaftar`
                     : 'Cukup masukkan Nama & pilih Kelas'}

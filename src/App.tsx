@@ -222,12 +222,12 @@ export default function App() {
   // STUDENT VIEW (Colorful, cheerful, modern, mobile-first)
   return (
     <div className="min-h-screen bg-mesh-colorful flex flex-col selection:bg-emerald-300 selection:text-emerald-950 relative overflow-x-hidden">
-      {/* Colorful Floating Ambient Lighting Background Orbs */}
+      {/* Vibrant Multi-Color Ambient Lighting Background Orbs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
-        <div className="absolute -top-24 -left-20 w-80 h-80 rounded-full bg-gradient-to-br from-emerald-300/40 via-teal-200/30 to-transparent blur-3xl animate-float-slow" />
-        <div className="absolute top-1/4 -right-24 w-96 h-96 rounded-full bg-gradient-to-bl from-amber-300/35 via-orange-200/25 to-transparent blur-3xl animate-float-reverse" />
-        <div className="absolute bottom-20 left-1/3 w-88 h-88 rounded-full bg-gradient-to-tr from-sky-300/30 via-indigo-200/20 to-transparent blur-3xl animate-float-slow" />
-        <div className="absolute -bottom-20 right-10 w-80 h-80 rounded-full bg-gradient-to-tl from-pink-300/25 via-rose-200/20 to-transparent blur-3xl animate-float-reverse" />
+        <div className="absolute -top-28 -left-24 w-96 h-96 rounded-full bg-gradient-to-br from-rose-400/40 via-pink-300/30 to-transparent blur-3xl animate-float-slow" />
+        <div className="absolute top-1/4 -right-28 w-[30rem] h-[30rem] rounded-full bg-gradient-to-bl from-amber-400/40 via-orange-300/30 to-transparent blur-3xl animate-float-reverse" />
+        <div className="absolute bottom-16 left-1/4 w-96 h-96 rounded-full bg-gradient-to-tr from-teal-400/40 via-emerald-300/30 to-transparent blur-3xl animate-float-slow" />
+        <div className="absolute -bottom-24 right-10 w-96 h-96 rounded-full bg-gradient-to-tl from-indigo-500/35 via-purple-300/30 to-transparent blur-3xl animate-float-reverse" />
       </div>
 
       {/* Student Top Header */}
