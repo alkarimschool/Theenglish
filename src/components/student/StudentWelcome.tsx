@@ -937,6 +937,7 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
         </div>
 
         {/* End of Card */}
+        </div>
       </div>
     </div>
   );
