@@ -477,7 +477,7 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
             &ldquo;semua akan inggris pada waktunya&rdquo;
           </p>
           <p className="mt-1 text-xs text-gray-600 font-medium">
-            Media pembelajaran &amp; evaluasi interaktif untuk jenjang TK, SD, SMP, dan SMA
+            Media Pembelajaran &amp; Evaluasi Bahasa Inggris Interaktif
           </p>
         </div>
 
@@ -888,64 +888,7 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
                 </div>
               )}
 
-              {/* Detected Level Indicator & Manual Level Override */}
-              <div className="mt-2 p-2 rounded-xl bg-gray-50/90 border border-gray-200 flex flex-col gap-1.5">
-                <div className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-1.5 text-gray-700">
-                    <span className="text-gray-500 font-medium">Jenjang:</span>
-                    <span className="font-bold text-emerald-800 bg-emerald-100/60 px-2 py-0.5 rounded-md">
-                      {getLevelDisplayName(selectedLevelId)}
-                    </span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setShowManualLevelPicker((prev) => !prev)}
-                    className="text-[11px] font-bold text-emerald-700 hover:text-emerald-900 underline cursor-pointer"
-                  >
-                    {showManualLevelPicker ? 'Tutup Pilihan' : 'Ubah Jenjang'}
-                  </button>
-                </div>
 
-                {showManualLevelPicker && (
-                  <div className="pt-1.5 border-t border-gray-200 mt-0.5 animate-in fade-in duration-150">
-                    <label
-                      htmlFor="student-level-manual-select"
-                      className="block text-[10px] font-bold text-gray-600 mb-1"
-                    >
-                      PILIH JENJANG MANUAL JIKA INGIN MENGUBAH:
-                    </label>
-                    <select
-                      id="student-level-manual-select"
-                      value={selectedLevelId}
-                      onChange={(e) => setSelectedLevelId(e.target.value)}
-                      className="w-full px-2.5 py-1.5 rounded-lg border border-gray-300 bg-white text-xs font-semibold text-gray-800 outline-none focus:border-emerald-600"
-                    >
-                      <optgroup label="Jenjang TK">
-                        <option value="tk-a">TK A</option>
-                        <option value="tk-b">TK B</option>
-                      </optgroup>
-                      <optgroup label="Jenjang SD">
-                        <option value="sd-1">SD Kelas 1</option>
-                        <option value="sd-2">SD Kelas 2</option>
-                        <option value="sd-3">SD Kelas 3</option>
-                        <option value="sd-4">SD Kelas 4</option>
-                        <option value="sd-5">SD Kelas 5</option>
-                        <option value="sd-6">SD Kelas 6</option>
-                      </optgroup>
-                      <optgroup label="Jenjang SMP">
-                        <option value="smp-7">SMP Kelas 7</option>
-                        <option value="smp-8">SMP Kelas 8</option>
-                        <option value="smp-9">SMP Kelas 9</option>
-                      </optgroup>
-                      <optgroup label="Jenjang SMA">
-                        <option value="sma-10">SMA Kelas 10</option>
-                        <option value="sma-11">SMA Kelas 11</option>
-                        <option value="sma-12">SMA Kelas 12</option>
-                      </optgroup>
-                    </select>
-                  </div>
-                )}
-              </div>
             </div>
 
             {/* Submit Button */}
