@@ -1,0 +1,121 @@
+import React from 'react';
+import { useAuth } from '../../context/AuthContext';
+import { BookOpen, User as UserIcon, Shield, LogOut, GraduationCap, Sparkles, ArrowLeft } from 'lucide-react';
+
+interface Props {
+  onOpenLogin: () => void;
+  onBackToStudentHome?: () => void;
+  showBackButton?: boolean;
+  backTitle?: string;
+}
+
+export const Header: React.FC<Props> = ({
+  onOpenLogin,
+  onBackToStudentHome,
+  showBackButton,
+  backTitle = 'Kembali',
+}) => {
+  const { currentUser, studentSession, logout, clearStudent, activeRole } = useAuth();
+
+  return (
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-emerald-100 shadow-xs">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        {/* Left: Brand or Back */}
+        <div className="flex items-center gap-3">
+          {showBackButton && onBackToStudentHome && (
+            <button
+              id="header-back-btn"
+              onClick={onBackToStudentHome}
+              className="mr-1 p-2 rounded-xl text-emerald-800 hover:bg-emerald-50 border border-emerald-200 transition-colors flex items-center gap-1.5 text-sm font-medium cursor-pointer"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span className="hidden sm:inline">{backTitle}</span>
+            </button>
+          )}
+
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 flex items-center justify-center text-white shadow-sm shadow-emerald-700/20">
+              <BookOpen className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-base sm:text-lg font-black tracking-tight text-emerald-950">
+                  The English <span className="text-emerald-600 font-black">Sekolah Alam Al-Karim</span>
+                </span>
+                <span className="hidden lg:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                  TK • SD • SMP • SMA
+                </span>
+              </div>
+              <p className="text-[11px] text-emerald-700/90 font-medium hidden sm:block italic">
+                semua akan inggris pada waktunya
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Auth / Student Status & Admin/Teacher Login */}
+        <div className="flex items-center gap-3">
+          {currentUser ? (
+            <div className="flex items-center gap-2">
+              <div className="text-right hidden sm:block">
+                <div className="text-xs font-bold text-gray-900 flex items-center gap-1 justify-end">
+                  {currentUser.role === 'admin' ? (
+                    <Shield className="w-3.5 h-3.5 text-indigo-600" />
+                  ) : (
+                    <GraduationCap className="w-3.5 h-3.5 text-emerald-600" />
+                  )}
+                  {currentUser.name}
+                </div>
+                <div className="text-[10px] text-gray-500 font-medium">
+                  {currentUser.role === 'admin' ? 'Super Admin' : `Guru (${currentUser.assignedLevelIds?.join(', ') || 'Semua'})`}
+                </div>
+              </div>
+
+              <button
+                id="header-logout-btn"
+                onClick={logout}
+                title="Keluar dari akun Guru / Admin"
+                className="p-2 sm:px-3 sm:py-1.5 rounded-lg text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 transition flex items-center gap-1.5 cursor-pointer"
+              >
+                <LogOut className="w-4 h-4" />
+                <span className="hidden sm:inline">Logout</span>
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              {studentSession && (
+                <div className="hidden md:flex bg-emerald-50 border border-emerald-200/80 rounded-xl px-3 py-1.5 items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold">
+                    {studentSession.name ? studentSession.name.charAt(0).toUpperCase() : 'S'}
+                  </div>
+                  <div className="text-left">
+                    <div className="text-xs font-bold text-emerald-950 leading-tight">
+                      {studentSession.name || 'Siswa'}
+                    </div>
+                    <div className="text-[10px] text-emerald-700 font-medium leading-tight">
+                      Kelas {studentSession.className || '-'}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Tombol Login Admin / Guru untuk Desktop & Mobile */}
+              <button
+                id="header-admin-login-btn"
+                type="button"
+                onClick={onOpenLogin}
+                className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-emerald-700 via-teal-700 to-emerald-800 hover:from-emerald-800 hover:to-teal-900 border border-emerald-600 shadow-md shadow-emerald-900/10 hover:shadow-lg transition-all duration-150 cursor-pointer group"
+                title="Masuk ke Panel Guru / Admin"
+              >
+                <div className="w-5 h-5 rounded-lg bg-white/20 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <Shield className="w-3.5 h-3.5 text-amber-300" />
+                </div>
+                <span className="font-extrabold tracking-wide">Login Guru / Admin</span>
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </header>
+  );
+};
