@@ -68,10 +68,10 @@ export const DashboardOverview: React.FC<Props> = ({
                 id="dash-quick-edit-class-btn"
                 type="button"
                 onClick={onOpenEditClass}
-                className="px-4 py-2.5 rounded-xl bg-[#E5B5C8] hover:brightness-95 text-[#4A1E2F] font-black text-xs sm:text-sm flex items-center gap-2 shadow-sm transition cursor-pointer active:scale-95 border border-white/80"
+                className="px-4 py-2.5 rounded-2xl btn-game-3d btn-game-pink text-white font-black text-xs sm:text-sm flex items-center gap-2 cursor-pointer transition"
               >
-                <Edit3 className="w-4 h-4 text-[#4A1E2F]" />
-                <span>Edit Nama Kelas</span>
+                <Edit3 className="w-4 h-4 text-white" />
+                <span>✏️ Edit Nama Kelas</span>
               </button>
             )}
 
@@ -80,10 +80,10 @@ export const DashboardOverview: React.FC<Props> = ({
                 id="dash-quick-import-students-btn"
                 type="button"
                 onClick={onOpenImportStudents}
-                className="px-4 py-2.5 rounded-xl bg-[#CBEAD9] hover:brightness-95 text-[#123E2A] font-black text-xs sm:text-sm flex items-center gap-2 shadow-sm transition cursor-pointer active:scale-95 border border-white/80"
+                className="px-4 py-2.5 rounded-2xl btn-game-3d btn-game-amber text-amber-950 font-black text-xs sm:text-sm flex items-center gap-2 cursor-pointer transition"
               >
-                <FileSpreadsheet className="w-4 h-4 text-[#123E2A]" />
-                <span>Import Siswa (Excel)</span>
+                <FileSpreadsheet className="w-4 h-4 text-amber-950" />
+                <span>📊 Import Siswa (Excel)</span>
               </button>
             )}
 
@@ -91,20 +91,20 @@ export const DashboardOverview: React.FC<Props> = ({
               id="dash-quick-topic-btn"
               type="button"
               onClick={() => onNavigate('topics')}
-              className="px-4 py-2.5 rounded-xl bg-[#9ED7C6] hover:brightness-95 text-[#0E3D34] font-black text-xs sm:text-sm flex items-center gap-2 shadow-sm transition cursor-pointer border border-white/80"
+              className="px-4 py-2.5 rounded-2xl btn-game-3d btn-game-emerald text-white font-black text-xs sm:text-sm flex items-center gap-2 cursor-pointer transition"
             >
               <BookOpen className="w-4 h-4" />
-              <span>Kelola Materi</span>
+              <span>📖 Kelola Materi</span>
             </button>
 
             <button
               id="dash-quick-questions-btn"
               type="button"
               onClick={() => onNavigate('questions')}
-              className="px-4 py-2.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs sm:text-sm flex items-center gap-2 border border-white/40 transition cursor-pointer"
+              className="px-4 py-2.5 rounded-2xl btn-game-3d btn-game-sky text-white font-black text-xs sm:text-sm flex items-center gap-2 cursor-pointer transition"
             >
               <HelpCircle className="w-4 h-4" />
-              <span>Lihat Bank Soal</span>
+              <span>🎯 Bank Soal</span>
             </button>
           </div>
         </div>

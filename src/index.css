@@ -146,6 +146,56 @@
   .animate-pulse-glow {
     animation: pulseGlow 2s ease-in-out infinite;
   }
+
+  /* --- 4 REALM GAME WORLD BACKGROUNDS & 3D PORTAL CARDS --- */
+  .bg-realm-tk {
+    background: linear-gradient(135deg, #fff0f5 0%, #ffe4e6 40%, #fef3c7 100%);
+  }
+
+  .bg-realm-sd {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 40%, #fef3c7 100%);
+  }
+
+  .bg-realm-smp {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #ccfbf1 100%);
+  }
+
+  .bg-realm-sma {
+    background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 40%, #fce7f3 100%);
+  }
+
+  /* 3D Game Portal Card */
+  .card-game-portal {
+    border-bottom-width: 6px;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .card-game-portal:hover {
+    transform: translateY(-6px) scale(1.015);
+  }
+
+  .card-game-tk {
+    background: white;
+    border-color: #f472b6;
+    box-shadow: 0 12px 24px rgba(244, 114, 182, 0.2);
+  }
+
+  .card-game-sd {
+    background: white;
+    border-color: #10b981;
+    box-shadow: 0 12px 24px rgba(16, 185, 129, 0.2);
+  }
+
+  .card-game-smp {
+    background: white;
+    border-color: #0ea5e9;
+    box-shadow: 0 12px 24px rgba(14, 165, 233, 0.2);
+  }
+
+  .card-game-sma {
+    background: white;
+    border-color: #8b5cf6;
+    box-shadow: 0 12px 24px rgba(139, 92, 246, 0.2);
+  }
 }
 
 @keyframes float {

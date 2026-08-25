@@ -208,24 +208,17 @@ export const ExerciseStage: React.FC<Props> = ({
                 >
                   <div className="flex items-center gap-3.5 flex-1">
                     <span
-                      className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm font-extrabold shrink-0 transition-colors ${
+                      className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm font-black shrink-0 transition-colors ${
                         isSelected
-                          ? `${theme.bgActive} text-white`
-                          : 'bg-gray-100 text-gray-700'
+                          ? 'bg-emerald-600 text-white shadow-xs'
+                          : 'bg-slate-100 text-slate-800'
                       }`}
                     >
                       {key}
                     </span>
-                    <span className="text-sm sm:text-base font-semibold leading-snug">{label}</span>
+                    <span className="text-sm sm:text-base font-bold text-slate-900 leading-snug">{label}</span>
                   </div>
-
-                  <div
-                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
-                      isSelected ? `${theme.activeOptionBorder} ${theme.bgActive} text-white` : 'border-gray-300'
-                    }`}
-                  >
-                    {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
-                  </div>
+                  {isSelected && <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0" />}
                 </button>
               );
             })}
@@ -258,19 +251,19 @@ export const ExerciseStage: React.FC<Props> = ({
               id="exercise-finish-btn"
               type="button"
               onClick={() => setShowConfirmModal(true)}
-              className={`px-6 py-3 rounded-xl ${theme.btnPrimary} font-extrabold text-xs sm:text-sm shadow-md flex items-center gap-2 cursor-pointer transition transform active:scale-95`}
+              className="px-6 py-3 rounded-2xl btn-game-3d btn-game-amber text-amber-950 font-black text-xs sm:text-sm shadow-md flex items-center gap-2 cursor-pointer transition"
             >
-              <Send className="w-4 h-4" />
-              <span>Selesai & Kirim</span>
+              <Send className="w-4 h-4 text-amber-950" />
+              <span>🚀 SELESAI &amp; KIRIM QUEST</span>
             </button>
           ) : (
             <button
               id="exercise-next-btn"
               type="button"
               onClick={handleNext}
-              className={`px-6 py-3 rounded-xl ${theme.btnPrimary} font-bold text-xs sm:text-sm flex items-center gap-2 cursor-pointer transition transform active:scale-95`}
+              className="px-6 py-3 rounded-2xl btn-game-3d btn-game-emerald text-white font-black text-xs sm:text-sm flex items-center gap-2 cursor-pointer transition"
             >
-              <span>Selanjutnya</span>
+              <span>SOAL SELANJUTNYA</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           )}
