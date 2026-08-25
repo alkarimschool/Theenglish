@@ -8,7 +8,8 @@ export interface User {
   password?: string;
   email?: string;
   nip?: string;
-  assignedLevelIds: string[]; // for teachers, e.g. ['smp-7']
+  assignedLevelIds: string[]; // for teachers, e.g. ['sd', 'smp']
+  assignedClasses?: string[]; // for teachers per-class access, e.g. ['Kelas 1 Abu Bakar', 'Kelas 7 Salman Alfarisi']
   isActive: boolean;
   status?: 'active' | 'inactive';
   createdAt: string;

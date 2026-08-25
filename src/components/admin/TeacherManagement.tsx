@@ -24,6 +24,65 @@ interface Props {
   onOpenEditClass?: () => void;
 }
 
+const ALL_CLASSES_BY_LEVEL = [
+  {
+    levelId: 'tk',
+    levelName: 'Jenjang TK (Taman Kanak-Kanak)',
+    badgeBg: 'bg-pink-50 text-pink-900 border-pink-200',
+    classes: [
+      'TK A Patimura',
+      'TK B Diponegoro',
+      'TK B Jendral Sudirman',
+      'TK B Pangeran Antasari',
+    ],
+  },
+  {
+    levelId: 'sd',
+    levelName: 'Jenjang SD (Sekolah Dasar)',
+    badgeBg: 'bg-amber-50 text-amber-900 border-amber-200',
+    classes: [
+      'Kelas 1 Abu Bakar',
+      'Kelas 1 Umar Bin Khattab',
+      'Kelas 2 Ali Bin Abi Thalib',
+      'Kelas 2 Thalhah bin Ubaidillah',
+      'Kelas 2 Utsman bin Affan',
+      'Kelas 3 Abdurrahman Bin Auf',
+      'Kelas 3 Bilal Bin Rabah',
+      'Kelas 3 Khalid Bin Walid',
+      'Kelas 4 Muadz Bin Jabbal',
+      'Kelas 4 Said Bin Zaid',
+      'Kelas 4 Zubair Bin Awwam',
+      'Kelas 5 Hamzah bin Abdul Muthalib',
+      'Kelas 5 Hudzaifah Bin Al Yaman',
+      'Kelas 5 Saad Bin Abi Waqqash',
+      'Kelas 6 Abu Ubaidah Bin Al-Jarrah',
+      'Kelas 6 Amr Bin Ash',
+      'Kelas 6 Anas Bin Malik',
+    ],
+  },
+  {
+    levelId: 'smp',
+    levelName: 'Jenjang SMP (Sekolah Menengah Pertama)',
+    badgeBg: 'bg-emerald-50 text-emerald-900 border-emerald-200',
+    classes: [
+      'Kelas 7 Salman Alfarisi',
+      'Kelas 8 Abu Hurairah',
+      'Kelas 8 Mushab Bin Umair',
+      'Kelas 9 Amr bin Yasir',
+    ],
+  },
+  {
+    levelId: 'sma',
+    levelName: 'Jenjang SMA (Sekolah Menengah Atas)',
+    badgeBg: 'bg-blue-50 text-blue-900 border-blue-200',
+    classes: [
+      'Kelas 10 Muhammad Al-Fatih',
+      'Kelas 11 Thariq bin Ziyad',
+      'Kelas 12 Salahudin Al-Ayyubi',
+    ],
+  },
+];
+
 export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh, onOpenEditClass }) => {
   const [search, setSearch] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -39,7 +98,7 @@ export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [assignedLevels, setAssignedLevels] = useState<string[]>([]);
+  const [assignedClasses, setAssignedClasses] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -59,7 +118,7 @@ export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh
     setEmail('');
     setUsername('');
     setPassword('');
-    setAssignedLevels(['smp']);
+    setAssignedClasses(['Kelas 7 Salman Alfarisi', 'Kelas 8 Abu Hurairah']);
     setError('');
     setIsModalOpen(true);
   };
@@ -70,17 +129,46 @@ export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh
     setEmail(t.email);
     setUsername(t.username);
     setPassword('');
-    setAssignedLevels(t.assignedLevelIds || []);
+
+    if (t.assignedClasses && t.assignedClasses.length > 0) {
+      setAssignedClasses(t.assignedClasses);
+    } else if (t.assignedLevelIds && t.assignedLevelIds.length > 0) {
+      const mapped = ALL_CLASSES_BY_LEVEL
+        .filter((g) => t.assignedLevelIds.includes(g.levelId))
+        .flatMap((g) => g.classes);
+      setAssignedClasses(mapped);
+    } else {
+      setAssignedClasses([]);
+    }
+
     setError('');
     setIsModalOpen(true);
   };
 
-  const toggleLevel = (lvlId: string) => {
-    if (assignedLevels.includes(lvlId)) {
-      setAssignedLevels(assignedLevels.filter((id) => id !== lvlId));
+  const toggleClass = (clsName: string) => {
+    if (assignedClasses.includes(clsName)) {
+      setAssignedClasses(assignedClasses.filter((c) => c !== clsName));
     } else {
-      setAssignedLevels([...assignedLevels, lvlId]);
+      setAssignedClasses([...assignedClasses, clsName]);
     }
+  };
+
+  const toggleGroupClasses = (groupClasses: string[]) => {
+    const allSelected = groupClasses.every((c) => assignedClasses.includes(c));
+    if (allSelected) {
+      setAssignedClasses(assignedClasses.filter((c) => !groupClasses.includes(c)));
+    } else {
+      setAssignedClasses(Array.from(new Set([...assignedClasses, ...groupClasses])));
+    }
+  };
+
+  const selectAll28Classes = () => {
+    const all = ALL_CLASSES_BY_LEVEL.flatMap((g) => g.classes);
+    setAssignedClasses(all);
+  };
+
+  const clearAllClasses = () => {
+    setAssignedClasses([]);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -93,8 +181,8 @@ export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh
       setError('Mohon isi Password awal untuk guru baru.');
       return;
     }
-    if (assignedLevels.length === 0) {
-      setError('Pilih minimal satu level pengajaran yang ditugaskan.');
+    if (assignedClasses.length === 0) {
+      setError('Pilih minimal satu kelas pengajaran yang ditugaskan.');
       return;
     }
 
@@ -107,7 +195,7 @@ export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh
           name: name.trim(),
           username: username.trim().toLowerCase(),
           email: email.trim(),
-          assignedLevelIds: assignedLevels,
+          assignedClasses: assignedClasses,
           password: password.trim() ? password.trim() : undefined,
         });
       } else {
@@ -116,7 +204,7 @@ export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh
           email: email.trim(),
           username: username.trim().toLowerCase(),
           password: password.trim(),
-          assignedLevelIds: assignedLevels,
+          assignedClasses: assignedClasses,
         });
       }
 
@@ -244,23 +332,43 @@ export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh
                 <div className="text-xs text-gray-600 mb-3">{teacher.email}</div>
               )}
 
-              {/* Assigned Levels */}
+              {/* Assigned Classes */}
               <div className="mt-3 pt-3 border-t border-gray-100">
-                <span className="text-[10px] font-bold uppercase text-gray-500 block mb-1.5">
-                  Hak Akses Jenjang / Level:
-                </span>
-                <div className="flex flex-wrap gap-1">
-                  {teacher.assignedLevelIds && teacher.assignedLevelIds.length > 0 ? (
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-[10px] font-bold uppercase text-gray-500 block">
+                    Hak Akses Pengajaran Per Kelas:
+                  </span>
+                  <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                    {teacher.role === 'admin'
+                      ? 'Seluruh 28 Kelas'
+                      : `${teacher.assignedClasses?.length || teacher.assignedLevelIds?.length || 0} Kelas`}
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-1 max-h-24 overflow-y-auto pr-1">
+                  {teacher.role === 'admin' ? (
+                    <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#7A93D1]/20 text-[#2B3E75] border border-[#7A93D1]/30">
+                      Super Admin Access (Seluruh Kelas)
+                    </span>
+                  ) : teacher.assignedClasses && teacher.assignedClasses.length > 0 ? (
+                    teacher.assignedClasses.map((cls) => (
+                      <span
+                        key={cls}
+                        className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-50 text-emerald-900 border border-emerald-200"
+                      >
+                        {cls}
+                      </span>
+                    ))
+                  ) : teacher.assignedLevelIds && teacher.assignedLevelIds.length > 0 ? (
                     teacher.assignedLevelIds.map((lvl) => (
                       <span
                         key={lvl}
                         className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-gray-100 text-gray-800 uppercase"
                       >
-                        {lvl}
+                        Jenjang {lvl}
                       </span>
                     ))
                   ) : (
-                    <span className="text-xs text-gray-400 italic">Semua Level</span>
+                    <span className="text-xs text-gray-400 italic">Belum Ditugaskan</span>
                   )}
                 </div>
               </div>
@@ -275,7 +383,7 @@ export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh
                 className="px-3 py-1.5 rounded-lg text-xs font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 flex items-center gap-1.5 cursor-pointer"
               >
                 <Edit2 className="w-3.5 h-3.5" />
-                <span>Edit / Akses</span>
+                <span>Edit / Hak Akses Kelas</span>
               </button>
 
               {teacher.role === 'admin' || teacher.username === 'admin' ? (
@@ -319,7 +427,7 @@ export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh
               <div className="font-bold text-rose-950 text-sm">{teacherToDelete.name}</div>
               <div className="text-rose-800 font-mono text-[11px]">Username: @{teacherToDelete.username}</div>
               <div className="text-[11px] text-rose-700 mt-1">
-                Hak Jenjang: {teacherToDelete.assignedLevelIds?.join(', ') || 'Semua Level'}
+                Hak Kelas: {teacherToDelete.assignedClasses?.join(', ') || teacherToDelete.assignedLevelIds?.join(', ') || 'Semua Kelas'}
               </div>
             </div>
 
@@ -366,11 +474,16 @@ export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh
       {/* Add / Edit Teacher Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-emerald-100 flex flex-col overflow-hidden animate-in fade-in zoom-in duration-200">
+          <div className="bg-white w-full max-w-2xl rounded-3xl shadow-2xl border border-emerald-100 flex flex-col overflow-hidden animate-in fade-in zoom-in duration-200">
             <div className="p-6 bg-gradient-to-r from-emerald-800 to-teal-800 text-white flex items-center justify-between">
-              <h3 className="text-lg font-bold">
-                {editingTeacher ? 'Edit Data & Akses Guru' : 'Tambah Guru Pengampu Baru'}
-              </h3>
+              <div>
+                <h3 className="text-lg font-bold">
+                  {editingTeacher ? 'Edit Data & Hak Akses Kelas Guru' : 'Tambah Guru Pengampu Baru'}
+                </h3>
+                <p className="text-xs text-emerald-100 mt-0.5">
+                  Tentukan kelas spesifik yang dapat diakses dan dikelola oleh guru ini.
+                </p>
+              </div>
               <button onClick={() => setIsModalOpen(false)} className="p-2 text-white/80 hover:text-white rounded-xl">
                 <X className="w-5 h-5" />
               </button>
@@ -383,30 +496,32 @@ export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh
                 </div>
               )}
 
-              <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Nama Lengkap & Gelar</label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Contoh: Ustadz Rian, S.Pd."
-                  required
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs font-medium"
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Nama Lengkap & Gelar</label>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Contoh: Ustadz Rian, S.Pd."
+                    required
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs font-medium"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 mb-1">Email (Opsional)</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="rian@alkarim.sch.id"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs font-medium"
+                  />
+                </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-bold text-gray-700 mb-1">Email (Opsional)</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="rian@alkarim.sch.id"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs font-medium"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 mb-1">
                     Username Login {editingTeacher && <span className="text-emerald-600 font-normal">(Bisa diganti)</span>}
@@ -420,7 +535,6 @@ export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh
                     required
                     className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs font-medium focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                   />
-                  <p className="text-[10px] text-gray-400 mt-1">Username bebas dikustomisasi untuk login guru.</p>
                 </div>
 
                 <div>
@@ -436,71 +550,77 @@ export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh
                     required={!editingTeacher}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-xs font-medium focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
                   />
-                  <p className="text-[10px] text-gray-400 mt-1">Gunakan minimal 6 karakter kombinasi.</p>
                 </div>
               </div>
 
-              {/* Multi Level Assignment Checkbox Grid */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="block text-xs font-bold text-gray-700">
-                    Tugaskan Hak Akses Jenjang/Level (RBAC):
-                  </label>
-                  <div className="flex flex-wrap gap-1 text-[10px]">
+              {/* Multi Class Selection Grid per Level */}
+              <div className="pt-2">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-3 bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                  <div>
+                    <label className="block text-xs font-black text-slate-900">
+                      Pilihan Hak Akses Pengajaran PER KELAS:
+                    </label>
+                    <span className="text-[11px] text-slate-500 font-medium">
+                      Pilih kelas-kelas spesifik yang dapat diampu oleh guru ini ({assignedClasses.length} dari 28 kelas terpilih).
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
                     <button
                       type="button"
-                      onClick={() => setAssignedLevels(levels.filter(l => l.schoolType === 'TK' || l.educationLevel === 'TK').map(l => l.id))}
-                      className="px-2 py-0.5 rounded bg-pink-50 text-pink-700 hover:bg-pink-100 font-bold cursor-pointer"
+                      onClick={selectAll28Classes}
+                      className="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 hover:bg-emerald-200 text-[11px] font-bold cursor-pointer transition"
                     >
-                      TK
+                      Pilih Semua (28)
                     </button>
                     <button
                       type="button"
-                      onClick={() => setAssignedLevels(levels.filter(l => l.schoolType === 'SD' || l.educationLevel === 'SD').map(l => l.id))}
-                      className="px-2 py-0.5 rounded bg-amber-50 text-amber-800 hover:bg-amber-100 font-bold cursor-pointer"
+                      onClick={clearAllClasses}
+                      className="px-2.5 py-1 rounded-lg bg-slate-200 text-slate-700 hover:bg-slate-300 text-[11px] font-bold cursor-pointer transition"
                     >
-                      SD
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setAssignedLevels(levels.filter(l => l.schoolType === 'SMP' || l.educationLevel === 'SMP').map(l => l.id))}
-                      className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 hover:bg-emerald-100 font-bold cursor-pointer"
-                    >
-                      SMP
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setAssignedLevels(levels.filter(l => l.schoolType === 'SMA' || l.educationLevel === 'SMA').map(l => l.id))}
-                      className="px-2 py-0.5 rounded bg-blue-50 text-blue-800 hover:bg-blue-100 font-bold cursor-pointer"
-                    >
-                      SMA
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setAssignedLevels(levels.map(l => l.id))}
-                      className="px-2 py-0.5 rounded bg-gray-100 text-gray-700 hover:bg-gray-200 font-bold cursor-pointer"
-                    >
-                      Semua
+                      Bersihkan
                     </button>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {levels.map((lvl) => {
-                    const isChecked = assignedLevels.includes(lvl.id);
+
+                <div className="space-y-4 max-h-[40vh] overflow-y-auto pr-1">
+                  {ALL_CLASSES_BY_LEVEL.map((grp) => {
+                    const selectedInGroupCount = grp.classes.filter((c) => assignedClasses.includes(c)).length;
+                    const isAllInGroup = selectedInGroupCount === grp.classes.length;
+
                     return (
-                      <button
-                        key={lvl.id}
-                        type="button"
-                        onClick={() => toggleLevel(lvl.id)}
-                        className={`p-2.5 rounded-xl border text-xs font-bold text-left transition cursor-pointer flex items-center justify-between ${
-                          isChecked
-                            ? 'bg-emerald-50 border-emerald-500 text-emerald-950 shadow-2xs'
-                            : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
-                        }`}
-                      >
-                        <span>{lvl.name}</span>
-                        {isChecked && <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />}
-                      </button>
+                      <div key={grp.levelId} className="rounded-2xl border border-slate-200 overflow-hidden bg-white">
+                        <div className={`px-4 py-2.5 ${grp.badgeBg} flex items-center justify-between border-b`}>
+                          <span className="font-black text-xs">{grp.levelName}</span>
+                          <button
+                            type="button"
+                            onClick={() => toggleGroupClasses(grp.classes)}
+                            className="px-2.5 py-0.5 rounded-md bg-white/80 hover:bg-white text-[10px] font-bold shadow-2xs cursor-pointer transition"
+                          >
+                            {isAllInGroup ? 'Batalkan Semua' : `Pilih Semua (${grp.classes.length})`}
+                          </button>
+                        </div>
+
+                        <div className="p-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {grp.classes.map((clsName) => {
+                            const isChecked = assignedClasses.includes(clsName);
+                            return (
+                              <button
+                                key={clsName}
+                                type="button"
+                                onClick={() => toggleClass(clsName)}
+                                className={`p-2.5 rounded-xl border text-xs font-bold text-left transition cursor-pointer flex items-center justify-between ${
+                                  isChecked
+                                    ? 'bg-emerald-50 border-emerald-500 text-emerald-950 shadow-2xs ring-1 ring-emerald-400'
+                                    : 'bg-slate-50/50 border-slate-200 text-slate-700 hover:bg-slate-100'
+                                }`}
+                              >
+                                <span>{clsName}</span>
+                                {isChecked && <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
                     );
                   })}
                 </div>

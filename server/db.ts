@@ -71,6 +71,11 @@ class DatabaseManager {
             if (Array.isArray(u.assignedLevelIds)) {
               u.assignedLevelIds = Array.from(new Set(u.assignedLevelIds.map(mapOldLevel)));
             }
+            // Sync initial seed assignedClasses if missing
+            const su = seed.users.find((s) => s.id === u.id || s.username === u.username);
+            if (su && su.assignedClasses && (!u.assignedClasses || u.assignedClasses.length === 0)) {
+              u.assignedClasses = su.assignedClasses;
+            }
           });
           (parsed.students || []).forEach((st: StudentProfile) => {
             st.levelId = mapOldLevel(st.levelId);
@@ -168,8 +173,16 @@ class DatabaseManager {
   }
 
   public createUser(userData: Omit<User, 'id' | 'createdAt'>) {
+    const assignedClasses = userData.assignedClasses || [];
+    const derivedLevelIds = new Set(userData.assignedLevelIds || []);
+    assignedClasses.forEach((cls) => {
+      derivedLevelIds.add(this.detectLevelFromClassName(cls));
+    });
+
     const newUser: User = {
       ...userData,
+      assignedClasses,
+      assignedLevelIds: Array.from(derivedLevelIds),
       id: `user-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
       createdAt: new Date().toISOString(),
     };
@@ -181,7 +194,25 @@ class DatabaseManager {
   public updateUser(idOrUsername: string, updates: Partial<User>) {
     const idx = this.data.users.findIndex((u) => u.id === idOrUsername || u.username === idOrUsername);
     if (idx === -1) return null;
-    this.data.users[idx] = { ...this.data.users[idx], ...updates };
+
+    const current = this.data.users[idx];
+    const newAssignedClasses = updates.assignedClasses !== undefined ? updates.assignedClasses : current.assignedClasses || [];
+    
+    let newAssignedLevelIds = updates.assignedLevelIds !== undefined ? updates.assignedLevelIds : current.assignedLevelIds || [];
+    if (updates.assignedClasses !== undefined) {
+      const derivedSet = new Set<string>();
+      newAssignedClasses.forEach((cls) => {
+        derivedSet.add(this.detectLevelFromClassName(cls));
+      });
+      newAssignedLevelIds = Array.from(derivedSet);
+    }
+
+    this.data.users[idx] = {
+      ...current,
+      ...updates,
+      assignedClasses: newAssignedClasses,
+      assignedLevelIds: newAssignedLevelIds,
+    };
     this.saveData();
     return this.data.users[idx];
   }
