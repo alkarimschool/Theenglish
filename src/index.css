@@ -1,15 +1,19 @@
 @import "tailwindcss";
 
 @layer utilities {
-  /* Clean White Page Backgrounds */
+  /* High-Energy Game World Backgrounds */
   .bg-mesh-colorful {
-    background-color: #ffffff;
-    background-image: none;
+    background: linear-gradient(135deg, #e0f2fe 0%, #d1fae5 35%, #fef3c7 70%, #fce7f3 100%);
+    background-attachment: fixed;
   }
 
   .bg-mesh-admin {
-    background-color: #ffffff;
-    background-image: none;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
+    background-attachment: fixed;
+  }
+
+  .font-game {
+    font-family: 'Fredoka', 'Plus Jakarta Sans', sans-serif;
   }
 
   /* 5 Pastel Palette Card Styles from User Reference Image */

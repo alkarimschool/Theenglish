@@ -29,9 +29,9 @@ export const Header: React.FC<Props> = ({
             <button
               id="header-back-btn"
               onClick={onBackToStudentHome}
-              className="mr-1 p-2 rounded-xl text-slate-800 hover:bg-emerald-50 border border-slate-200 transition-colors flex items-center gap-1.5 text-sm font-bold cursor-pointer"
+              className="mr-1 px-3 py-1.5 rounded-xl btn-game-3d btn-game-sky text-white text-xs font-black cursor-pointer flex items-center gap-1.5 shadow-sm"
             >
-              <ArrowLeft className="w-4 h-4 text-emerald-700" />
+              <ArrowLeft className="w-4 h-4 text-white" />
               <span className="hidden sm:inline">{backTitle}</span>
             </button>
           )}
