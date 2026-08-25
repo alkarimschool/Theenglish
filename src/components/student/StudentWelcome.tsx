@@ -500,17 +500,32 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
           </p>
         </div>
 
-        {/* Student Form Card with Calm Sage Teal Theme */}
-        <div className="bg-white rounded-3xl border-2 border-teal-100 shadow-xl shadow-teal-900/5 relative overflow-hidden">
-          {/* Card Top Block with Calm Sage Teal Gradient + White Line Divider */}
-          <div className="bg-gradient-to-r from-teal-700 via-emerald-700 to-teal-800 text-white p-5 relative border-b-2 border-white/80 shadow-xs">
+        {/* Mascot Buddy Greeting Card */}
+        <div className="mb-6 bg-gradient-to-r from-amber-400 via-amber-300 to-orange-400 p-4 rounded-3xl shadow-lg border-4 border-white flex items-center gap-3.5 relative overflow-hidden animate-pulse-glow">
+          <div className="w-14 h-14 rounded-2xl bg-white/90 p-1 flex items-center justify-center shrink-0 shadow-md animate-float">
+            <span className="text-3xl">🦅</span>
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="inline-block px-2.5 py-0.5 rounded-full bg-amber-950 text-amber-200 text-[10px] font-black uppercase tracking-wider mb-1">
+              Elgio Mascot Buddy
+            </div>
+            <p className="text-xs font-black text-amber-950 leading-tight">
+              &ldquo;Assalamu’alaikum Explorer! Ready to start your English Quest today?&rdquo;
+            </p>
+          </div>
+        </div>
+
+        {/* Student Form Card with Playful 3D Theme */}
+        <div className="bg-white rounded-3xl border-4 border-emerald-200 shadow-2xl relative overflow-hidden">
+          {/* Card Top Block with Playful Emerald Gradient + White Line Divider */}
+          <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white p-5 relative border-b-4 border-emerald-800 shadow-xs">
             <div className="flex items-center justify-between gap-3.5">
               <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-white/20 text-white flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-xl bg-white/20 text-white flex items-center justify-center font-bold shadow-2xs">
                   <UserCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <h2 className="text-base sm:text-lg font-black text-white leading-tight">Mulai Belajar</h2>
+                  <h2 className="text-base sm:text-lg font-black text-white leading-tight">Mulai Petualangan</h2>
                   <p className="text-xs text-emerald-100 font-medium">
                     {dbStudents.length > 0
                       ? `Cari nama dari ${dbStudents.length} siswa terdaftar`
@@ -520,8 +535,8 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
               </div>
 
               {dbStudents.length > 0 && (
-                <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black bg-white/20 text-white border border-white/40 shadow-2xs">
-                  <Database className="w-3 h-3 text-white" />
+                <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black bg-amber-400 text-amber-950 border border-amber-500 shadow-2xs">
+                  <Database className="w-3 h-3 text-amber-950" />
                   <span>{dbStudents.length} Siswa</span>
                 </span>
               )}
@@ -911,19 +926,19 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
 
             </div>
 
-            {/* Submit Button - Calm Sage Teal Theme */}
+            {/* Submit Button - 3D Tactile Game Style */}
             <button
               id="start-learning-btn"
               type="submit"
               disabled={loading}
-              className="w-full mt-3 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-teal-700 via-emerald-600 to-teal-800 hover:from-teal-800 hover:to-emerald-700 text-white font-black text-sm sm:text-base tracking-wide shadow-lg shadow-teal-900/15 flex items-center justify-center gap-2 cursor-pointer transition transform active:scale-[0.99] disabled:opacity-70 border border-white/80"
+              className="w-full mt-4 py-4 px-6 rounded-2xl btn-game-3d btn-game-emerald text-white font-black text-sm sm:text-base tracking-wider flex items-center justify-center gap-2 cursor-pointer transition disabled:opacity-70"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
-                  <span>MULAI BELAJAR</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>🚀 MULAI PETUALANGAN BELAJAR</span>
+                  <ArrowRight className="w-5 h-5" />
                 </>
               )}
             </button>

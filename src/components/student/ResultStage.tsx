@@ -156,33 +156,46 @@ export const ResultStage: React.FC<Props> = ({
           </div>
         </div>
 
+        {/* Reward Badge */}
+        <div className="mt-6 inline-flex items-center gap-3 bg-gradient-to-r from-amber-100 via-amber-50 to-emerald-50 border-2 border-amber-300 px-5 py-2.5 rounded-2xl shadow-sm animate-bounce-gentle">
+          <span className="text-xl">🏆</span>
+          <div className="text-left">
+            <div className="text-xs font-black text-amber-950">Hadiah Petualangan Diraih:</div>
+            <div className="text-xs font-extrabold text-emerald-800 flex items-center gap-2">
+              <span>🪙 +100 Koin Al-Karim</span>
+              <span>•</span>
+              <span>⚡ +50 XP Quest</span>
+            </div>
+          </div>
+        </div>
+
         {/* Action Buttons */}
         <div className="mt-8 pt-6 border-t border-gray-100 flex flex-wrap items-center justify-center gap-3">
           <button
             id="result-study-again-btn"
             type="button"
             onClick={onStudyAgain}
-            className={`px-4 py-2.5 rounded-xl ${theme.bgLight} ${theme.textDark} border ${theme.borderColor} text-xs font-bold flex items-center gap-2 cursor-pointer transition`}
+            className="px-4 py-2.5 rounded-xl btn-game-3d btn-game-sky text-white text-xs font-bold flex items-center gap-2 cursor-pointer transition"
           >
             <BookOpen className="w-4 h-4" />
-            <span>Pelajari Lagi (Materi)</span>
+            <span>📖 Pelajari Lagi (Materi)</span>
           </button>
 
           <button
             id="result-retake-btn"
             type="button"
             onClick={onRetakeExercise}
-            className="px-4 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 text-xs font-bold flex items-center gap-2 cursor-pointer transition"
+            className="px-4 py-2.5 rounded-xl btn-game-3d btn-game-amber text-amber-950 text-xs font-bold flex items-center gap-2 cursor-pointer transition"
           >
-            <RotateCcw className="w-4 h-4 text-amber-700" />
-            <span>Kerjakan Lagi ({attempt.totalQuestions} Soal)</span>
+            <RotateCcw className="w-4 h-4 text-amber-950" />
+            <span>🔄 Ulangi Latihan ({attempt.totalQuestions} Soal)</span>
           </button>
 
           <button
             id="result-back-topics-btn"
             type="button"
             onClick={onBackToTopicList}
-            className="px-4 py-2.5 rounded-xl bg-white hover:bg-gray-50 text-gray-800 border border-gray-300 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition"
+            className="px-4 py-2.5 rounded-xl btn-game-3d btn-game-emerald text-white text-xs font-bold flex items-center gap-1.5 cursor-pointer transition"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Daftar Topic {category.name}</span>
@@ -193,7 +206,7 @@ export const ResultStage: React.FC<Props> = ({
               id="result-back-level-btn"
               type="button"
               onClick={onBackToLevelPage}
-              className={`px-5 py-2.5 rounded-xl ${theme.btnPrimary} text-xs font-extrabold shadow-md flex items-center gap-2 cursor-pointer transition`}
+              className="px-5 py-2.5 rounded-xl btn-game-3d btn-game-indigo text-white text-xs font-extrabold shadow-md flex items-center gap-2 cursor-pointer transition"
             >
               <span>Halaman {level.name}</span>
               <ArrowLeft className="w-4 h-4 rotate-180" />

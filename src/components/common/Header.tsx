@@ -89,16 +89,34 @@ export const Header: React.FC<Props> = ({
           ) : (
             <div className="flex items-center gap-2">
               {studentSession && (
-                <div className="hidden md:flex bg-emerald-50 border border-emerald-200/80 rounded-xl px-3 py-1.5 items-center gap-2">
-                  <div className="w-6 h-6 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold">
-                    {studentSession.name ? studentSession.name.charAt(0).toUpperCase() : 'S'}
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  {/* Gamified Stat Chips */}
+                  <div className="flex items-center gap-1 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-xl shadow-2xs" title="Day Streak Belajar">
+                    <span className="text-xs">🔥</span>
+                    <span className="text-xs font-black text-amber-950">3 Hari</span>
                   </div>
-                  <div className="text-left">
-                    <div className="text-xs font-bold text-slate-900 leading-tight">
-                      {studentSession.name || 'Siswa'}
+
+                  <div className="flex items-center gap-1 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-xl shadow-2xs" title="Koin Al-Karim Quest">
+                    <span className="text-xs">🪙</span>
+                    <span className="text-xs font-black text-emerald-950">150</span>
+                  </div>
+
+                  <div className="hidden sm:flex items-center gap-1 bg-rose-50 border border-rose-200 px-2.5 py-1 rounded-xl shadow-2xs" title="Heart Points / Nyawa">
+                    <span className="text-xs">❤️</span>
+                    <span className="text-xs font-black text-rose-950">5/5</span>
+                  </div>
+
+                  <div className="hidden md:flex bg-emerald-50 border border-emerald-200/80 rounded-xl px-3 py-1 items-center gap-2">
+                    <div className="w-6 h-6 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs font-bold">
+                      {studentSession.name ? studentSession.name.charAt(0).toUpperCase() : 'S'}
                     </div>
-                    <div className="text-[10px] text-emerald-800 font-medium leading-tight">
-                      Kelas {studentSession.className || '-'}
+                    <div className="text-left">
+                      <div className="text-xs font-bold text-slate-900 leading-tight">
+                        {studentSession.name || 'Siswa'}
+                      </div>
+                      <div className="text-[10px] text-emerald-800 font-medium leading-tight">
+                        Kelas {studentSession.className || '-'}
+                      </div>
                     </div>
                   </div>
                 </div>

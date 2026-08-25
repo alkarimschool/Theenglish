@@ -115,10 +115,12 @@ export const TopicSelection: React.FC<Props> = ({
                     )}
 
                     {isCompleted && !isLocked && (
-                      <span className="inline-flex items-center gap-1 px-3 py-0.5 rounded-full text-[11px] font-extrabold bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-xs">
-                        <CheckCircle className="w-3.5 h-3.5 text-emerald-200" />
-                        <span>Nilai: {attempt.score} / 100</span>
-                      </span>
+                      <div className="flex items-center gap-1 bg-amber-50 border border-amber-300 px-3 py-0.5 rounded-full text-[11px] font-black text-amber-950 shadow-2xs">
+                        <span>
+                          {attempt.score >= 90 ? '⭐⭐⭐' : attempt.score >= 75 ? '⭐⭐' : '⭐'}
+                        </span>
+                        <span className="ml-1 text-emerald-800 font-extrabold">Nilai: {attempt.score}</span>
+                      </div>
                     )}
                   </div>
 
@@ -146,7 +148,7 @@ export const TopicSelection: React.FC<Props> = ({
                       {topic.questionCount || 30} Soal Latihan
                     </span>
                     <span className="text-gray-300 hidden sm:inline">•</span>
-                    <span>📖 Materi & Kosakata</span>
+                    <span>📖 Ringkasan Materi</span>
                     <span className="text-gray-300 hidden sm:inline">•</span>
                     <span>✍️ Latihan Soal</span>
                   </div>
@@ -169,9 +171,9 @@ export const TopicSelection: React.FC<Props> = ({
                       id={`start-topic-btn-${topic.id}`}
                       type="button"
                       onClick={() => onSelectTopic(topic)}
-                      className={`px-5 py-3 rounded-2xl ${theme.btnPrimary} font-black text-xs sm:text-sm tracking-wide shadow-md flex items-center gap-2 cursor-pointer transition active:scale-95`}
+                      className="px-5 py-3 rounded-2xl btn-game-3d btn-game-emerald font-black text-xs sm:text-sm tracking-wide shadow-md flex items-center gap-2 cursor-pointer transition"
                     >
-                      <span>{isCompleted ? 'Pelajari Ulang' : 'Mulai Belajar'}</span>
+                      <span>{isCompleted ? '🔄 Pelajari Ulang' : '🚀 MULAI CHECKPOINT'}</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   )}
