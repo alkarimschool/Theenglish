@@ -1,6 +1,6 @@
 {
   "name": "The English Sekolah Alam Al-Karim",
-  "description": "The English Sekolah Alam Al-Karim - semua akan inggris pada waktunya. Media pembelajaran & evaluasi Bahasa Inggris interaktif untuk TK, SD, SMP, dan SMA.",
+  "description": "The English Sekolah Alam Al-Karim - Semua Akan Inggris Pada Waktunya. Media pembelajaran & evaluasi Bahasa Inggris interaktif untuk TK, SD, SMP, dan SMA.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

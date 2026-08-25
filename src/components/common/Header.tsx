@@ -52,7 +52,7 @@ export const Header: React.FC<Props> = ({
                 </span>
               </div>
               <p className="text-[11px] text-slate-600 font-medium hidden sm:block italic">
-                semua akan inggris pada waktunya
+                Semua Akan Inggris Pada Waktunya
               </p>
             </div>
           </div>
