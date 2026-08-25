@@ -473,94 +473,59 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 sm:p-6 lg:p-10">
-      <div className="w-full max-w-5xl relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 sm:p-6 lg:p-8">
+      <div className="w-full max-w-md relative z-10">
         
-        {/* Left Column: World Gate Story & 4 World Portals */}
-        <div className="lg:col-span-7 text-center lg:text-left space-y-5">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white text-xs font-black tracking-wider border-2 border-white shadow-lg animate-float">
+        {/* Decorative Top Typography Header */}
+        <div className="text-center mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white text-xs font-black tracking-wider border-2 border-white shadow-md mb-3 animate-float">
             <Sparkles className="w-4 h-4 text-amber-300 animate-spin" />
-            <span className="uppercase font-game">WELCOME TO THE ENGLISH ADVENTURE WORLD</span>
+            <span className="uppercase font-game">THE ENGLISH SEKOLAH ALAM AL-KARIM</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-black text-slate-950 tracking-tight leading-none font-game drop-shadow-sm">
-            THE ENGLISH <br />
+          <h1 className="text-2xl sm:text-3.5xl font-black text-slate-950 tracking-tight leading-tight font-game drop-shadow-sm">
+            Selamat Datang di <br />
+            <span className="text-slate-900 font-black">The </span>
             <span className="bg-gradient-to-r from-teal-700 via-emerald-600 to-amber-600 bg-clip-text text-transparent uppercase font-black">
-              SEKOLAH ALAM AL-KARIM
+              English
+            </span>
+            <br />
+            <span className="text-emerald-700 font-black text-xl sm:text-2xl">
+              Sekolah Alam Al-Karim
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-800 font-black italic tracking-wide">
+          <p className="mt-2 text-sm sm:text-base text-slate-800 font-black italic tracking-wide">
             &ldquo;<span className="text-teal-700 font-black not-italic underline decoration-amber-400 decoration-4">Semua Akan Inggris Pada Waktunya</span>&rdquo;
           </p>
 
-          <p className="text-xs sm:text-sm text-slate-600 font-extrabold max-w-xl leading-relaxed">
-            Pilih Dunia Pembelajaran kamu dan mulailah petualangan menguasai Kosakata, Tata Bahasa, &amp; Kuis Interaktif!
+          <p className="mt-1 text-xs text-slate-600 font-extrabold">
+            Media Pembelajaran &amp; Evaluasi Bahasa Inggris Interaktif (TK, SD, SMP, SMA)
           </p>
-
-          {/* 4 Interactive Game World Cards */}
-          <div className="grid grid-cols-2 gap-3 pt-2">
-            <div
-              onClick={() => onContinue('tk-a')}
-              className="p-4 rounded-2xl bg-gradient-to-br from-pink-100 to-rose-50 border-3 border-pink-300 shadow-md hover:scale-102 transition cursor-pointer text-left group"
-            >
-              <div className="text-2xl mb-1 group-hover:scale-110 transition">🌸</div>
-              <div className="text-xs font-black text-pink-950 font-game">1. TK CANDY PLAYLAND</div>
-              <div className="text-[10px] text-pink-800 font-bold">Usia Dini • Phonics &amp; Play</div>
-            </div>
-
-            <div
-              onClick={() => onContinue('sd-4')}
-              className="p-4 rounded-2xl bg-gradient-to-br from-amber-100 to-orange-50 border-3 border-amber-300 shadow-md hover:scale-102 transition cursor-pointer text-left group"
-            >
-              <div className="text-2xl mb-1 group-hover:scale-110 transition">🌴</div>
-              <div className="text-xs font-black text-amber-950 font-game">2. SD NATURE JUNGLE</div>
-              <div className="text-[10px] text-amber-800 font-bold">Kelas 1-6 • Adventure Mission</div>
-            </div>
-
-            <div
-              onClick={() => onContinue('smp-7')}
-              className="p-4 rounded-2xl bg-gradient-to-br from-sky-100 to-teal-50 border-3 border-sky-300 shadow-md hover:scale-102 transition cursor-pointer text-left group"
-            >
-              <div className="text-2xl mb-1 group-hover:scale-110 transition">🏔️</div>
-              <div className="text-xs font-black text-sky-950 font-game">3. SMP CYBER ARENA</div>
-              <div className="text-[10px] text-sky-800 font-bold">Kelas 7-9 • Challenge Level</div>
-            </div>
-
-            <div
-              onClick={() => onContinue('sma-10')}
-              className="p-4 rounded-2xl bg-gradient-to-br from-purple-100 to-indigo-50 border-3 border-purple-300 shadow-md hover:scale-102 transition cursor-pointer text-left group"
-            >
-              <div className="text-2xl mb-1 group-hover:scale-110 transition">🏰</div>
-              <div className="text-xs font-black text-purple-950 font-game">4. SMA STAR CASTLE</div>
-              <div className="text-[10px] text-purple-800 font-bold">Kelas 10-12 • Global Quest</div>
-            </div>
-          </div>
         </div>
 
-        {/* Right Column: Student Login Control Station */}
-        <div className="lg:col-span-5">
-          <div className="bg-white rounded-3xl border-4 border-emerald-300 shadow-2xl relative overflow-hidden">
-            {/* Card Top Block */}
-            <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white p-5 relative border-b-4 border-emerald-800 shadow-xs">
-              <div className="flex items-center justify-between gap-3.5">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-white/20 text-white flex items-center justify-center font-bold shadow-2xs">
-                    <UserCheck className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h2 className="text-base sm:text-lg font-black text-white leading-tight font-game">STASIUN PETUALANGAN</h2>
-                    <p className="text-xs text-emerald-100 font-medium">
-                      {dbStudents.length > 0
-                        ? `Cari nama dari ${dbStudents.length} siswa terdaftar`
-                        : 'Masukkan Nama &amp; pilih Kelas'}
-                    </p>
-                  </div>
+        {/* Student Login Control Station */}
+        <div className="bg-white rounded-3xl border-4 border-emerald-300 shadow-2xl relative overflow-hidden">
+          {/* Card Top Block */}
+          <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white p-5 relative border-b-4 border-emerald-800 shadow-xs">
+            <div className="flex items-center justify-between gap-3.5">
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-white/20 text-white flex items-center justify-center font-bold shadow-2xs">
+                  <UserCheck className="w-5 h-5" />
                 </div>
+                <div>
+                  <h2 className="text-base sm:text-lg font-black text-white leading-tight font-game">Mulai Petualangan</h2>
+                  <p className="text-xs text-emerald-100 font-medium">
+                    {dbStudents.length > 0
+                      ? `Cari nama dari ${dbStudents.length} siswa terdaftar`
+                      : 'Masukkan Nama &amp; pilih Kelas'}
+                  </p>
+                </div>
+              </div>
 
-                {dbStudents.length > 0 && (
-                  <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black bg-amber-400 text-amber-950 border border-amber-500 shadow-2xs">
-                    <Database className="w-3 h-3 text-amber-950" />
+              {dbStudents.length > 0 && (
+                <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black bg-amber-400 text-amber-950 border border-amber-500 shadow-2xs">
+                  <Database className="w-3 h-3 text-amber-950" />
                     <span>{dbStudents.length} Siswa</span>
                   </span>
                 )}
@@ -991,7 +956,6 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
       </div>
     </div>
   </div>
-</div>
 );
 };
 
