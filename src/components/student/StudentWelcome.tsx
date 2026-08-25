@@ -516,21 +516,6 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
           </div>
         </div>
 
-        {/* Mascot Buddy Greeting Card */}
-        <div className="mb-6 bg-gradient-to-r from-amber-400 via-amber-300 to-orange-400 p-4 rounded-3xl shadow-lg border-4 border-white flex items-center gap-3.5 relative overflow-hidden animate-pulse-glow">
-          <div className="w-14 h-14 rounded-2xl bg-white/90 p-1 flex items-center justify-center shrink-0 shadow-md animate-float">
-            <span className="text-3xl">🦅</span>
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="inline-block px-2.5 py-0.5 rounded-full bg-amber-950 text-amber-200 text-[10px] font-black uppercase tracking-wider mb-1">
-              Elgio Mascot Buddy
-            </div>
-            <p className="text-xs font-black text-amber-950 leading-tight">
-              &ldquo;Assalamu’alaikum Explorer! Ready to start your English Quest today?&rdquo;
-            </p>
-          </div>
-        </div>
-
         {/* Student Form Card with Playful 3D Theme */}
         <div className="bg-white rounded-3xl border-4 border-emerald-200 shadow-2xl relative overflow-hidden">
           {/* Card Top Block with Playful Emerald Gradient + White Line Divider */}
