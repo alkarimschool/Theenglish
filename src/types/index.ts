@@ -16,8 +16,8 @@ export interface User {
 
 export interface Level {
   id: string;
-  name: string; // e.g. "TK A", "Level 1", "SMP Level 7", "SMA Level 10"
-  grade: string; // e.g. "TK A", "SD Kelas 1", "SMP Kelas 7", "SMA Kelas 10"
+  name: string; // e.g. "Jenjang TK", "Jenjang SD", "Jenjang SMP", "Jenjang SMA"
+  grade: string; // e.g. "TK", "SD", "SMP", "SMA"
   schoolType: 'TK' | 'SD' | 'SMP' | 'SMA';
   educationLevel?: 'TK' | 'SD' | 'SMP' | 'SMA';
   numericGrade: number; // 0 for TK, 1-6 for SD, 7-9 for SMP, 10-12 for SMA
@@ -25,6 +25,7 @@ export interface Level {
   iconName: string;
   color: string;
   order: number;
+  classes?: string[]; // Mapped class names for this level
 }
 
 export interface Category {

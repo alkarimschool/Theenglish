@@ -40,7 +40,7 @@ export const QuestionBank: React.FC<Props> = ({
   onOpenBulkImport,
   onRefresh,
 }) => {
-  const [levelFilter, setLevelFilter] = useState(initialLevelId || levels[0]?.id || 'smp-7');
+  const [levelFilter, setLevelFilter] = useState(initialLevelId || levels[0]?.id || 'smp');
   const [categoryFilter, setCategoryFilter] = useState(initialCategoryId || 'all');
   const [topicFilter, setTopicFilter] = useState(initialTopicId || 'all');
   const [search, setSearch] = useState('');

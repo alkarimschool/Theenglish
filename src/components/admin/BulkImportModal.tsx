@@ -74,7 +74,7 @@ export const BulkImportModal: React.FC<Props> = ({
   onSuccess,
 }) => {
   const [activeCategoryTab, setActiveCategoryTab] = useState<string>('expression');
-  const [targetLevelId, setTargetLevelId] = useState(selectedLevelId || levels[0]?.id || 'smp-7');
+  const [targetLevelId, setTargetLevelId] = useState(selectedLevelId || levels[0]?.id || 'smp');
   const [targetCategoryId, setTargetCategoryId] = useState(selectedCategoryId || 'expression');
   const [targetTopicId, setTargetTopicId] = useState(selectedTopicId || '');
 

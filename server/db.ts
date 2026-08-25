@@ -46,16 +46,37 @@ class DatabaseManager {
         const raw = fs.readFileSync(DB_FILE, 'utf-8');
         const parsed = JSON.parse(raw);
         if (parsed && Array.isArray(parsed.levels) && Array.isArray(parsed.questions)) {
-          // Ensure all 14 levels are present in database and keep display names updated
-          seed.levels.forEach((sl) => {
-            const existing = parsed.levels.find((l: Level) => l.id === sl.id);
-            if (!existing) {
-              parsed.levels.push(sl);
-            } else {
-              existing.name = existing.name || sl.name;
-              existing.grade = existing.grade || sl.grade;
-              existing.description = existing.description || sl.description;
+          // Migration: Map old sub-level IDs (e.g. smp-7, sd-4) to 4 core level IDs (tk, sd, smp, sma)
+          const mapOldLevel = (id: string): string => {
+            if (!id) return 'sd';
+            const lower = id.toLowerCase();
+            if (lower.startsWith('tk')) return 'tk';
+            if (lower.startsWith('sd')) return 'sd';
+            if (lower.startsWith('smp')) return 'smp';
+            if (lower.startsWith('sma')) return 'sma';
+            return id;
+          };
+
+          // Always enforce 4 core levels from seed
+          parsed.levels = seed.levels;
+
+          // Migrate level IDs across all entities
+          (parsed.topics || []).forEach((t: Topic) => {
+            t.levelId = mapOldLevel(t.levelId);
+          });
+          (parsed.questions || []).forEach((q: Question) => {
+            q.levelId = mapOldLevel(q.levelId);
+          });
+          (parsed.users || []).forEach((u: User) => {
+            if (Array.isArray(u.assignedLevelIds)) {
+              u.assignedLevelIds = Array.from(new Set(u.assignedLevelIds.map(mapOldLevel)));
             }
+          });
+          (parsed.students || []).forEach((st: StudentProfile) => {
+            st.levelId = mapOldLevel(st.levelId);
+          });
+          (parsed.attempts || []).forEach((att: StudentAttempt) => {
+            att.levelId = mapOldLevel(att.levelId);
           });
 
           // Ensure each level has at least initial seed topics & questions if empty
@@ -527,53 +548,21 @@ class DatabaseManager {
   }
 
   // --- STUDENTS & ATTEMPTS ---
-  public detectLevelFromClassName(className: string, defaultLevelId: string = 'sd-4'): string {
+  public detectLevelFromClassName(className: string, defaultLevelId: string = 'sd'): string {
     const c = (className || '').toUpperCase().trim();
     if (!c) return defaultLevelId;
 
-    // TK A
-    if (c.includes('PATIMURA') || c.includes('TK A') || c === 'TKA') return 'tk-a';
+    // TK
+    if (c.includes('PATIMURA') || c.includes('DIPONEGORO') || c.includes('SUDIRMAN') || c.includes('ANTASARI') || c.includes('TK')) return 'tk';
 
-    // TK B
-    if (c.includes('DIPONEGORO') || c.includes('SUDIRMAN') || c.includes('ANTASARI') || c.includes('TK B') || c === 'TKB') return 'tk-b';
+    // SMP
+    if (c.includes('SALMAN') || c.includes('ALFARISI') || c.includes('HURAIRAH') || c.includes('MUSHAB') || c.includes('YASIR') || c.includes('SMP') || c.includes('KELAS 7') || c.includes('KELAS 8') || c.includes('KELAS 9')) return 'smp';
 
-    // SD Kelas 1
-    if (c.includes('ABU BAKAR') || c.includes('UMAR') || c.includes('KELAS 1') || c.includes('SD 1')) return 'sd-1';
+    // SMA
+    if (c.includes('FATIH') || c.includes('THARIQ') || c.includes('ZIYAD') || c.includes('SALAHUDIN') || c.includes('AYYUBI') || c.includes('SMA') || c.includes('KELAS 10') || c.includes('KELAS 11') || c.includes('KELAS 12')) return 'sma';
 
-    // SD Kelas 2
-    if (c.includes('ALI BIN ABI') || c.includes('THALHAH') || c.includes('UTSMAN') || c.includes('KELAS 2') || c.includes('SD 2')) return 'sd-2';
-
-    // SD Kelas 3
-    if (c.includes('ABDURRAHMAN') || c.includes('BILAL') || c.includes('KHALID') || c.includes('KELAS 3') || c.includes('SD 3')) return 'sd-3';
-
-    // SD Kelas 4
-    if (c.includes('MUADZ') || c.includes('SAID BIN ZAID') || c.includes('ZUBAIR') || c.includes('KELAS 4') || c.includes('SD 4')) return 'sd-4';
-
-    // SD Kelas 5
-    if (c.includes('HAMZAH') || c.includes('HUDZAIFAH') || c.includes('SAAD') || c.includes('KELAS 5') || c.includes('SD 5')) return 'sd-5';
-
-    // SD Kelas 6
-    if (c.includes('ABU UBAIDAH') || c.includes('AMR BIN ASH') || c.includes('ANAS') || c.includes('KELAS 6') || c.includes('SD 6')) return 'sd-6';
-
-    // SMP 7
-    if (c.includes('SALMAN') || c.includes('ALFARISI') || c.includes('KELAS 7') || c.includes('SMP 7')) return 'smp-7';
-
-    // SMP 8
-    if (c.includes('HURAIRAH') || c.includes('MUSHAB') || c.includes('KELAS 8') || c.includes('SMP 8')) return 'smp-8';
-
-    // SMP 9
-    if (c.includes('YASIR') || c.includes('KELAS 9') || c.includes('SMP 9')) return 'smp-9';
-
-    // SMA 10
-    if (c.includes('FATIH') || c.includes('KELAS 10') || c.includes('SMA 10')) return 'sma-10';
-
-    // SMA 11
-    if (c.includes('THARIQ') || c.includes('ZIYAD') || c.includes('KELAS 11') || c.includes('SMA 11')) return 'sma-11';
-
-    // SMA 12
-    if (c.includes('SALAHUDIN') || c.includes('AYYUBI') || c.includes('KELAS 12') || c.includes('SMA 12')) return 'sma-12';
-
-    return defaultLevelId;
+    // Default SD for any SD class name
+    return 'sd';
   }
 
   public bulkRegisterStudents(

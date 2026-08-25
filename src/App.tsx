@@ -99,7 +99,7 @@ export default function App() {
       // Find matching level or default to SD-4
       const matched =
         levels.find((l) => l.id === studentSession.levelId) ||
-        levels.find((l) => l.id === 'sd-4') ||
+        levels.find((l) => l.id === 'sd') ||
         levels[0] ||
         null;
       setSelectedLevel(matched);

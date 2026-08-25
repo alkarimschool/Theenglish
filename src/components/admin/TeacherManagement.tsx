@@ -59,7 +59,7 @@ export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh
     setEmail('');
     setUsername('');
     setPassword('');
-    setAssignedLevels(['smp-7']);
+    setAssignedLevels(['smp']);
     setError('');
     setIsModalOpen(true);
   };
