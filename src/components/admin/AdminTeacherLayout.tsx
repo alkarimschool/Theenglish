@@ -32,6 +32,7 @@ import {
   Shield,
   FileSpreadsheet,
   Edit3,
+  ArrowLeft,
 } from 'lucide-react';
 
 interface Props {
@@ -348,6 +349,24 @@ export const AdminTeacherLayout: React.FC<Props> = ({
 
       {/* Main Content Area */}
       <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
+        {activeTab !== 'dashboard' && (
+          <div className="mb-6 flex items-center justify-between bg-slate-50 border border-slate-200/90 p-3.5 rounded-2xl shadow-2xs">
+            <button
+              id="admin-btn-back-to-dashboard"
+              type="button"
+              onClick={() => setActiveTab('dashboard')}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-emerald-50 hover:border-emerald-300 text-slate-800 hover:text-emerald-950 text-xs font-black border border-slate-200 shadow-2xs transition-all active:scale-95 cursor-pointer"
+            >
+              <ArrowLeft className="w-4 h-4 text-emerald-700 shrink-0" />
+              <span>Kembali ke Dashboard Utama</span>
+            </button>
+            <div className="text-xs font-black text-slate-700 px-3.5 py-1.5 bg-white rounded-xl border border-slate-200 uppercase tracking-wider flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+              <span>{navItems.find((n) => n.id === activeTab)?.label || activeTab}</span>
+            </div>
+          </div>
+        )}
+
         {activeTab === 'dashboard' && (
           <DashboardOverview
             stats={effectiveStats}

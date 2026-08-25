@@ -8,6 +8,7 @@ import {
   Compass,
   Globe,
   ArrowRight,
+  ArrowLeft,
   Smile,
   Heart,
   Sun,
@@ -20,9 +21,10 @@ interface Props {
   levels: Level[];
   selectedLevelId: string | null;
   onSelectLevel: (level: Level) => void;
+  onBack?: () => void;
 }
 
-export const LevelSelection: React.FC<Props> = ({ levels, selectedLevelId, onSelectLevel }) => {
+export const LevelSelection: React.FC<Props> = ({ levels, selectedLevelId, onSelectLevel, onBack }) => {
   const tkLevels = levels.filter((l) => l.schoolType === 'TK' || l.educationLevel === 'TK');
   const sdLevels = levels.filter((l) => l.schoolType === 'SD' || l.educationLevel === 'SD');
   const smpLevels = levels.filter((l) => l.schoolType === 'SMP' || l.educationLevel === 'SMP');

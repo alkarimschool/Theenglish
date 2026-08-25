@@ -227,9 +227,11 @@ export default function App() {
       <div className="relative z-30">
         <Header
           onOpenLogin={() => setIsLoginModalOpen(true)}
-          showBackButton={studentView !== 'welcome' && studentView !== 'levels'}
+          showBackButton={studentView !== 'welcome'}
           backTitle={
-            studentView === 'categories'
+            studentView === 'levels'
+              ? 'Beranda'
+              : studentView === 'categories'
               ? 'Beranda'
               : studentView === 'topics'
               ? (selectedLevel ? `Halaman ${selectedLevel.name}` : 'Halaman Jenjang')
@@ -238,7 +240,9 @@ export default function App() {
               : 'Kembali'
           }
           onBackToStudentHome={() => {
-            if (studentView === 'categories') {
+            if (studentView === 'levels') {
+              setStudentView('welcome');
+            } else if (studentView === 'categories') {
               clearStudent();
               setStudentView('welcome');
             } else if (studentView === 'topics') {
@@ -249,6 +253,8 @@ export default function App() {
               setStudentView('learning');
             } else if (studentView === 'result') {
               setStudentView('topics');
+            } else {
+              setStudentView('welcome');
             }
           }}
         />
@@ -284,6 +290,7 @@ export default function App() {
             levels={levels}
             selectedLevelId={selectedLevel?.id || null}
             onSelectLevel={handleSelectLevel}
+            onBack={() => setStudentView('welcome')}
           />
         )}
 
