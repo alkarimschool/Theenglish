@@ -476,46 +476,48 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 sm:p-6 lg:p-8">
       <div className="w-full max-w-md relative z-10">
         
-        {/* Decorative Top Typography Header */}
+        {/* Decorative Top Typography Header - Eye-Catching & Calm Palette */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white text-xs font-black tracking-wider border-2 border-white shadow-md mb-3 animate-float">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-teal-600 via-emerald-600 to-indigo-600 text-white text-xs font-black tracking-wider border-2 border-white shadow-md mb-3.5 animate-float font-outfit">
             <Sparkles className="w-4 h-4 text-amber-300 animate-spin" />
-            <span className="uppercase font-game">THE ENGLISH SEKOLAH ALAM AL-KARIM</span>
+            <span className="uppercase tracking-widest text-[11px]">THE ENGLISH SEKOLAH ALAM AL-KARIM</span>
           </div>
 
-          <h1 className="text-2xl sm:text-3.5xl font-black text-slate-950 tracking-tight leading-tight font-game drop-shadow-sm">
+          <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug font-outfit drop-shadow-xs">
             Selamat Datang di <br />
-            <span className="text-slate-900 font-black">The </span>
-            <span className="bg-gradient-to-r from-teal-700 via-emerald-600 to-amber-600 bg-clip-text text-transparent uppercase font-black">
-              English
+            <span className="text-teal-800 font-extrabold">The </span>
+            <span className="bg-gradient-to-r from-teal-600 via-emerald-500 to-amber-500 bg-clip-text text-transparent uppercase font-black tracking-wide">
+              ENGLISH
             </span>
             <br />
-            <span className="text-emerald-700 font-black text-xl sm:text-2xl">
+            <span className="text-emerald-700 font-extrabold text-xl sm:text-2.5xl">
               Sekolah Alam Al-Karim
             </span>
           </h1>
 
-          <p className="mt-2 text-sm sm:text-base text-slate-800 font-black italic tracking-wide">
-            &ldquo;<span className="text-teal-700 font-black not-italic underline decoration-amber-400 decoration-4">Semua Akan Inggris Pada Waktunya</span>&rdquo;
-          </p>
+          <div className="mt-3 inline-block px-4 py-1.5 rounded-2xl bg-teal-50/90 border border-teal-200/90 shadow-2xs">
+            <p className="text-xs sm:text-sm text-teal-900 font-extrabold font-outfit">
+              &ldquo;<span className="text-teal-700 font-black underline decoration-amber-400 decoration-3">Semua Akan Inggris Pada Waktunya</span>&rdquo;
+            </p>
+          </div>
 
-          <p className="mt-1 text-xs text-slate-600 font-extrabold">
+          <p className="mt-2 text-xs text-slate-600 font-extrabold">
             Media Pembelajaran &amp; Evaluasi Bahasa Inggris Interaktif (TK, SD, SMP, SMA)
           </p>
         </div>
 
-        {/* Student Login Control Station */}
-        <div className="bg-white rounded-3xl border-4 border-emerald-300 shadow-2xl relative overflow-hidden">
-          {/* Card Top Block */}
-          <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white p-5 relative border-b-4 border-emerald-800 shadow-xs">
+        {/* Student Login Control Station - Calm & Eye-Catching Glassmorphism */}
+        <div className="bg-white/95 backdrop-blur-md rounded-3xl border-3 border-teal-200/90 shadow-xl shadow-teal-950/5 relative overflow-hidden">
+          {/* Card Top Block with Seafoam Teal & Soft Indigo Gradient */}
+          <div className="bg-gradient-to-r from-teal-600 via-emerald-600 to-teal-700 text-white p-5 relative border-b-3 border-teal-800 shadow-xs">
             <div className="flex items-center justify-between gap-3.5">
               <div className="flex items-center gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-white/20 text-white flex items-center justify-center font-bold shadow-2xs">
-                  <UserCheck className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-2xl bg-white/20 text-white flex items-center justify-center font-bold shadow-2xs backdrop-blur-xs">
+                  <UserCheck className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-base sm:text-lg font-black text-white leading-tight font-game">Mulai Petualangan</h2>
-                  <p className="text-xs text-emerald-100 font-medium">
+                  <h2 className="text-base sm:text-lg font-black text-white leading-tight font-outfit">Mulai Petualangan</h2>
+                  <p className="text-xs text-teal-100 font-semibold">
                     {dbStudents.length > 0
                       ? `Cari nama dari ${dbStudents.length} siswa terdaftar`
                       : 'Masukkan Nama &amp; pilih Kelas'}
@@ -524,13 +526,13 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
               </div>
 
               {dbStudents.length > 0 && (
-                <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black bg-amber-400 text-amber-950 border border-amber-500 shadow-2xs">
-                  <Database className="w-3 h-3 text-amber-950" />
-                    <span>{dbStudents.length} Siswa</span>
-                  </span>
-                )}
-              </div>
+                <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black bg-amber-400 text-amber-950 border border-amber-500 shadow-2xs">
+                  <Database className="w-3.5 h-3.5 text-amber-950" />
+                  <span>{dbStudents.length} Siswa</span>
+                </span>
+              )}
             </div>
+          </div>
 
           <div className="p-6 sm:p-8">
             <form onSubmit={handleSubmit} className="space-y-4">
