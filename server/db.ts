@@ -531,26 +531,47 @@ class DatabaseManager {
     const c = (className || '').toUpperCase().trim();
     if (!c) return defaultLevelId;
 
-    if (c.includes('TK A') || c === 'TKA') return 'tk-a';
-    if (c.includes('TK B') || c === 'TKB' || c.includes('TK')) return 'tk-b';
+    // TK A
+    if (c.includes('PATIMURA') || c.includes('TK A') || c === 'TKA') return 'tk-a';
 
-    // SMA (10, 11, 12)
-    if (c.includes('SMA 10') || c.includes('KELAS 10') || c.includes('KLAS 10') || c.includes('X ') || c.endsWith('X') || c.includes('10')) return 'sma-10';
-    if (c.includes('SMA 11') || c.includes('KELAS 11') || c.includes('KLAS 11') || c.includes('XI ') || c.endsWith('XI') || c.includes('11')) return 'sma-11';
-    if (c.includes('SMA 12') || c.includes('KELAS 12') || c.includes('KLAS 12') || c.includes('XII ') || c.endsWith('XII') || c.includes('12')) return 'sma-12';
+    // TK B
+    if (c.includes('DIPONEGORO') || c.includes('SUDIRMAN') || c.includes('ANTASARI') || c.includes('TK B') || c === 'TKB') return 'tk-b';
 
-    // SMP (7, 8, 9)
-    if (c.includes('SMP 7') || c.includes('KELAS 7') || c.includes('KLAS 7') || c.includes('VII ') || c.endsWith('VII') || c.includes('7')) return 'smp-7';
-    if (c.includes('SMP 8') || c.includes('KELAS 8') || c.includes('KLAS 8') || c.includes('VIII ') || c.endsWith('VIII') || c.includes('8')) return 'smp-8';
-    if (c.includes('SMP 9') || c.includes('KELAS 9') || c.includes('KLAS 9') || c.includes('IX ') || c.endsWith('IX') || c.includes('9')) return 'smp-9';
+    // SD Kelas 1
+    if (c.includes('ABU BAKAR') || c.includes('UMAR') || c.includes('KELAS 1') || c.includes('SD 1')) return 'sd-1';
 
-    // SD (1, 2, 3, 4, 5, 6)
-    if (c.includes('SD 1') || c.includes('KELAS 1') || c.includes('KLAS 1') || c.includes('1 ') || c.endsWith('1')) return 'sd-1';
-    if (c.includes('SD 2') || c.includes('KELAS 2') || c.includes('KLAS 2') || c.includes('2 ') || c.endsWith('2')) return 'sd-2';
-    if (c.includes('SD 3') || c.includes('KELAS 3') || c.includes('KLAS 3') || c.includes('3 ') || c.endsWith('3')) return 'sd-3';
-    if (c.includes('SD 4') || c.includes('KELAS 4') || c.includes('KLAS 4') || c.includes('4 ') || c.endsWith('4')) return 'sd-4';
-    if (c.includes('SD 5') || c.includes('KELAS 5') || c.includes('KLAS 5') || c.includes('5 ') || c.endsWith('5')) return 'sd-5';
-    if (c.includes('SD 6') || c.includes('KELAS 6') || c.includes('KLAS 6') || c.includes('6 ') || c.endsWith('6')) return 'sd-6';
+    // SD Kelas 2
+    if (c.includes('ALI BIN ABI') || c.includes('THALHAH') || c.includes('UTSMAN') || c.includes('KELAS 2') || c.includes('SD 2')) return 'sd-2';
+
+    // SD Kelas 3
+    if (c.includes('ABDURRAHMAN') || c.includes('BILAL') || c.includes('KHALID') || c.includes('KELAS 3') || c.includes('SD 3')) return 'sd-3';
+
+    // SD Kelas 4
+    if (c.includes('MUADZ') || c.includes('SAID BIN ZAID') || c.includes('ZUBAIR') || c.includes('KELAS 4') || c.includes('SD 4')) return 'sd-4';
+
+    // SD Kelas 5
+    if (c.includes('HAMZAH') || c.includes('HUDZAIFAH') || c.includes('SAAD') || c.includes('KELAS 5') || c.includes('SD 5')) return 'sd-5';
+
+    // SD Kelas 6
+    if (c.includes('ABU UBAIDAH') || c.includes('AMR BIN ASH') || c.includes('ANAS') || c.includes('KELAS 6') || c.includes('SD 6')) return 'sd-6';
+
+    // SMP 7
+    if (c.includes('SALMAN') || c.includes('ALFARISI') || c.includes('KELAS 7') || c.includes('SMP 7')) return 'smp-7';
+
+    // SMP 8
+    if (c.includes('HURAIRAH') || c.includes('MUSHAB') || c.includes('KELAS 8') || c.includes('SMP 8')) return 'smp-8';
+
+    // SMP 9
+    if (c.includes('YASIR') || c.includes('KELAS 9') || c.includes('SMP 9')) return 'smp-9';
+
+    // SMA 10
+    if (c.includes('FATIH') || c.includes('KELAS 10') || c.includes('SMA 10')) return 'sma-10';
+
+    // SMA 11
+    if (c.includes('THARIQ') || c.includes('ZIYAD') || c.includes('KELAS 11') || c.includes('SMA 11')) return 'sma-11';
+
+    // SMA 12
+    if (c.includes('SALAHUDIN') || c.includes('AYYUBI') || c.includes('KELAS 12') || c.includes('SMA 12')) return 'sma-12';
 
     return defaultLevelId;
   }

@@ -76,49 +76,67 @@ export const ImportStudentsModal: React.FC<Props> = ({
     }
 
     const c = (className || '').toUpperCase().trim();
-    if (c.includes('TK A') || c === 'TKA') {
+    if (c.includes('PATIMURA') || c.includes('TK A') || c === 'TKA') {
       const lvl = levels.find((l) => l.id === 'tk-a') || levels[0];
-      return { id: lvl?.id || 'tk-a', name: lvl?.name || 'TK A' };
+      return { id: lvl?.id || 'tk-a', name: lvl?.name || 'TK A Patimura' };
     }
-    if (c.includes('TK B') || c === 'TKB' || c.includes('TK')) {
+    if (c.includes('DIPONEGORO') || c.includes('SUDIRMAN') || c.includes('ANTASARI') || c.includes('TK B') || c === 'TKB') {
       const lvl = levels.find((l) => l.id === 'tk-b') || levels[0];
       return { id: lvl?.id || 'tk-b', name: lvl?.name || 'TK B' };
     }
 
     // SMA (10, 11, 12)
-    if (c.includes('SMA 10') || c.includes('KELAS 10') || c.includes('KLAS 10') || c.includes('X ') || c.endsWith('X') || c.includes('10')) {
+    if (c.includes('FATIH') || c.includes('SMA 10') || c.includes('KELAS 10') || c.includes('KLAS 10')) {
       const lvl = levels.find((l) => l.id === 'sma-10') || levels[0];
-      return { id: lvl?.id || 'sma-10', name: lvl?.name || 'SMA Kelas 10' };
+      return { id: lvl?.id || 'sma-10', name: lvl?.name || 'Kelas 10 Muhammad Al-Fatih' };
     }
-    if (c.includes('SMA 11') || c.includes('KELAS 11') || c.includes('KLAS 11') || c.includes('XI ') || c.endsWith('XI') || c.includes('11')) {
+    if (c.includes('THARIQ') || c.includes('ZIYAD') || c.includes('SMA 11') || c.includes('KELAS 11') || c.includes('KLAS 11')) {
       const lvl = levels.find((l) => l.id === 'sma-11') || levels[0];
-      return { id: lvl?.id || 'sma-11', name: lvl?.name || 'SMA Kelas 11' };
+      return { id: lvl?.id || 'sma-11', name: lvl?.name || 'Kelas 11 Thariq bin Ziyad' };
     }
-    if (c.includes('SMA 12') || c.includes('KELAS 12') || c.includes('KLAS 12') || c.includes('XII ') || c.endsWith('XII') || c.includes('12')) {
+    if (c.includes('SALAHUDIN') || c.includes('AYYUBI') || c.includes('SMA 12') || c.includes('KELAS 12') || c.includes('KLAS 12')) {
       const lvl = levels.find((l) => l.id === 'sma-12') || levels[0];
-      return { id: lvl?.id || 'sma-12', name: lvl?.name || 'SMA Kelas 12' };
+      return { id: lvl?.id || 'sma-12', name: lvl?.name || 'Kelas 12 Salahudin Al-Ayyubi' };
     }
 
     // SMP (7, 8, 9)
-    if (c.includes('SMP 7') || c.includes('KELAS 7') || c.includes('KLAS 7') || c.includes('VII ') || c.endsWith('VII') || c.includes('7')) {
+    if (c.includes('SALMAN') || c.includes('ALFARISI') || c.includes('SMP 7') || c.includes('KELAS 7')) {
       const lvl = levels.find((l) => l.id === 'smp-7') || levels[0];
-      return { id: lvl?.id || 'smp-7', name: lvl?.name || 'SMP Kelas 7' };
+      return { id: lvl?.id || 'smp-7', name: lvl?.name || 'Kelas 7 Salman Alfarisi' };
     }
-    if (c.includes('SMP 8') || c.includes('KELAS 8') || c.includes('KLAS 8') || c.includes('VIII ') || c.endsWith('VIII') || c.includes('8')) {
+    if (c.includes('HURAIRAH') || c.includes('MUSHAB') || c.includes('SMP 8') || c.includes('KELAS 8')) {
       const lvl = levels.find((l) => l.id === 'smp-8') || levels[0];
-      return { id: lvl?.id || 'smp-8', name: lvl?.name || 'SMP Kelas 8' };
+      return { id: lvl?.id || 'smp-8', name: lvl?.name || 'Kelas 8' };
     }
-    if (c.includes('SMP 9') || c.includes('KELAS 9') || c.includes('KLAS 9') || c.includes('IX ') || c.endsWith('IX') || c.includes('9')) {
+    if (c.includes('YASIR') || c.includes('SMP 9') || c.includes('KELAS 9')) {
       const lvl = levels.find((l) => l.id === 'smp-9') || levels[0];
-      return { id: lvl?.id || 'smp-9', name: lvl?.name || 'SMP Kelas 9' };
+      return { id: lvl?.id || 'smp-9', name: lvl?.name || 'Kelas 9 Amr bin Yasir' };
     }
 
     // SD (1..6)
-    for (let i = 1; i <= 6; i++) {
-      if (c.includes(`SD ${i}`) || c.includes(`KELAS ${i}`) || c.includes(`KLAS ${i}`) || c.includes(`${i} `) || c.endsWith(`${i}`)) {
-        const lvl = levels.find((l) => l.id === `sd-${i}`) || levels[0];
-        return { id: lvl?.id || `sd-${i}`, name: lvl?.name || `SD Kelas ${i}` };
-      }
+    if (c.includes('ABU BAKAR') || c.includes('UMAR') || c.includes('SD 1') || c.includes('KELAS 1')) {
+      const lvl = levels.find((l) => l.id === 'sd-1') || levels[0];
+      return { id: lvl?.id || 'sd-1', name: lvl?.name || 'Kelas 1' };
+    }
+    if (c.includes('ALI BIN ABI') || c.includes('THALHAH') || c.includes('UTSMAN') || c.includes('SD 2') || c.includes('KELAS 2')) {
+      const lvl = levels.find((l) => l.id === 'sd-2') || levels[0];
+      return { id: lvl?.id || 'sd-2', name: lvl?.name || 'Kelas 2' };
+    }
+    if (c.includes('ABDURRAHMAN') || c.includes('BILAL') || c.includes('KHALID') || c.includes('SD 3') || c.includes('KELAS 3')) {
+      const lvl = levels.find((l) => l.id === 'sd-3') || levels[0];
+      return { id: lvl?.id || 'sd-3', name: lvl?.name || 'Kelas 3' };
+    }
+    if (c.includes('MUADZ') || c.includes('SAID BIN ZAID') || c.includes('ZUBAIR') || c.includes('SD 4') || c.includes('KELAS 4')) {
+      const lvl = levels.find((l) => l.id === 'sd-4') || levels[0];
+      return { id: lvl?.id || 'sd-4', name: lvl?.name || 'Kelas 4' };
+    }
+    if (c.includes('HAMZAH') || c.includes('HUDZAIFAH') || c.includes('SAAD') || c.includes('SD 5') || c.includes('KELAS 5')) {
+      const lvl = levels.find((l) => l.id === 'sd-5') || levels[0];
+      return { id: lvl?.id || 'sd-5', name: lvl?.name || 'Kelas 5' };
+    }
+    if (c.includes('ABU UBAIDAH') || c.includes('AMR BIN ASH') || c.includes('ANAS') || c.includes('SD 6') || c.includes('KELAS 6')) {
+      const lvl = levels.find((l) => l.id === 'sd-6') || levels[0];
+      return { id: lvl?.id || 'sd-6', name: lvl?.name || 'Kelas 6' };
     }
 
     // Fallback default level
