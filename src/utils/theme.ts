@@ -5,7 +5,13 @@ export type JenjangTier = 'TK' | 'SD' | 'SMP' | 'SMA';
 export interface JenjangTheme {
   tier: JenjangTier;
   tierName: string;
+  worldName: string;
   tagline: string;
+  mascotEmoji: string;
+  questionPrefix: string;
+  incorrectFeedback: string;
+  gameBtnClass: string;
+  cardStyleClass: string;
   bannerGradient: string;
   headerGradient: string;
   subtleGradient: string;
@@ -56,45 +62,57 @@ export function getJenjangTheme(level: Level | string | null | undefined): Jenja
       return {
         tier: 'TK',
         tierName: 'Jenjang TK (Early Childhood)',
-        tagline: 'Playful English & Joyful Phonics',
-        bannerGradient: 'from-pink-500 via-rose-500 to-pink-600',
+        worldName: 'TK Candy Playland',
+        tagline: 'Let\'s Explore English & Play Together!',
+        mascotEmoji: '🐰',
+        questionPrefix: 'LET\'S PLAY!',
+        incorrectFeedback: 'Good try! Let\'s try again! You can do it! 🌟',
+        gameBtnClass: 'btn-game-pink',
+        cardStyleClass: 'card-game-tk',
+        bannerGradient: 'from-pink-500 via-rose-400 to-amber-300',
         headerGradient: 'from-pink-900 via-rose-900 to-pink-950',
         subtleGradient: 'from-pink-50/80 via-rose-50/40 to-white',
         cardBgHover: 'hover:bg-pink-50/50',
         bgLight: 'bg-pink-50',
         bgActive: 'bg-pink-500',
-        borderColor: 'border-pink-200',
-        borderHover: 'hover:border-pink-300',
+        borderColor: 'border-pink-300',
+        borderHover: 'hover:border-pink-400',
         badgeBg: 'bg-pink-100',
-        badgeText: 'text-pink-800',
+        badgeText: 'text-pink-900 font-black',
         textAccent: 'text-pink-600',
         textDark: 'text-pink-950',
         btnPrimary:
           'bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white shadow-pink-500/25',
         btnLight: 'bg-pink-100 hover:bg-pink-200 text-pink-900',
         ringColor: 'ring-pink-400',
-        progressBarColor: 'bg-gradient-to-r from-pink-500 to-rose-500',
+        progressBarColor: 'bg-gradient-to-r from-pink-500 to-rose-400',
         avatarBg: 'bg-pink-100 text-pink-700',
-        activeOptionBorder: 'border-pink-500 ring-2 ring-pink-400/30',
-        activeOptionBg: 'bg-pink-50 text-pink-950',
+        activeOptionBorder: 'border-pink-500 ring-4 ring-pink-300/50',
+        activeOptionBg: 'bg-pink-50/90 text-pink-950',
       };
 
     case 'SD':
       return {
         tier: 'SD',
         tierName: 'Jenjang SD (Primary School)',
-        tagline: 'Primary Explorer & Nature Adventure',
-        bannerGradient: 'from-amber-500 via-orange-500 to-amber-600',
+        worldName: 'SD Nature Jungle Explorer',
+        tagline: 'Explore the World & Complete Missions!',
+        mascotEmoji: '🦊',
+        questionPrefix: 'MISSION',
+        incorrectFeedback: 'Good try, Explorer! Analyze again to find the clue! 🎒',
+        gameBtnClass: 'btn-game-amber',
+        cardStyleClass: 'card-game-sd',
+        bannerGradient: 'from-amber-500 via-orange-500 to-emerald-500',
         headerGradient: 'from-amber-950 via-orange-950 to-stone-900',
         subtleGradient: 'from-amber-50/80 via-orange-50/40 to-white',
         cardBgHover: 'hover:bg-amber-50/50',
         bgLight: 'bg-amber-50',
         bgActive: 'bg-amber-500',
-        borderColor: 'border-amber-200',
-        borderHover: 'hover:border-amber-300',
+        borderColor: 'border-amber-300',
+        borderHover: 'hover:border-amber-400',
         badgeBg: 'bg-amber-100',
-        badgeText: 'text-amber-900',
-        textAccent: 'text-amber-600',
+        badgeText: 'text-amber-950 font-black',
+        textAccent: 'text-amber-700',
         textDark: 'text-amber-950',
         btnPrimary:
           'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-amber-500/25',
@@ -102,26 +120,32 @@ export function getJenjangTheme(level: Level | string | null | undefined): Jenja
         ringColor: 'ring-amber-400',
         progressBarColor: 'bg-gradient-to-r from-amber-500 to-orange-500',
         avatarBg: 'bg-amber-100 text-amber-800',
-        activeOptionBorder: 'border-amber-500 ring-2 ring-amber-400/30',
-        activeOptionBg: 'bg-amber-50 text-amber-950',
+        activeOptionBorder: 'border-amber-500 ring-4 ring-amber-300/50',
+        activeOptionBg: 'bg-amber-50/90 text-amber-950',
       };
 
     case 'SMP':
       return {
         tier: 'SMP',
         tierName: 'Jenjang SMP (Junior High)',
-        tagline: 'Junior Foundations & Nature Exploration',
-        bannerGradient: 'from-emerald-600 via-teal-600 to-emerald-700',
+        worldName: 'SMP Cyber Challenge Arena',
+        tagline: 'Master English Foundations & Rise to the Top!',
+        mascotEmoji: '⚡',
+        questionPrefix: 'CHALLENGE',
+        incorrectFeedback: 'Good effort! Review the clue and conquer the challenge! ⚡',
+        gameBtnClass: 'btn-game-emerald',
+        cardStyleClass: 'card-game-smp',
+        bannerGradient: 'from-emerald-600 via-teal-600 to-sky-600',
         headerGradient: 'from-emerald-950 via-teal-950 to-slate-950',
         subtleGradient: 'from-emerald-50/80 via-teal-50/40 to-white',
         cardBgHover: 'hover:bg-emerald-50/50',
         bgLight: 'bg-emerald-50',
         bgActive: 'bg-emerald-600',
-        borderColor: 'border-emerald-200',
-        borderHover: 'hover:border-emerald-300',
+        borderColor: 'border-emerald-300',
+        borderHover: 'hover:border-emerald-400',
         badgeBg: 'bg-emerald-100',
-        badgeText: 'text-emerald-900',
-        textAccent: 'text-emerald-600',
+        badgeText: 'text-emerald-950 font-black',
+        textAccent: 'text-emerald-700',
         textDark: 'text-emerald-950',
         btnPrimary:
           'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-emerald-600/25',
@@ -129,26 +153,32 @@ export function getJenjangTheme(level: Level | string | null | undefined): Jenja
         ringColor: 'ring-emerald-400',
         progressBarColor: 'bg-gradient-to-r from-emerald-600 to-teal-600',
         avatarBg: 'bg-emerald-100 text-emerald-800',
-        activeOptionBorder: 'border-emerald-600 ring-2 ring-emerald-400/30',
-        activeOptionBg: 'bg-emerald-50 text-emerald-950',
+        activeOptionBorder: 'border-emerald-600 ring-4 ring-emerald-300/50',
+        activeOptionBg: 'bg-emerald-50/90 text-emerald-950',
       };
 
     case 'SMA':
       return {
         tier: 'SMA',
         tierName: 'Jenjang SMA (Senior High)',
-        tagline: 'Analytical Leadership & Global Readiness',
-        bannerGradient: 'from-blue-600 via-indigo-600 to-blue-700',
+        worldName: 'SMA Star Quest Academy',
+        tagline: 'Analytical Leadership & Global English Readiness',
+        mascotEmoji: '🎓',
+        questionPrefix: 'QUEST',
+        incorrectFeedback: 'Analytical mind at work. Refine your choice for the ultimate Quest! 🎯',
+        gameBtnClass: 'btn-game-indigo',
+        cardStyleClass: 'card-game-sma',
+        bannerGradient: 'from-blue-600 via-indigo-600 to-purple-600',
         headerGradient: 'from-slate-950 via-blue-950 to-indigo-950',
         subtleGradient: 'from-blue-50/80 via-indigo-50/40 to-white',
         cardBgHover: 'hover:bg-blue-50/50',
         bgLight: 'bg-blue-50',
         bgActive: 'bg-blue-600',
-        borderColor: 'border-blue-200',
-        borderHover: 'hover:border-blue-300',
+        borderColor: 'border-blue-300',
+        borderHover: 'hover:border-blue-400',
         badgeBg: 'bg-blue-100',
-        badgeText: 'text-blue-900',
-        textAccent: 'text-blue-600',
+        badgeText: 'text-blue-950 font-black',
+        textAccent: 'text-blue-700',
         textDark: 'text-blue-950',
         btnPrimary:
           'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-blue-600/25',
@@ -156,8 +186,8 @@ export function getJenjangTheme(level: Level | string | null | undefined): Jenja
         ringColor: 'ring-blue-400',
         progressBarColor: 'bg-gradient-to-r from-blue-600 to-indigo-600',
         avatarBg: 'bg-blue-100 text-blue-800',
-        activeOptionBorder: 'border-blue-600 ring-2 ring-blue-400/30',
-        activeOptionBg: 'bg-blue-50 text-blue-950',
+        activeOptionBorder: 'border-blue-600 ring-4 ring-blue-300/50',
+        activeOptionBg: 'bg-blue-50/90 text-blue-950',
       };
   }
 }

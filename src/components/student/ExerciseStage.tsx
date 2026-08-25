@@ -165,23 +165,23 @@ export const ExerciseStage: React.FC<Props> = ({
           {/* Top color accent strip */}
           <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${theme.bannerGradient}`} />
 
-          {/* Question Meta & Number */}
+          {/* Question Meta & Number Per Jenjang */}
           <div className="flex items-center justify-between gap-3 mb-5 pb-3 border-b border-gray-100 mt-1">
-            <span className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black ${theme.badgeBg} ${theme.badgeText} border ${theme.borderColor}`}>
-              <Sparkles className="w-3.5 h-3.5" />
-              Question {currentIndex + 1} of {total}
+            <span className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black ${theme.badgeBg} ${theme.badgeText} border ${theme.borderColor} shadow-2xs`}>
+              <span className="text-base">{theme.mascotEmoji}</span>
+              <span>{theme.questionPrefix} {currentIndex + 1} OF {total}</span>
             </span>
 
             <div className="flex items-center gap-2">
               <TextToSpeechButton text={currentQ.questionText} label="Listen" size="sm" />
-              <span className="text-xs font-bold text-gray-500 bg-gray-100 px-2.5 py-1 rounded-lg">
+              <span className="text-xs font-black text-slate-700 bg-slate-100 px-3 py-1.5 rounded-xl border border-slate-200">
                 {answeredCount}/{total} Terjawab
               </span>
             </div>
           </div>
 
           {/* Question Text */}
-          <div className="text-base sm:text-lg font-bold text-gray-900 leading-relaxed mb-6">
+          <div className="text-base sm:text-lg font-black text-slate-900 leading-relaxed mb-6">
             {currentQ.questionText}
           </div>
 
@@ -202,23 +202,28 @@ export const ExerciseStage: React.FC<Props> = ({
                   onClick={() => handleSelectOption(key)}
                   className={`w-full text-left p-4 sm:p-4.5 rounded-2xl border-2 transition-all duration-150 flex items-center justify-between gap-4 cursor-pointer ${
                     isSelected
-                      ? `${theme.activeOptionBg} ${theme.activeOptionBorder} shadow-sm`
-                      : 'bg-white hover:bg-gray-50 border-gray-200 text-gray-800'
+                      ? `${theme.activeOptionBg} ${theme.activeOptionBorder} shadow-md`
+                      : 'bg-white hover:bg-slate-50 border-slate-200 text-slate-800'
                   }`}
                 >
                   <div className="flex items-center gap-3.5 flex-1">
                     <span
-                      className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm font-black shrink-0 transition-colors ${
+                      className={`w-10 h-10 rounded-2xl flex items-center justify-center text-sm font-black shrink-0 transition-colors shadow-2xs ${
                         isSelected
-                          ? 'bg-emerald-600 text-white shadow-xs'
-                          : 'bg-slate-100 text-slate-800'
+                          ? `${theme.bgActive} text-white`
+                          : 'bg-slate-100 text-slate-800 border border-slate-200'
                       }`}
                     >
                       {key}
                     </span>
-                    <span className="text-sm sm:text-base font-bold text-slate-900 leading-snug">{label}</span>
+                    <span className="text-sm sm:text-base font-black text-slate-900 leading-snug">{label}</span>
                   </div>
-                  {isSelected && <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0" />}
+                  {isSelected && (
+                    <span className="flex items-center gap-1 text-xs font-black text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full border border-emerald-300">
+                      <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <span>{theme.tier === 'TK' ? 'Jawaban Kamu! ⭐' : 'Selected'}</span>
+                    </span>
+                  )}
                 </button>
               );
             })}
