@@ -31,6 +31,7 @@ import {
   ExternalLink,
   Shield,
   FileSpreadsheet,
+  Edit3,
 } from 'lucide-react';
 
 interface Props {
@@ -119,6 +120,7 @@ export const AdminTeacherLayout: React.FC<Props> = ({
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     ...(isAdmin ? [{ id: 'teachers', label: 'Guru & Akses', icon: GraduationCap }] : []),
+    { id: 'classes', label: 'Edit Nama Kelas', icon: Edit3 },
     { id: 'students', label: 'Siswa & Progress', icon: Users },
     { id: 'topics', label: 'Materi & Topic', icon: BookOpen },
     { id: 'questions', label: 'Bank Soal', icon: HelpCircle },
@@ -195,6 +197,7 @@ export const AdminTeacherLayout: React.FC<Props> = ({
 
             // 5 Soft Pastel card active colors from reference image
             let activeClass = 'bg-[#7A93D1] text-white shadow-sm font-black'; // Card 1: Periwinkle Blue
+            if (item.id === 'classes') activeClass = 'bg-[#E5B5C8] text-[#4A1E2F] shadow-sm font-black'; // Card 5: Pastel Rose
             if (item.id === 'topics') activeClass = 'bg-[#E5B5C8] text-[#4A1E2F] shadow-sm font-black'; // Card 5: Pastel Rose
             if (item.id === 'questions') activeClass = 'bg-[#9ED7C6] text-[#0E3D34] shadow-sm font-black'; // Card 3: Mint Green
             if (item.id === 'progress') activeClass = 'bg-[#8CB5D3] text-white shadow-sm font-black'; // Card 2: Sky Blue
@@ -206,7 +209,13 @@ export const AdminTeacherLayout: React.FC<Props> = ({
                 key={item.id}
                 id={`sidebar-nav-${item.id}`}
                 type="button"
-                onClick={() => setActiveTab(item.id)}
+                onClick={() => {
+                  if (item.id === 'classes') {
+                    setIsEditClassOpen(true);
+                  } else {
+                    setActiveTab(item.id);
+                  }
+                }}
                 className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs transition cursor-pointer ${
                   isActive
                     ? activeClass
@@ -219,8 +228,20 @@ export const AdminTeacherLayout: React.FC<Props> = ({
             );
           })}
 
-          {/* Quick Import Siswa Action in Sidebar */}
-          <div className="pt-2">
+          {/* Quick Edit Nama Kelas Action in Sidebar */}
+          <div className="pt-2 space-y-1.5">
+            <button
+              id="sidebar-edit-class-btn"
+              type="button"
+              onClick={() => setIsEditClassOpen(true)}
+              className="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-black bg-[#E5B5C8] text-[#4A1E2F] border border-[#D8A1B6] hover:brightness-95 transition cursor-pointer shadow-2xs group active:scale-98"
+            >
+              <div className="w-5 h-5 rounded-md bg-[#4A1E2F] text-white flex items-center justify-center shrink-0 transition shadow-2xs">
+                <Edit3 className="w-3.5 h-3.5" />
+              </div>
+              <span className="truncate">Edit Nama Kelas</span>
+            </button>
+
             <button
               id="sidebar-import-students-btn"
               type="button"
@@ -299,7 +320,11 @@ export const AdminTeacherLayout: React.FC<Props> = ({
               <button
                 key={item.id}
                 onClick={() => {
-                  setActiveTab(item.id);
+                  if (item.id === 'classes') {
+                    setIsEditClassOpen(true);
+                  } else {
+                    setActiveTab(item.id);
+                  }
                   setMobileDrawerOpen(false);
                 }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold ${

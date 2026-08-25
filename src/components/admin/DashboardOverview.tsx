@@ -272,6 +272,52 @@ export const DashboardOverview: React.FC<Props> = ({
         </div>
       </div>
 
+      {/* Class Name Management Section */}
+      <div className="bg-white rounded-3xl p-6 border border-gray-200 shadow-xs space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-3">
+          <div>
+            <h3 className="text-base font-bold text-gray-900 flex items-center gap-2">
+              <Edit3 className="w-4 h-4 text-[#7A93D1]" />
+              <span>Daftar Kelas & Hak Akses Pengajaran</span>
+            </h3>
+            <p className="text-xs text-gray-500">
+              {isTeacher
+                ? 'Daftar nama kelas yang Anda ampu. Klik salah satu kelas untuk mengubah namanya agar sinkron dengan data siswa.'
+                : 'Daftar seluruh 14 jenjang kelas Sekolah Alam Al-Karim. Klik untuk mengedit atau menyinkronkan nama kelas dari data siswa.'}
+            </p>
+          </div>
+
+          {onOpenEditClass && (
+            <button
+              id="dash-overview-edit-class-grid-btn"
+              type="button"
+              onClick={onOpenEditClass}
+              className="px-4 py-2.5 rounded-xl bg-[#E5B5C8] hover:brightness-95 text-[#4A1E2F] font-black text-xs flex items-center gap-2 shadow-2xs transition cursor-pointer active:scale-95 border border-white/80 shrink-0"
+            >
+              <Edit3 className="w-4 h-4" />
+              <span>Edit Nama Kelas</span>
+            </button>
+          )}
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2.5">
+          {levels.map((lvl) => (
+            <div
+              key={lvl.id}
+              onClick={onOpenEditClass}
+              className="p-3 rounded-2xl bg-slate-50 border border-slate-200 hover:border-[#7A93D1] transition cursor-pointer flex flex-col justify-between group hover:shadow-2xs"
+            >
+              <div className="flex items-center justify-between text-[10px] font-bold text-slate-500 mb-1">
+                <span className="uppercase px-1.5 py-0.5 rounded bg-white border border-slate-200">{lvl.schoolType}</span>
+                <Edit3 className="w-3 h-3 text-slate-400 group-hover:text-[#7A93D1]" />
+              </div>
+              <div className="font-black text-xs text-slate-900 truncate" title={lvl.name}>{lvl.name}</div>
+              <div className="text-[10px] text-slate-500 truncate mt-0.5">{lvl.grade}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Recent Student Submissions Table */}
       <div className="bg-white rounded-3xl p-6 border border-gray-200 shadow-xs">
         <div className="flex items-center justify-between pb-4 mb-4 border-b border-gray-100">
