@@ -484,11 +484,11 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
 
   // Font family helper class
   const fontClass =
-    hpConfig.fontFamily === 'Outfit'
+    hpConfig?.fontFamily === 'Outfit'
       ? 'font-outfit'
-      : hpConfig.fontFamily === 'Nunito'
+      : hpConfig?.fontFamily === 'Nunito'
       ? 'font-nunito'
-      : hpConfig.fontFamily === 'Quicksand'
+      : hpConfig?.fontFamily === 'Quicksand'
       ? 'font-quicksand'
       : '';
 
@@ -498,50 +498,50 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
         
         {/* Decorative Top Typography Header - Dynamic Config */}
         <div className="text-center mb-6">
-          <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r ${hpConfig.topBadgeBg || 'from-teal-600 via-emerald-600 to-indigo-600'} text-white text-xs font-black tracking-wider border-2 border-white shadow-md mb-3.5 animate-float`}>
+          <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r ${hpConfig?.topBadgeBg || 'from-teal-600 via-emerald-600 to-indigo-600'} text-white text-xs font-black tracking-wider border-2 border-white shadow-md mb-3.5 animate-float`}>
             <Sparkles className="w-4 h-4 text-amber-300 animate-spin" />
-            <span className="uppercase tracking-widest text-[11px]">{hpConfig.topBadgeText || 'THE ENGLISH SEKOLAH ALAM AL-KARIM'}</span>
+            <span className="uppercase tracking-widest text-[11px]">{hpConfig?.topBadgeText || 'THE ENGLISH SEKOLAH ALAM AL-KARIM'}</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug drop-shadow-xs">
-            {hpConfig.heroTitleLine1 || 'Selamat Datang di'} <br />
-            <span className="text-teal-800 font-extrabold">{hpConfig.heroTitleLine2Prefix || 'The '}</span>
+            {hpConfig?.heroTitleLine1 || 'Selamat Datang di'} <br />
+            <span className="text-teal-800 font-extrabold">{hpConfig?.heroTitleLine2Prefix || 'The '}</span>
             <span className="bg-gradient-to-r from-teal-600 via-emerald-500 to-amber-500 bg-clip-text text-transparent uppercase font-black tracking-wide">
-              {hpConfig.heroTitleLine2Highlight || 'ENGLISH'}
+              {hpConfig?.heroTitleLine2Highlight || 'ENGLISH'}
             </span>
             <br />
             <span className="text-emerald-700 font-extrabold text-xl sm:text-2.5xl">
-              {hpConfig.heroTitleLine3 || 'Sekolah Alam Al-Karim'}
+              {hpConfig?.heroTitleLine3 || 'Sekolah Alam Al-Karim'}
             </span>
           </h1>
 
-          {hpConfig.taglineText && (
-            <div className={`mt-3 inline-block px-4 py-1.5 rounded-2xl ${hpConfig.taglineBg || 'bg-teal-50/90 border border-teal-200/90'} shadow-2xs`}>
-              <p className={`text-xs sm:text-sm font-extrabold ${hpConfig.taglineTextColor || 'text-teal-900'}`}>
+          {hpConfig?.taglineText && (
+            <div className={`mt-3 inline-block px-4 py-1.5 rounded-2xl ${hpConfig?.taglineBg || 'bg-teal-50/90 border border-teal-200/90'} shadow-2xs`}>
+              <p className={`text-xs sm:text-sm font-extrabold ${hpConfig?.taglineTextColor || 'text-teal-900'}`}>
                 &ldquo;<span className="text-teal-700 font-black underline decoration-amber-400 decoration-3">{hpConfig.taglineText}</span>&rdquo;
               </p>
             </div>
           )}
 
           <p className="mt-2 text-xs text-slate-600 font-extrabold">
-            {hpConfig.subtitleText || 'Media Pembelajaran & Evaluasi Bahasa Inggris Interaktif (TK, SD, SMP, SMA)'}
+            {hpConfig?.subtitleText || 'Media Pembelajaran & Evaluasi Bahasa Inggris Interaktif (TK, SD, SMP, SMA)'}
           </p>
         </div>
 
         {/* Student Login Control Station - Dynamic Config */}
-        <div className={`bg-white/95 backdrop-blur-md rounded-3xl border-3 ${hpConfig.cardBorderColor || 'border-teal-200/90'} shadow-xl shadow-teal-950/5 relative overflow-hidden`}>
+        <div className={`bg-white/95 backdrop-blur-md rounded-3xl border-3 ${hpConfig?.cardBorderColor || 'border-teal-200/90'} shadow-xl shadow-teal-950/5 relative overflow-hidden`}>
           {/* Card Top Block with Dynamic Gradient */}
-          <div className={`bg-gradient-to-r ${hpConfig.cardHeaderBg || 'from-teal-600 via-emerald-600 to-teal-700'} text-white p-5 relative border-b-3 border-teal-800 shadow-xs`}>
+          <div className={`bg-gradient-to-r ${hpConfig?.cardHeaderBg || 'from-teal-600 via-emerald-600 to-teal-700'} text-white p-5 relative border-b-3 border-teal-800 shadow-xs`}>
             <div className="flex items-center justify-between gap-3.5">
               <div className="flex items-center gap-3.5">
                 <div className="w-10 h-10 rounded-2xl bg-white/20 text-white flex items-center justify-center font-bold shadow-2xs backdrop-blur-xs">
                   <UserCheck className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-base sm:text-lg font-black text-white leading-tight">{hpConfig.cardHeaderTitle || 'Mulai Petualangan'}</h2>
+                  <h2 className="text-base sm:text-lg font-black text-white leading-tight">{hpConfig?.cardHeaderTitle || 'Mulai Petualangan'}</h2>
                   <p className="text-xs text-teal-100 font-semibold">
                     {dbStudents.length > 0
-                      ? (hpConfig.cardHeaderSubtitle || 'Cari nama dari {count} siswa terdaftar').replace('{count}', String(dbStudents.length))
+                      ? (hpConfig?.cardHeaderSubtitle || 'Cari nama dari {count} siswa terdaftar').replace('{count}', String(dbStudents.length))
                       : 'Masukkan Nama &amp; pilih Kelas'}
                   </p>
                 </div>
@@ -944,13 +944,13 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
               id="start-learning-btn"
               type="submit"
               disabled={loading}
-              className={`w-full mt-4 py-4 px-6 rounded-2xl btn-game-3d ${hpConfig.submitBtnBg || 'btn-game-emerald'} text-white font-black text-sm sm:text-base tracking-wider flex items-center justify-center gap-2 cursor-pointer transition disabled:opacity-70`}
+              className={`w-full mt-4 py-4 px-6 rounded-2xl btn-game-3d ${hpConfig?.submitBtnBg || 'btn-game-emerald'} text-white font-black text-sm sm:text-base tracking-wider flex items-center justify-center gap-2 cursor-pointer transition disabled:opacity-70`}
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
-                  <span>{hpConfig.submitBtnText || '🚀 MULAI PETUALANGAN BELAJAR'}</span>
+                  <span>{hpConfig?.submitBtnText || '🚀 MULAI PETUALANGAN BELAJAR'}</span>
                   <ArrowRight className="w-5 h-5" />
                 </>
               )}

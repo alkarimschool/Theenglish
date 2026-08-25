@@ -65,7 +65,9 @@ export function getHomepageConfig(): HomepageConfig {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       const parsed = JSON.parse(saved);
-      return { ...DEFAULT_HOMEPAGE_CONFIG, ...parsed };
+      if (parsed && typeof parsed === 'object') {
+        return { ...DEFAULT_HOMEPAGE_CONFIG, ...parsed };
+      }
     }
   } catch (err) {
     console.warn('Failed to load homepage config from localStorage:', err);
