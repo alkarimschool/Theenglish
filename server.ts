@@ -80,6 +80,29 @@ async function startServer() {
     res.json(levels);
   });
 
+  app.put('/api/levels/:id', (req, res) => {
+    const { name, grade, description } = req.body;
+    const updated = db.updateLevel(req.params.id, {
+      ...(name !== undefined && { name }),
+      ...(grade !== undefined && { grade }),
+      ...(description !== undefined && { description }),
+    });
+    if (!updated) {
+      return res.status(404).json({ error: 'Level not found' });
+    }
+    res.json(updated);
+  });
+
+  app.post('/api/levels/sync-from-students', (req, res) => {
+    const result = db.syncLevelsFromStudents();
+    res.json({
+      success: true,
+      message: `Berhasil menyinkronkan nama kelas dari data siswa. (${result.updatedCount} kelas diperbarui)`,
+      updatedCount: result.updatedCount,
+      levels: result.levels,
+    });
+  });
+
   app.get('/api/categories', (req, res) => {
     const { levelId } = req.query as { levelId?: string };
     let categories = db.getCategories();

@@ -48,6 +48,25 @@ export const api = {
     return res.json();
   },
 
+  updateLevel: async (id: string, updates: Partial<Level>): Promise<Level> => {
+    const res = await fetch(`/api/levels/${id}`, {
+      method: 'PUT',
+      headers: getHeaders(),
+      body: JSON.stringify(updates),
+    });
+    if (!res.ok) throw new Error('Gagal memperbarui nama kelas');
+    return res.json();
+  },
+
+  syncLevelsFromStudents: async (): Promise<{ success: boolean; message: string; updatedCount: number; levels: Level[] }> => {
+    const res = await fetch('/api/levels/sync-from-students', {
+      method: 'POST',
+      headers: getHeaders(),
+    });
+    if (!res.ok) throw new Error('Gagal menyinkronkan nama kelas dari data siswa');
+    return res.json();
+  },
+
   getCategories: async (levelId?: string): Promise<Category[]> => {
     const url = levelId ? `/api/categories?levelId=${encodeURIComponent(levelId)}` : '/api/categories';
     const res = await fetch(url, { headers: getHeaders() });

@@ -12,6 +12,7 @@ import { ReportsView } from './ReportsView';
 import { SettingsView } from './SettingsView';
 import { BulkImportModal, ImportMode } from './BulkImportModal';
 import { ImportStudentsModal } from './ImportStudentsModal';
+import { EditClassModal } from './EditClassModal';
 import {
   LayoutDashboard,
   GraduationCap,
@@ -68,6 +69,9 @@ export const AdminTeacherLayout: React.FC<Props> = ({
 
   // Student Import Modal state
   const [isImportStudentsOpen, setIsImportStudentsOpen] = useState(false);
+
+  // Edit Class Modal state
+  const [isEditClassOpen, setIsEditClassOpen] = useState(false);
 
   // Question bank initial filter
   const [qbInitialTopicId, setQbInitialTopicId] = useState<string | undefined>();
@@ -327,11 +331,17 @@ export const AdminTeacherLayout: React.FC<Props> = ({
             onNavigate={(tab) => setActiveTab(tab)}
             onOpenBulkImport={() => handleOpenBulkImport()}
             onOpenImportStudents={() => setIsImportStudentsOpen(true)}
+            onOpenEditClass={() => setIsEditClassOpen(true)}
           />
         )}
 
         {activeTab === 'teachers' && isAdmin && (
-          <TeacherManagement teachers={teachers} levels={levels} onRefresh={onRefreshAll} />
+          <TeacherManagement
+            teachers={teachers}
+            levels={levels}
+            onRefresh={onRefreshAll}
+            onOpenEditClass={() => setIsEditClassOpen(true)}
+          />
         )}
 
         {activeTab === 'students' && (
@@ -390,7 +400,13 @@ export const AdminTeacherLayout: React.FC<Props> = ({
           />
         )}
 
-        {activeTab === 'settings' && <SettingsView currentUser={currentUser} onRefreshAll={onRefreshAll} />}
+        {activeTab === 'settings' && (
+          <SettingsView
+            currentUser={currentUser}
+            onRefreshAll={onRefreshAll}
+            onOpenEditClass={() => setIsEditClassOpen(true)}
+          />
+        )}
       </main>
 
       {/* Global Quick Bulk Import Modal */}
@@ -415,6 +431,17 @@ export const AdminTeacherLayout: React.FC<Props> = ({
           isOpen={isImportStudentsOpen}
           onClose={() => setIsImportStudentsOpen(false)}
           levels={allowedLevels}
+          currentUser={currentUser}
+          onSuccess={onRefreshAll}
+        />
+      )}
+
+      {/* Global Edit Class Name & Sync Modal */}
+      {isEditClassOpen && (
+        <EditClassModal
+          isOpen={isEditClassOpen}
+          onClose={() => setIsEditClassOpen(false)}
+          levels={levels}
           currentUser={currentUser}
           onSuccess={onRefreshAll}
         />

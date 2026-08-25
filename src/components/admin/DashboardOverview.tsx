@@ -15,6 +15,8 @@ import {
   PlusCircle,
   FileSpreadsheet,
   CheckCircle2,
+  Edit3,
+  RefreshCw,
 } from 'lucide-react';
 
 interface Props {
@@ -24,6 +26,7 @@ interface Props {
   onNavigate: (tab: string) => void;
   onOpenBulkImport?: () => void;
   onOpenImportStudents?: () => void;
+  onOpenEditClass?: () => void;
 }
 
 export const DashboardOverview: React.FC<Props> = ({
@@ -32,6 +35,7 @@ export const DashboardOverview: React.FC<Props> = ({
   levels,
   onNavigate,
   onOpenImportStudents,
+  onOpenEditClass,
 }) => {
   const isTeacher = currentUser.role === 'teacher';
 
@@ -59,6 +63,18 @@ export const DashboardOverview: React.FC<Props> = ({
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
+            {onOpenEditClass && (
+              <button
+                id="dash-quick-edit-class-btn"
+                type="button"
+                onClick={onOpenEditClass}
+                className="px-4 py-2.5 rounded-xl bg-[#E5B5C8] hover:brightness-95 text-[#4A1E2F] font-black text-xs sm:text-sm flex items-center gap-2 shadow-sm transition cursor-pointer active:scale-95 border border-white/80"
+              >
+                <Edit3 className="w-4 h-4 text-[#4A1E2F]" />
+                <span>Edit Nama Kelas</span>
+              </button>
+            )}
+
             {onOpenImportStudents && (
               <button
                 id="dash-quick-import-students-btn"

@@ -10,14 +10,18 @@ import {
   CheckCircle,
   AlertTriangle,
   Sparkles,
+  Edit3,
+  Building2,
+  RefreshCw,
 } from 'lucide-react';
 
 interface Props {
   currentUser?: User;
   onRefreshAll: () => void;
+  onOpenEditClass?: () => void;
 }
 
-export const SettingsView: React.FC<Props> = ({ currentUser, onRefreshAll }) => {
+export const SettingsView: React.FC<Props> = ({ currentUser, onRefreshAll, onOpenEditClass }) => {
   const [resetting, setResetting] = useState(false);
   const [msg, setMsg] = useState('');
 
@@ -83,6 +87,33 @@ export const SettingsView: React.FC<Props> = ({ currentUser, onRefreshAll }) => 
           <div className="px-3 py-1.5 rounded-xl bg-emerald-100 text-emerald-900 font-bold text-xs">
             {isAdmin ? 'Semua Jenjang (TK, SD, SMP, SMA)' : `Jenjang Pengajaran: ${currentUser?.assignedLevelIds?.join(', ') || 'Belum Ditugaskan'}`}
           </div>
+        </div>
+      </div>
+
+      {/* Class Name Management Card */}
+      <div className="bg-white p-6 rounded-3xl border border-gray-200 shadow-xs space-y-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+              <Building2 className="w-4 h-4 text-[#7A93D1]" />
+              <span>Pengelolaan Nama Kelas & Jenjang</span>
+            </h3>
+            <p className="text-xs text-gray-500 mt-1">
+              Ubah nama kelas (misal: "Kelas 7 Al-Farabi") atau sinkronkan otomatis dari data siswa yang sudah di-upload.
+            </p>
+          </div>
+
+          {onOpenEditClass && (
+            <button
+              id="settings-edit-class-btn"
+              type="button"
+              onClick={onOpenEditClass}
+              className="px-4 py-2.5 rounded-xl bg-[#7A93D1] hover:brightness-95 text-white text-xs font-black flex items-center gap-2 cursor-pointer shadow-sm shrink-0 transition active:scale-95"
+            >
+              <Edit3 className="w-4 h-4" />
+              <span>Edit Nama Kelas</span>
+            </button>
+          )}
         </div>
       </div>
 

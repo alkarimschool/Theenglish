@@ -52,9 +52,9 @@ class DatabaseManager {
             if (!existing) {
               parsed.levels.push(sl);
             } else {
-              existing.name = sl.name;
-              existing.grade = sl.grade;
-              existing.description = sl.description;
+              existing.name = existing.name || sl.name;
+              existing.grade = existing.grade || sl.grade;
+              existing.description = existing.description || sl.description;
             }
           });
 
@@ -180,6 +180,50 @@ class DatabaseManager {
 
   public getLevelById(id: string) {
     return this.data.levels.find((l) => l.id === id);
+  }
+
+  public updateLevel(id: string, updates: Partial<Level>) {
+    const idx = this.data.levels.findIndex((l) => l.id === id);
+    if (idx === -1) return null;
+    this.data.levels[idx] = {
+      ...this.data.levels[idx],
+      ...updates,
+    };
+    this.saveData();
+    return this.data.levels[idx];
+  }
+
+  public syncLevelsFromStudents() {
+    let updatedCount = 0;
+    const levelClassMap: Record<string, Set<string>> = {};
+
+    (this.data.students || []).forEach((st) => {
+      if (st.levelId && st.className) {
+        if (!levelClassMap[st.levelId]) {
+          levelClassMap[st.levelId] = new Set();
+        }
+        levelClassMap[st.levelId].add(st.className.trim());
+      }
+    });
+
+    this.data.levels.forEach((lvl) => {
+      const classes = levelClassMap[lvl.id];
+      if (classes && classes.size > 0) {
+        const classList = Array.from(classes);
+        const primaryClassName = classList.join(', ');
+        if (lvl.name !== primaryClassName) {
+          lvl.name = primaryClassName;
+          lvl.grade = classList[0];
+          updatedCount++;
+        }
+      }
+    });
+
+    if (updatedCount > 0) {
+      this.saveData();
+    }
+
+    return { levels: this.getLevels(), updatedCount };
   }
 
   public getCategories() {

@@ -5,6 +5,7 @@ import {
   GraduationCap,
   Plus,
   Edit2,
+  Edit3,
   Trash2,
   Shield,
   CheckCircle,
@@ -20,9 +21,10 @@ interface Props {
   teachers: User[];
   levels: Level[];
   onRefresh: () => void;
+  onOpenEditClass?: () => void;
 }
 
-export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh }) => {
+export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh, onOpenEditClass }) => {
   const [search, setSearch] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTeacher, setEditingTeacher] = useState<User | null>(null);
@@ -169,15 +171,29 @@ export const TeacherManagement: React.FC<Props> = ({ teachers, levels, onRefresh
           </p>
         </div>
 
-        <button
-          id="add-teacher-btn"
-          type="button"
-          onClick={handleOpenAdd}
-          className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-2 cursor-pointer shadow-md shadow-emerald-700/15"
-        >
-          <Plus className="w-4 h-4" />
-          <span>Tambah Guru Baru</span>
-        </button>
+        <div className="flex items-center gap-3">
+          {onOpenEditClass && (
+            <button
+              id="teacher-mg-edit-class-btn"
+              type="button"
+              onClick={onOpenEditClass}
+              className="px-4 py-2.5 rounded-xl bg-[#E5B5C8] hover:brightness-95 text-[#4A1E2F] text-xs font-black flex items-center gap-2 cursor-pointer shadow-2xs border border-white/80 transition active:scale-95"
+            >
+              <Edit3 className="w-4 h-4" />
+              <span>Edit Nama Kelas</span>
+            </button>
+          )}
+
+          <button
+            id="add-teacher-btn"
+            type="button"
+            onClick={handleOpenAdd}
+            className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-2 cursor-pointer shadow-md shadow-emerald-700/15"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Tambah Guru Baru</span>
+          </button>
+        </div>
       </div>
 
       {/* Search Filter */}
