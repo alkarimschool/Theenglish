@@ -13,6 +13,7 @@ import { SettingsView } from './SettingsView';
 import { BulkImportModal, ImportMode } from './BulkImportModal';
 import { ImportStudentsModal } from './ImportStudentsModal';
 import { EditClassModal } from './EditClassModal';
+import { HomepageEditorModal } from './HomepageEditorModal';
 import {
   LayoutDashboard,
   GraduationCap,
@@ -33,6 +34,7 @@ import {
   FileSpreadsheet,
   Edit3,
   ArrowLeft,
+  Sliders,
 } from 'lucide-react';
 
 interface Props {
@@ -74,6 +76,9 @@ export const AdminTeacherLayout: React.FC<Props> = ({
 
   // Edit Class Modal state
   const [isEditClassOpen, setIsEditClassOpen] = useState(false);
+
+  // Homepage Editor Modal state
+  const [isHomepageEditorOpen, setIsHomepageEditorOpen] = useState(false);
 
   // Question bank initial filter
   const [qbInitialTopicId, setQbInitialTopicId] = useState<string | undefined>();
@@ -120,6 +125,7 @@ export const AdminTeacherLayout: React.FC<Props> = ({
 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    ...(isAdmin ? [{ id: 'homepage_editor', label: 'Edit Homepage', icon: Sliders }] : []),
     ...(isAdmin ? [{ id: 'teachers', label: 'Guru & Akses', icon: GraduationCap }] : []),
     { id: 'classes', label: 'Edit Nama Kelas', icon: Edit3 },
     { id: 'students', label: 'Siswa & Progress', icon: Users },
@@ -376,6 +382,7 @@ export const AdminTeacherLayout: React.FC<Props> = ({
             onOpenBulkImport={() => handleOpenBulkImport()}
             onOpenImportStudents={() => setIsImportStudentsOpen(true)}
             onOpenEditClass={() => setIsEditClassOpen(true)}
+            onOpenHomepageEditor={() => setIsHomepageEditorOpen(true)}
           />
         )}
 
@@ -488,6 +495,17 @@ export const AdminTeacherLayout: React.FC<Props> = ({
           levels={levels}
           currentUser={currentUser}
           onSuccess={onRefreshAll}
+        />
+      )}
+
+      {/* Global Homepage Customizer Modal for Super Admin */}
+      {(isHomepageEditorOpen || activeTab === 'homepage_editor') && (
+        <HomepageEditorModal
+          isOpen={isHomepageEditorOpen || activeTab === 'homepage_editor'}
+          onClose={() => {
+            setIsHomepageEditorOpen(false);
+            if (activeTab === 'homepage_editor') setActiveTab('dashboard');
+          }}
         />
       )}
     </div>

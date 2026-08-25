@@ -27,6 +27,7 @@ interface Props {
   onOpenBulkImport?: () => void;
   onOpenImportStudents?: () => void;
   onOpenEditClass?: () => void;
+  onOpenHomepageEditor?: () => void;
 }
 
 export const DashboardOverview: React.FC<Props> = ({
@@ -36,6 +37,7 @@ export const DashboardOverview: React.FC<Props> = ({
   onNavigate,
   onOpenImportStudents,
   onOpenEditClass,
+  onOpenHomepageEditor,
 }) => {
   const isTeacher = currentUser.role === 'teacher';
 
@@ -63,6 +65,18 @@ export const DashboardOverview: React.FC<Props> = ({
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
+            {!isTeacher && onOpenHomepageEditor && (
+              <button
+                id="dash-quick-edit-homepage-btn"
+                type="button"
+                onClick={onOpenHomepageEditor}
+                className="px-4 py-2.5 rounded-2xl btn-game-3d btn-game-indigo text-white font-black text-xs sm:text-sm flex items-center gap-2 cursor-pointer transition shadow-md"
+              >
+                <Sliders className="w-4 h-4 text-white" />
+                <span>⚙️ Edit Tampilan Homepage</span>
+              </button>
+            )}
+
             {onOpenEditClass && (
               <button
                 id="dash-quick-edit-class-btn"

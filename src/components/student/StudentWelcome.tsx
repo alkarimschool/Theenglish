@@ -3,6 +3,7 @@ import { useAuth } from '../../context/AuthContext';
 import { api } from '../../services/api';
 import { Level, StudentProfile } from '../../types';
 import logoImg from '../../assets/logo.png';
+import { getHomepageConfig, HomepageConfig } from '../../data/homepageConfig';
 import {
   Sparkles,
   ArrowRight,
@@ -29,6 +30,15 @@ interface Props {
 
 export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpenLogin }) => {
   const { startStudent, studentSession } = useAuth();
+
+  // Dynamic Homepage Config state
+  const [hpConfig, setHpConfig] = useState<HomepageConfig>(getHomepageConfig());
+
+  useEffect(() => {
+    const handleUpdate = () => setHpConfig(getHomepageConfig());
+    window.addEventListener('homepage-config-updated', handleUpdate);
+    return () => window.removeEventListener('homepage-config-updated', handleUpdate);
+  }, []);
 
   // Database students state
   const [dbStudents, setDbStudents] = useState<StudentProfile[]>([]);
@@ -472,54 +482,66 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
     );
   };
 
+  // Font family helper class
+  const fontClass =
+    hpConfig.fontFamily === 'Outfit'
+      ? 'font-outfit'
+      : hpConfig.fontFamily === 'Nunito'
+      ? 'font-nunito'
+      : hpConfig.fontFamily === 'Quicksand'
+      ? 'font-quicksand'
+      : '';
+
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 sm:p-6 lg:p-8">
+    <div className={`min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 sm:p-6 lg:p-8 ${fontClass}`}>
       <div className="w-full max-w-md relative z-10">
         
-        {/* Decorative Top Typography Header - Eye-Catching & Calm Palette */}
+        {/* Decorative Top Typography Header - Dynamic Config */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-teal-600 via-emerald-600 to-indigo-600 text-white text-xs font-black tracking-wider border-2 border-white shadow-md mb-3.5 animate-float font-outfit">
+          <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r ${hpConfig.topBadgeBg || 'from-teal-600 via-emerald-600 to-indigo-600'} text-white text-xs font-black tracking-wider border-2 border-white shadow-md mb-3.5 animate-float`}>
             <Sparkles className="w-4 h-4 text-amber-300 animate-spin" />
-            <span className="uppercase tracking-widest text-[11px]">THE ENGLISH SEKOLAH ALAM AL-KARIM</span>
+            <span className="uppercase tracking-widest text-[11px]">{hpConfig.topBadgeText || 'THE ENGLISH SEKOLAH ALAM AL-KARIM'}</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug font-outfit drop-shadow-xs">
-            Selamat Datang di <br />
-            <span className="text-teal-800 font-extrabold">The </span>
+          <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug drop-shadow-xs">
+            {hpConfig.heroTitleLine1 || 'Selamat Datang di'} <br />
+            <span className="text-teal-800 font-extrabold">{hpConfig.heroTitleLine2Prefix || 'The '}</span>
             <span className="bg-gradient-to-r from-teal-600 via-emerald-500 to-amber-500 bg-clip-text text-transparent uppercase font-black tracking-wide">
-              ENGLISH
+              {hpConfig.heroTitleLine2Highlight || 'ENGLISH'}
             </span>
             <br />
             <span className="text-emerald-700 font-extrabold text-xl sm:text-2.5xl">
-              Sekolah Alam Al-Karim
+              {hpConfig.heroTitleLine3 || 'Sekolah Alam Al-Karim'}
             </span>
           </h1>
 
-          <div className="mt-3 inline-block px-4 py-1.5 rounded-2xl bg-teal-50/90 border border-teal-200/90 shadow-2xs">
-            <p className="text-xs sm:text-sm text-teal-900 font-extrabold font-outfit">
-              &ldquo;<span className="text-teal-700 font-black underline decoration-amber-400 decoration-3">Semua Akan Inggris Pada Waktunya</span>&rdquo;
-            </p>
-          </div>
+          {hpConfig.taglineText && (
+            <div className={`mt-3 inline-block px-4 py-1.5 rounded-2xl ${hpConfig.taglineBg || 'bg-teal-50/90 border border-teal-200/90'} shadow-2xs`}>
+              <p className={`text-xs sm:text-sm font-extrabold ${hpConfig.taglineTextColor || 'text-teal-900'}`}>
+                &ldquo;<span className="text-teal-700 font-black underline decoration-amber-400 decoration-3">{hpConfig.taglineText}</span>&rdquo;
+              </p>
+            </div>
+          )}
 
           <p className="mt-2 text-xs text-slate-600 font-extrabold">
-            Media Pembelajaran &amp; Evaluasi Bahasa Inggris Interaktif (TK, SD, SMP, SMA)
+            {hpConfig.subtitleText || 'Media Pembelajaran & Evaluasi Bahasa Inggris Interaktif (TK, SD, SMP, SMA)'}
           </p>
         </div>
 
-        {/* Student Login Control Station - Calm & Eye-Catching Glassmorphism */}
-        <div className="bg-white/95 backdrop-blur-md rounded-3xl border-3 border-teal-200/90 shadow-xl shadow-teal-950/5 relative overflow-hidden">
-          {/* Card Top Block with Seafoam Teal & Soft Indigo Gradient */}
-          <div className="bg-gradient-to-r from-teal-600 via-emerald-600 to-teal-700 text-white p-5 relative border-b-3 border-teal-800 shadow-xs">
+        {/* Student Login Control Station - Dynamic Config */}
+        <div className={`bg-white/95 backdrop-blur-md rounded-3xl border-3 ${hpConfig.cardBorderColor || 'border-teal-200/90'} shadow-xl shadow-teal-950/5 relative overflow-hidden`}>
+          {/* Card Top Block with Dynamic Gradient */}
+          <div className={`bg-gradient-to-r ${hpConfig.cardHeaderBg || 'from-teal-600 via-emerald-600 to-teal-700'} text-white p-5 relative border-b-3 border-teal-800 shadow-xs`}>
             <div className="flex items-center justify-between gap-3.5">
               <div className="flex items-center gap-3.5">
                 <div className="w-10 h-10 rounded-2xl bg-white/20 text-white flex items-center justify-center font-bold shadow-2xs backdrop-blur-xs">
                   <UserCheck className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-base sm:text-lg font-black text-white leading-tight font-outfit">Mulai Petualangan</h2>
+                  <h2 className="text-base sm:text-lg font-black text-white leading-tight">{hpConfig.cardHeaderTitle || 'Mulai Petualangan'}</h2>
                   <p className="text-xs text-teal-100 font-semibold">
                     {dbStudents.length > 0
-                      ? `Cari nama dari ${dbStudents.length} siswa terdaftar`
+                      ? (hpConfig.cardHeaderSubtitle || 'Cari nama dari {count} siswa terdaftar').replace('{count}', String(dbStudents.length))
                       : 'Masukkan Nama &amp; pilih Kelas'}
                   </p>
                 </div>
@@ -917,18 +939,18 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
 
             </div>
 
-            {/* Submit Button - 3D Tactile Game Style */}
+            {/* Submit Button - Dynamic Config */}
             <button
               id="start-learning-btn"
               type="submit"
               disabled={loading}
-              className="w-full mt-4 py-4 px-6 rounded-2xl btn-game-3d btn-game-emerald text-white font-black text-sm sm:text-base tracking-wider flex items-center justify-center gap-2 cursor-pointer transition disabled:opacity-70"
+              className={`w-full mt-4 py-4 px-6 rounded-2xl btn-game-3d ${hpConfig.submitBtnBg || 'btn-game-emerald'} text-white font-black text-sm sm:text-base tracking-wider flex items-center justify-center gap-2 cursor-pointer transition disabled:opacity-70`}
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
-                  <span>🚀 MULAI PETUALANGAN BELAJAR</span>
+                  <span>{hpConfig.submitBtnText || '🚀 MULAI PETUALANGAN BELAJAR'}</span>
                   <ArrowRight className="w-5 h-5" />
                 </>
               )}
