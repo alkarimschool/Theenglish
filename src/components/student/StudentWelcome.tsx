@@ -475,11 +475,11 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 sm:p-6 lg:p-8">
       <div className="w-full max-w-md relative z-10">
-        {/* Decorative Top Typography Header - Calm & Eye-Catching Sage Teal Theme */}
+        {/* Decorative Top Typography Header - Playful Game Quest Theme */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 text-emerald-900 text-xs font-extrabold tracking-wide border border-emerald-200/90 mb-3 shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />
-            <span className="font-extrabold">The English Sekolah Alam Al-Karim</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 text-white text-xs font-black tracking-wide border-2 border-white mb-3 shadow-md">
+            <Sparkles className="w-4 h-4 text-amber-300 animate-spin" />
+            <span className="font-extrabold uppercase">The English Sekolah Alam Al-Karim</span>
           </div>
           <h1 className="text-2xl sm:text-3.5xl font-black text-slate-900 tracking-tight drop-shadow-xs leading-tight">
             Selamat Datang di <br />
@@ -492,12 +492,28 @@ export const StudentWelcome: React.FC<Props> = ({ levels = [], onContinue, onOpe
               Sekolah Alam Al-Karim
             </span>
           </h1>
-          <p className="mt-2 text-sm sm:text-base text-slate-800 font-bold italic tracking-wide">
-            &ldquo;semua akan <span className="text-teal-700 font-black not-italic underline decoration-amber-400 decoration-2">inggris</span> pada waktunya&rdquo;
+          <p className="mt-2 text-sm sm:text-base text-slate-800 font-black italic tracking-wide">
+            &ldquo;<span className="text-teal-700 font-black not-italic underline decoration-amber-400 decoration-4">Semua Akan Inggris Pada Waktunya</span>&rdquo;
           </p>
-          <p className="mt-1 text-xs text-slate-600 font-medium">
-            Media Pembelajaran &amp; Evaluasi Bahasa Inggris Interaktif
+          <p className="mt-1 text-xs text-slate-600 font-bold">
+            Media Pembelajaran &amp; Evaluasi Bahasa Inggris Interaktif (TK, SD, SMP, SMA)
           </p>
+
+          {/* 4 Realm Quick Badges */}
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+            <span className="px-2.5 py-1 rounded-xl bg-pink-100 text-pink-950 font-black text-[11px] border border-pink-300 shadow-2xs">
+              🌸 TK Playland
+            </span>
+            <span className="px-2.5 py-1 rounded-xl bg-amber-100 text-amber-950 font-black text-[11px] border border-amber-300 shadow-2xs">
+              🌴 SD Jungle
+            </span>
+            <span className="px-2.5 py-1 rounded-xl bg-sky-100 text-sky-950 font-black text-[11px] border border-sky-300 shadow-2xs">
+              🏔️ SMP Sky Peak
+            </span>
+            <span className="px-2.5 py-1 rounded-xl bg-purple-100 text-purple-950 font-black text-[11px] border border-purple-300 shadow-2xs">
+              🏰 SMA Castle
+            </span>
+          </div>
         </div>
 
         {/* Mascot Buddy Greeting Card */}

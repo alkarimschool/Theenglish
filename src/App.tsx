@@ -219,9 +219,9 @@ export default function App() {
     );
   }
 
-  // STUDENT VIEW (Clean White Background, Soft Pastel Card Accents)
+  // STUDENT VIEW (Playful Game World Gradient Background)
   return (
-    <div className="min-h-screen bg-white flex flex-col selection:bg-slate-200 selection:text-slate-950 relative overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#EBF5F0] via-[#E8F1FA] to-[#FFF8EC] flex flex-col selection:bg-emerald-200 selection:text-emerald-950 relative overflow-x-hidden">
 
       {/* Student Top Header */}
       <div className="relative z-30">
